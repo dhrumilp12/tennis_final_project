@@ -1,5 +1,0 @@
-loss_type,age_group,index_losses,unique_players,usable_next_matches,next_match_win_rate,complete_three_match_windows,next_three_win_rate,mean_age,mean_prior_matches
-other_ranked_loss,under_23,6,6,0,,0,,21.05,1.3333333333333333
-other_ranked_loss,23_to_29,14,14,0,,0,,26.014285714285712,0.7142857142857143
-other_ranked_loss,30_plus,7,7,0,,0,,32.971428571428575,0.7142857142857143
-ranking_upset,23_to_29,2,2,0,,0,,23.7,0.0

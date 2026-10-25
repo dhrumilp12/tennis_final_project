@@ -1,0 +1,263 @@
+{
+  "raw_match_rows": 112056,
+  "exact_duplicates_removed": 0,
+  "unique_source_rows": 112056,
+  "eligible_history_matches": 96501,
+  "eligible_analysis_matches": 63784,
+  "exclusion_flag_counts_nonexclusive": {
+    "invalid_player_ids": 0,
+    "conflicting_match_key": 0,
+    "outside_individual_AMG_scope": 11107,
+    "unfinished_or_unrecognized_score": 3505,
+    "ambiguous_order": 12385,
+    "outside_history_window": 0,
+    "missing_match_key": 0
+  },
+  "configuration": {
+    "output_dir": "outputs",
+    "raw_dir": "data/raw",
+    "history_start": 1990,
+    "analysis_start": 2000,
+    "end_year": 2024,
+    "test_start": 2020,
+    "upset_max_rank": 50,
+    "upset_rank_gap": 30,
+    "recent_matches": 10,
+    "min_hand_matches": 10,
+    "bootstrap_samples": 500,
+    "random_seed": 42,
+    "offline": false,
+    "make_plots": true
+  },
+  "source_repository": "Aneeshers/tennis-sackmann-archive",
+  "source_revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+  "inputs": [
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_1990.csv",
+      "sha256": "4c65abf16c98f1a96634bdc464961f058555677539203cd23b50031155fa037c",
+      "bytes": 630930
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_1991.csv",
+      "sha256": "8366632e1d874fcfb700017d8ff8bf59fe05e25e44ca86dfcfb314a198d303a0",
+      "bytes": 743040
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_1992.csv",
+      "sha256": "b2ede0ff352a34e59b9cdc0e2a7c9af764a6fe6ac7326a09c4c923f5736b7922",
+      "bytes": 760047
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_1993.csv",
+      "sha256": "4620a9807ae69e2e04bad72a1c26c2994f8d20cbbe7a2933d4e533cf2d9fc43b",
+      "bytes": 779735
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_1994.csv",
+      "sha256": "e8c577594c4495945d337d95b44ca5a8441c952eb693f7e6c9bcb61bb762580e",
+      "bytes": 787913
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_1995.csv",
+      "sha256": "d480e93dc75e4631d4811edc1f98c168f9e80f8eab8ab2eb6040a22bda7b3b21",
+      "bytes": 762360
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_1996.csv",
+      "sha256": "0e8fd6303e8a2f400a4a6f3ebc5aa04200e4d31bffd18593c815688d01e6052b",
+      "bytes": 757247
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_1997.csv",
+      "sha256": "74f69b97695a85e97a1e905244ca2e0f872c9ecc56862f5e595c612a3c656796",
+      "bytes": 730300
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_1998.csv",
+      "sha256": "396ad4be1a5843badd0c6a5ffee976cabbf43be865ce859a295b82ae403f9164",
+      "bytes": 725069
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_1999.csv",
+      "sha256": "bf864d0c188947369fa8f2e280ab571fc43b9db2e9e657d29e03683b4dbd26a4",
+      "bytes": 673043
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2000.csv",
+      "sha256": "a2176b0d9e70f238536d0a2d0957bc54dc1bfbfb47c368d8f3cbe28457b5ebe4",
+      "bytes": 680357
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2001.csv",
+      "sha256": "b07bcb7e7239fb451eae6b4e99ef9a0c892083a21185405c8627d5edc9a113be",
+      "bytes": 669112
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2002.csv",
+      "sha256": "d161c2ef78158d167372ebc38b7eea2038c5b9e42bbb4b2804d8c19540c33adf",
+      "bytes": 649377
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2003.csv",
+      "sha256": "387a1dec62d014fdf5c7dc83329b87c3a4041fc4ebf8a25b19352c82d1f67c31",
+      "bytes": 649296
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2004.csv",
+      "sha256": "79251fec7d9751ea2eebb005a962f69fea466f827172d53f47b381aac53634af",
+      "bytes": 662757
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2005.csv",
+      "sha256": "7ab77584b319b65830d4b5c988cf8349d14a7a4e867633e9717801f8d9b97b27",
+      "bytes": 659963
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2006.csv",
+      "sha256": "c7f28866e127c665072ed6e4a8fc5812cd82f804660fbdd37e8b00063d1b8f53",
+      "bytes": 660698
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2007.csv",
+      "sha256": "d392402109561d6d3e19fd41dc8cc3a3f72ccb52d3988edbe7c18cc47b603db0",
+      "bytes": 644456
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2008.csv",
+      "sha256": "6725bd6e56d32538282e5a77bd30a2502014917138df180dce9259c535a93310",
+      "bytes": 631452
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2009.csv",
+      "sha256": "bab7523386fddcaeb684b2b354016075d035516e65c2f54d3e1d23c3a8fe22f9",
+      "bytes": 626700
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2010.csv",
+      "sha256": "135a4a1e2ab69c33318b6e5ad59efc67cc5358629b15bf28fb2f905d48f7aeb0",
+      "bytes": 614299
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2011.csv",
+      "sha256": "8e91e4b680f0b4e9605a3c71b4c676b55e2a102de8544a7d3b2fbaca5977575a",
+      "bytes": 611939
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2012.csv",
+      "sha256": "03f03612691af370c9c47939dde4202d9858e05ea044367388115e627d4d13f3",
+      "bytes": 610116
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2013.csv",
+      "sha256": "9e1e3b124ac22c1b840118f78475a910cb2ea68684289581f70b54a022f2832c",
+      "bytes": 596714
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2014.csv",
+      "sha256": "7c102ee3b0da1fee59edc6a5f280eb0784ac0bad69988583f65791dcb7084177",
+      "bytes": 589216
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2015.csv",
+      "sha256": "20c1f723df86b367f3ec205bbda3d8a7163fa6d4e46dcfda15095e24965bc5ed",
+      "bytes": 594438
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2016.csv",
+      "sha256": "86dda3871cb79d3226a047774c8fc97b86267cfe96709dea832a347dfbf81684",
+      "bytes": 617660
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2017.csv",
+      "sha256": "4bb295788c37487b120cd39171d413cef0ebc6f4c2d9fa40b7261f5143f3719f",
+      "bytes": 611380
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2018.csv",
+      "sha256": "0363dc6012190f337fcf34b4ca443634f192c4670cc6c14c94342a54b9adf7eb",
+      "bytes": 608903
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2019.csv",
+      "sha256": "7f1a21451ff622bb0c6a09690898db46d51e59dcdf08086d369753822e1d5478",
+      "bytes": 586071
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2020.csv",
+      "sha256": "985a917b72d5efb7dd5ef9df8ecc58c637ed6b88561ccad364653af71ac12da0",
+      "bytes": 307277
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2021.csv",
+      "sha256": "b9b1d31a4b0b9273b8f338cbb1347c5a847ad2361334ec760a286f5990fba347",
+      "bytes": 573056
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2022.csv",
+      "sha256": "7190042565ab8400e74f44fda60700acb36ddf3c82d393f331a07589e05b5f52",
+      "bytes": 608789
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2023.csv",
+      "sha256": "9b9671aa7c8156e74c2e4466675b7ed4e762bb8a58b7237a30daefd84ffceff5",
+      "bytes": 625341
+    },
+    {
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2024.csv",
+      "sha256": "73aec32247a0db68d8aa8fd8003eefea132905177f1cb145502d9215b53311be",
+      "bytes": 650136
+    }
+  ],
+  "input_mode": "pinned_download_or_cached_files",
+  "test_data_warning": null,
+  "q1": {
+    "index_losses": 63784,
+    "ranking_upsets": 7536,
+    "complete_three_match_followups": 47037,
+    "status": "Q1 descriptive tables and exploratory adjusted recovery-rate regression fitted.",
+    "adjusted_model_eligible_events": 18471,
+    "model_events": 18471,
+    "model_players": 341,
+    "model_formula": "next3_win_rate ~ ranking_upset * (age_centered + log_experience) + recent_win_rate + log_player_rank + followup_mean_log_rank_advantage + followup_clay_share + followup_grass_share + followup_carpet_share + followup_best_of_5_share + C(surface) + C(season)",
+    "uncertainty": "Player-clustered standard errors; not full opponent/network dependence."
+  },
+  "q2": {
+    "status": "Chronological Q2 comparison fitted: baseline, +meeting count, +head-to-head results.",
+    "training_matches": 52444,
+    "test_matches": 11340,
+    "test_start": 2020,
+    "orientation": "Player A has the smaller numeric player ID, independent of match outcome.",
+    "paired_brier_comparison": {
+      "status": "Computed",
+      "mean_brier_improvement": 0.0005861619938616038,
+      "ci95_lower": 9.464228086397671e-05,
+      "ci95_upper": 0.0010191004962474218,
+      "pair_clusters": 7824,
+      "resamples": 500,
+      "limitation": "Pair-cluster resampling does not capture every shared-player dependence across different pairs."
+    },
+    "convergence_warnings": [],
+    "primary_metric": "Brier score (lower is better). Both models are evaluated on exactly the same held-out matches.",
+    "test_history_policy": "Earlier held-out results can update later held-out pre-match histories; model parameters stay frozen."
+  },
+  "q3": {
+    "status": "Q3 descriptive tables and within-player adjusted linear probability model fitted.",
+    "player_match_rows": 127438,
+    "unique_matches": 63719,
+    "players_meeting_raw_comparison_minimum": 427,
+    "adjusted_player_match_rows": 112503,
+    "adjusted_unique_matches": 61412,
+    "adjusted_players": 420,
+    "covariance": "Two-way clustered by focal player and physical match; other shared-opponent dependence may remain.",
+    "ci_note": "Large-sample normal intervals; exploratory, not causal.",
+    "negative_variance_terms": 1,
+    "interpretation": "opponent_left is the adjusted L-minus-R contrast for right-handed focal players; add the interaction for left-handed focal players. Coefficients are probability units."
+  },
+  "runtime": {
+    "python": "3.13.7",
+    "pandas": "2.3.3",
+    "numpy": "2.5.4",
+    "scikit_learn": "1.9.1",
+    "statsmodels": "0.14.6"
+  }
+}
