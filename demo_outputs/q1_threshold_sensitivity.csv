@@ -1,0 +1,5 @@
+rank_gap_threshold,age_group,index_losses,complete_windows,next_three_win_rate
+20,under_23,1,0,
+20,23_to_29,3,0,
+30,23_to_29,2,0,
+50,23_to_29,1,0,
