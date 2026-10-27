@@ -1,4 +1,5 @@
-..............................................................           [100%]
+........................................................................ [ 75%]
+........................                                                 [100%]
 =============================== warnings summary ===============================
 tests/test_pipeline.py::test_conflicting_duplicate_keys_excluded
 tests/test_pipeline.py::test_conflicting_duplicate_keys_excluded
@@ -12,4 +13,4 @@ tests/test_pipeline.py: 1500 warnings
     date = pd.Timestamp('1998-01-01')+pd.Timedelta(days=6*i)
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-62 passed, 1504 warnings in 4.46s
+96 passed, 1504 warnings in 7.78s

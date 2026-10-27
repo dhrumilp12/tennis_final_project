@@ -1,3 +1,0 @@
-loss_type,index_losses,unique_players,usable_next_matches,complete_three_match_windows,incomplete_or_unusable_windows,mean_age,median_age,mean_prior_matches,median_prior_matches,next_match_win_rate,next_match_ci95_lower,next_match_ci95_upper,next_match_players,next_three_win_rate,next_three_ci95_lower,next_three_ci95_upper,next_three_players
-other_ranked_loss,16485,339,14550,12661,3824,26.68746132848044,26.5,300.46478616924475,255.0,0.6254295532646048,0.608237208822254,0.6426218977069557,338,0.5973725087539162,0.5822671354217331,0.6124778820860993,335
-ranking_upset,7536,326,6695,5885,1651,26.720103503184713,26.4,308.57019639065817,263.5,0.6197162061239732,0.6016797704779278,0.6377526417700186,321,0.5938261115831209,0.5775453086912198,0.6101069144750221,317

@@ -1,0 +1,12 @@
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+{
+  "run_id": "20261027T121134Z-20f069d1",
+  "python_executable": "/Users/dhrumil/Fall 2026/FDA/tennis_final_project/.venv/bin/python",
+  "fresh_kernel": true,
+  "notebook": "Tennis_Project.ipynb",
+  "code_cells": 11,
+  "executed_code_cells": 11,
+  "execution_errors": 0,
+  "elapsed_seconds": 36.987524084048346,
+  "notebook_sha256": "dd6ca3fbe40631ef673d98bb7a20dc31276afd4edd1705fdf9b221cc5dfd309a"
+}

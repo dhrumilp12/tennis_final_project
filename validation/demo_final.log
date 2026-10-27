@@ -1,0 +1,8 @@
+INFO: Loaded 31 raw match rows from 1 file(s).
+WARNING: Matplotlib is building the font cache; this may take a moment.
+INFO: Failed to extract font properties from /System/Library/PrivateFrameworks/FontServices.framework/Resources/Reserved/PingFangUI.ttc: FT_Open_Face (ft2font.cpp line 200) failed with error 0x02: unknown file format
+INFO: Failed to extract font properties from /System/Library/Fonts/Apple Color Emoji.ttc: Non-scalable fonts are not supported
+INFO: Failed to extract font properties from /System/Library/Fonts/Supplemental/NISC18030.ttf: Non-scalable fonts are not supported
+INFO: Failed to extract font properties from /System/Library/Fonts/LastResort.otf: tuple indices must be integers or slices, not str
+INFO: generated new fontManager
+INFO: Verified run 20261027T120758Z-f2f0e39b saved in /Users/dhrumil/Fall 2026/FDA/tennis_final_project/validation/demo

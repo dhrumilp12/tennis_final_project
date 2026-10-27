@@ -1,6 +1,8 @@
 # Executed verification
 
-Authoritative full-study run: `20261027T121134Z-20f069d1`. Base git revision: `27f3cdca880281396badef197949aaa75008313f`; the working tree was dirty because this implementation was uncommitted. Actual source hashes and dirty-state details are in `outputs_final/run_summary.json`. No changes were pushed.
+The sections below record the original **pre-push analysis execution**. Post-push CI and later local cleanup checks are recorded separately at the end.
+
+Authoritative full-study run: `20261027T121134Z-20f069d1`. Base git revision: `27f3cdca880281396badef197949aaa75008313f`; the working tree was dirty because this implementation was uncommitted. Actual source hashes and dirty-state details are in `outputs_final/run_summary.json`. No changes were pushed during that implementation session.
 
 ## Checks actually executed
 
@@ -54,7 +56,7 @@ Automated internal spot checks passed 27 comparisons using source-row references
 | ipykernel | 7.4.0 |
 | jupyterlab | 4.6.4 |
 
-`requirements.txt` contains compatible ranges; `requirements-lock.txt` is the actual `pip freeze`. The added GitHub Actions workflow runs offline tests and the real-data demo; it has **not** been remotely executed in this session and does not download annual seasons.
+`requirements.txt` contains compatible ranges; `requirements-lock.txt` is the actual `pip freeze`. At the time this historical execution record was written, the added GitHub Actions workflow had not yet been remotely executed. It runs offline tests and the real-data demo, without downloading annual seasons; the later verified result is recorded below.
 
 ## Warnings and remaining limits
 
@@ -66,3 +68,40 @@ Automated internal spot checks passed 27 comparisons using source-row references
 - Experience is observed eligible history since 1990. Exclusions, missingness, residual network/event dependence, limited left-handed support and unmeasured conditions constrain inference. Q1 post-index adjustment is conditional, Q2's small predictive improvement needs independent replication, and Q3 does not establish a universal effect. No causal or psychological claim is made.
 
 No execution blocker remains. The submission files are `reports/FINAL_REPORT.md`, `reports/RESULTS.md`, `reports/DATA_QUALITY.md`, `docs/DATA_DICTIONARY.md`, the executed `Tennis_Project.ipynb`, and the supporting `outputs_final/` tables/charts/summary, README, sources, licenses and this verification record.
+
+
+## Post-push verification — October 27, 2026
+
+Read-only inspection of GitHub Actions verified that the latest run is [Offline tests #1](https://github.com/dhrumilp12/tennis_final_project/actions/runs/40504267984), triggered by a push of commit `7c9569d6a25780506285faa7a7f587d9154b9223`. It ran on October 27, 2026, **08:30:19–08:31:34 EDT** (12:30:19–12:31:34 UTC) and concluded **success**. The `test` job succeeded, including dependency installation, `python -m pytest -q`, and `python tennis_project.py --demo --output-dir validation/ci-demo`. The API listed one run at inspection time, and that commit matched remote `main`. Run/job/step details and inspection time are retained under `remote_ci` in the [cleanup verification record](validation/cleanup_verification.json).
+
+This workflow checks tests and the demo, **not a fresh full historical analysis**. Its success applies to that committed revision, not subsequent local cleanup edits. No commit, push or workflow trigger was performed during this cleanup.
+
+## Reporting and cleanup provenance
+
+`outputs_final/` remains authoritative. The historical `outputs/` directory was removed in the already-pushed `ae573c4` commit; it is not part of the current clone and is absent on this machine. Historical statements above about preserving its files describe the original implementation checks, recorded in `validation/baseline_audit.json` and `validation/final_checks.json`. Optional local `.outputs_final.previous-*` backups are not required clone contents.
+
+The original run summary, input/output inventories, notebook bytes and execution record are preserved. Its source hashes describe code at analysis time, not later reporting edits. All original source/requirement hashes were checked against immutable commit `7c9569d6a25780506285faa7a7f587d9154b9223`; only `tennis_reporting.py` intentionally changes among those files. The separate `validation/cleanup_verification.json` records its old/new hashes and before-cleanup hashes of every authoritative artifact. The tests enforce that boundary rather than rewriting historical hashes.
+
+Removed 34 unreferenced intermediate files: repeated chronology/Q1/Q3 audit tables, header-only empty-sample outputs, two superseded test logs and an obsolete worktree-status snapshot. Numerical sensitivity results remain in `outputs_final/`. The short `docs/WORK_PLAN.md` remains because it substantiates the initial 26-test result. The complete historical demo, baseline/regression/final-integrity records and chart-review record remain. The review record describes an intermediate run inspected at that time; its optional local working directory is not promised in a fresh clone. Three small historical logs cited above are now explicitly retained alongside their JSON records.
+
+
+## Local cleanup checks — October 27, 2026
+
+These checks exercised the proposed, uncommitted documentation/reporting cleanup; the earlier GitHub Actions run did not test it. No new authoritative analysis was published.
+
+| Check | Actual outcome |
+| --- | --- |
+| Existing suite before cleanup | 74 passed, 1504 warnings in 5.85s |
+| `.venv/bin/python -m pytest -q` after cleanup | 96 passed, 1504 warnings in 7.78s — [full log](validation/cleanup_tests.txt) |
+| Required demo command (`--demo --output-dir validation/cleanup-demo`) | 31 records, 29 eligible; models explicitly insufficient |
+| `.venv/bin/python -m pip check` | No broken requirements found; existing environment retained |
+| `git diff --check` | Passed |
+| Isolated report regeneration | README and reports idempotent; sections outside generated markers preserved |
+| Isolated fresh-kernel notebook | 11/11 code cells executed; zero errors; 37.87 seconds |
+| Isolated numerical comparison | 48 CSV/CSV.gz tables agree with authoritative tables within 1e-10 |
+| Links and inclusion | 85 local Markdown links checked; no broken links; required targets tracked or present as unignored proposed additions |
+| Preserved artifacts | All 57 original final artifacts and the saved notebook remain byte-identical; numerical claim tables unchanged |
+
+The extra 22 focused tests cover both primary Q1 outcomes, changed future interaction evidence, missing/unavailable estimates, unrounded interval boundaries, detailed narrative consistency, and isolated README/report regeneration. Existing scientific tests and warnings remain intact. The original notebook's saved wording already reports age and experience intervals spanning zero; its evidence is preserved rather than replacing its outputs with newly written text. The temporary-copy execution exercised the updated shared explanation in the notebook without touching the submitted notebook.
+
+The separate [cleanup verification record](validation/cleanup_verification.json) contains the remote CI inspection, historical/current reporting hashes, protected artifact hashes, exact removed-file list and isolated notebook result. Temporary copies and disposable cleanup-demo output are not required in a clone. Retained notebook, final-integrity and regression records remain available. Existing NumPy/pandas deprecation warnings persist; the local Jupyter launcher also reports its localhost TCP transport warning. No model, data filter, threshold, dependency version or numerical result was changed.

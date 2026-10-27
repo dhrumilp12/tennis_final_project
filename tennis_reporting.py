@@ -29,15 +29,96 @@ def one(frame, **selectors):
 
 
 def interval(row, estimate='estimate_pp', lower='ci95_lower_pp', upper='ci95_upper_pp', digits=2, unit=' pp'):
-    if pd.isna(row[estimate]): return 'unavailable'
-    if pd.isna(row[lower]) or pd.isna(row[upper]): return f'{row[estimate]:+.{digits}f}{unit}; inference unavailable'
+    if not _finite(row.get(estimate)): return 'unavailable'
+    if contrast_evidence(row, estimate, lower, upper) == 'unavailable':
+        return f'{row[estimate]:+.{digits}f}{unit}; inference unavailable'
     return f'{row[estimate]:+.{digits}f}{unit} (95% interval {row[lower]:+.{digits}f} to {row[upper]:+.{digits}f}{unit})'
 
 
-def direction(row, lower='ci95_lower_pp', upper='ci95_upper_pp'):
-    if pd.isna(row[lower]) or pd.isna(row[upper]): return 'inference is unavailable'
+def direction(row, lower='ci95_lower_pp', upper='ci95_upper_pp', estimate=None):
+    if estimate is not None and contrast_evidence(row, estimate, lower, upper) == 'unavailable':
+        return 'inference is unavailable'
+    if (not _finite(row.get(lower)) or not _finite(row.get(upper)) or
+            row[lower] > row[upper] or row.get('inference_status', 'available') != 'available'):
+        return 'inference is unavailable'
     if row[lower] <= 0 <= row[upper]: return 'the interval includes zero'
     return 'the interval is above zero' if row[lower]>0 else 'the interval is below zero'
+
+
+def _finite(value):
+    return isinstance(value, (int, float, np.number)) and bool(np.isfinite(value))
+
+
+def contrast_evidence(row, estimate='estimate_pp', lower='ci95_lower_pp', upper='ci95_upper_pp'):
+    """Interpret unrounded estimates and valid intervals, never missing values."""
+    if (row is None or row.get('inference_status', 'available') != 'available' or
+            not all(_finite(row.get(k)) for k in [estimate, lower, upper])):
+        return 'unavailable'
+    if not row[lower] <= row[estimate] <= row[upper]:
+        return 'unavailable'
+    if row[lower] <= 0 <= row[upper]:
+        return 'uncertain'
+    return 'positive' if row[lower] > 0 else 'negative'
+
+
+def optional_contrast(frame, **selectors):
+    """A missing row has unavailable inference; duplicate rows are a data error."""
+    selected = frame
+    for column, value in selectors.items():
+        if column not in selected:
+            return pd.Series({'inference_status': 'unavailable_missing_row'})
+        selected = selected.loc[selected[column].eq(value)]
+    if selected.empty:
+        return pd.Series({'inference_status': 'unavailable_missing_row'})
+    return one(frame, **selectors)
+
+
+def q1_age_experience_conclusion(q1):
+    """Read both primary outcomes; sensitivities stay separately identified."""
+    evidence = {}
+    for label, contrast in [('age', 'age_interaction_per_year'),
+                            ('prior recorded match experience', 'experience_interaction_log_unit')]:
+        evidence[label] = {
+            outcome: contrast_evidence(optional_contrast(
+                q1, outcome=outcome, sample='all_windows', subgroup='all', contrast=contrast))
+            for outcome in ['next1_win', 'next3_win_rate']}
+    if all(value == 'uncertain' for states in evidence.values() for value in states.values()):
+        return ('We did not find clear evidence that the upset-related difference varied '
+                'with age or prior recorded match experience. '
+                'This does not show that all players recover identically.')
+    statements = []
+    names = {'next1_win': 'next-match', 'next3_win_rate': 'next-three-match'}
+    for label, states in evidence.items():
+        for outcome, status in states.items():
+            if status == 'unavailable':
+                statements.append(f'Inference about variation with {label} is unavailable for the {names[outcome]} outcome.')
+            elif status == 'uncertain':
+                statements.append(f'We did not find clear evidence of variation with {label} for the {names[outcome]} outcome.')
+            else:
+                statements.append(f'The {names[outcome]} upset-related difference shows a {status} association with {label}; its interaction interval excludes zero.')
+    return ' '.join(statements)
+
+
+def handedness_conclusion(q3):
+    states = [contrast_evidence(optional_contrast(q3, player_hand=hand), estimate='difference_pp') for hand in ['R', 'L']]
+    if states == ['uncertain', 'uncertain']:
+        return 'We found no clear evidence of an adjusted difference against left- versus right-handed opponents in either focal-hand group.'
+    if 'unavailable' in states:
+        return 'Adjusted handedness inference is unavailable for at least one focal-hand group; interpret only the available estimates.'
+    return 'Evidence differs by focal-hand group; inspect each adjusted contrast and its interval.'
+
+
+def write_readme_findings(root, summary, brief):
+    import re
+    path = root / 'README.md'
+    if not path.exists():
+        return
+    content = path.read_text()
+    start, end = '<!-- GENERATED_FINDINGS_START -->', '<!-- GENERATED_FINDINGS_END -->'
+    if start in content and end in content:
+        generated = (f'{start}\nAnalysis run: `{summary["run_id"]}`; '
+                     f'**{summary["eligible_analysis_matches"]:,} eligible study matches**.\n\n{brief}\n{end}')
+        path.write_text(re.sub(re.escape(start) + r'.*?' + re.escape(end), lambda _: generated, content, flags=re.S))
 
 
 def findings(output):
@@ -47,27 +128,29 @@ def findings(output):
     q1=read('q1_adjusted_contrasts'); q2=read('q2_paired_improvements'); q3=read('q3_adjusted_contrasts')
     a=one(q1,outcome='next3_win_rate',sample='all_windows',contrast='average_upset_minus_ordinary',subgroup='all')
     b=one(q1,outcome='next1_win',sample='all_windows',contrast='average_upset_minus_ordinary',subgroup='all')
-    age=one(q1,outcome='next3_win_rate',sample='all_windows',contrast='age_interaction_per_year',subgroup='all')
-    exp=one(q1,outcome='next3_win_rate',sample='all_windows',contrast='experience_interaction_log_unit',subgroup='all')
+    age=optional_contrast(q1,outcome='next3_win_rate',sample='all_windows',contrast='age_interaction_per_year',subgroup='all')
+    exp=optional_contrast(q1,outcome='next3_win_rate',sample='all_windows',contrast='experience_interaction_log_unit',subgroup='all')
     count=one(q2,first_model='baseline',second_model='plus_meeting_count',metric='brier')
     h2h=one(q2,first_model='baseline',second_model='plus_h2h_results',metric='brier')
     r=one(q3,player_hand='R'); l=one(q3,player_hand='L')
-    q1text=(f'After a ranking upset, adjusted next-three-match performance differed from ordinary losses by {interval(a)} '
+    q1text=(q1_age_experience_conclusion(q1) + ' '
+            f'After a ranking upset, adjusted next-three-match performance differed from ordinary losses by {interval(a)} '
             f'across {int(a.events):,} complete, covariate-usable loss events from {int(a.players):,} players. '
             f'The next-match difference was {interval(b)}. '
             f'Age modification was {interval(age)} per year; experience modification was {interval(exp)} per unit of log(1 + prior matches). '
-            f'For age, {direction(age)}; for experience, {direction(exp)}. '
+            f'For age, {direction(age, estimate="estimate_pp")}; for experience, {direction(exp, estimate="estimate_pp")}. '
             'Interpret the joint age and experience interactions using their intervals, rather than treating descriptive age bands as experience groups. '
             'Adjustment includes subsequent playing context, so this is a conditional association, not a causal recovery effect.')
     q2text=(f'On {s["q2"]["test_matches"]:,} held-out matches, meeting count alone changed Brier performance by '
-            f'{interval(count,"mean_improvement","ci95_lower","ci95_upper",6,"")}; {direction(count,"ci95_lower","ci95_upper")}. '
+            f'{interval(count,"mean_improvement","ci95_lower","ci95_upper",6,"")}; {direction(count,"ci95_lower","ci95_upper", "mean_improvement")}. '
             f'Adding previous head-to-head results changed Brier performance by '
             f'{interval(h2h,"mean_improvement","ci95_lower","ci95_upper",6,"")}. '
-            f'Positive improvement means lower prediction error; for previous results, {direction(h2h,"ci95_lower","ci95_upper")}. Meeting count and previous outcomes answer different questions. '
+            f'Positive improvement means lower prediction error; for previous results, {direction(h2h,"ci95_lower","ci95_upper", "mean_improvement")}. Meeting count and previous outcomes answer different questions. '
             'Pair-cluster intervals leave shared-player dependence across pairs unresolved.')
-    q3text=(f'Adjusted opponent-left-minus-right win-probability differences were {interval(r,"difference_pp")} '
+    q3text=(handedness_conclusion(q3) + ' '
+            f'Adjusted opponent-left-minus-right win-probability differences were {interval(r,"difference_pp")} '
             f'for {int(r.players):,} right-handed focal players and {interval(l,"difference_pp")} for {int(l.players):,} left-handed focal players. '
-            f'For right-handed players, {direction(r)}; for left-handed players, {direction(l)}. '
+            f'For right-handed players, {direction(r, estimate="difference_pp")}; for left-handed players, {direction(l, estimate="difference_pp")}. '
             'The results do not establish a uniform handedness advantage. Dyadic intervals account for matches sharing either participant; '
             'the smaller left-handed subgroup and remaining event/network dependence warrant caution.')
     return s, [q1text,q2text,q3text]
@@ -91,6 +174,7 @@ def incomplete_reports(output, root, summary):
         (reports/name).write_text(text+'\n')
     (reports/'report_claims.json').write_text(json.dumps({'run_id':summary['run_id'],'answers':answers,'tables':tables},indent=2,allow_nan=False))
     (reports/'report_manifest.json').write_text(json.dumps({'run_id':summary['run_id'],'outputs_summary_sha256':sha256(output/'run_summary.json'),'files':{p.name:sha256(p) for p in sorted(reports.iterdir()) if p.is_file() and p.name!='report_manifest.json'}},indent=2))
+    write_readme_findings(root, summary, '\n\n'.join(answers))
     return summary,answers
 
 
@@ -100,12 +184,27 @@ def generate_reports(output='outputs_final', root='.'):
     required=['q1_adjusted_contrasts','q2_paired_improvements','q3_adjusted_contrasts']
     if any(not (output/f'{name}.csv').exists() or pd.read_csv(output/f'{name}.csv').empty for name in required):
         return incomplete_reports(output,root,availability)
+    # Partial model fits can leave nonempty tables without the primary contrast.
+    essential = {
+        'q1_adjusted_contrasts': [dict(outcome=o, sample='all_windows', subgroup='all',
+                                     contrast='average_upset_minus_ordinary')
+                                  for o in ['next1_win', 'next3_win_rate']],
+        'q2_paired_improvements': [dict(first_model='baseline', second_model=m, metric='brier')
+                                   for m in ['plus_meeting_count', 'plus_h2h_results']],
+        'q3_adjusted_contrasts': [dict(player_hand=h) for h in ['R', 'L']],
+    }
+    for name, selectors in essential.items():
+        frame = pd.read_csv(output/f'{name}.csv')
+        if any(optional_contrast(frame, **selector).get('inference_status') == 'unavailable_missing_row'
+               for selector in selectors):
+            return incomplete_reports(output,root,availability)
     s,answers=findings(output); rid=s['run_id']
     reports=root/'reports';reports.mkdir(parents=True,exist_ok=True)
     read=lambda n: pd.read_csv(output/f'{n}.csv')
     # Relative links keep the project portable as a submission directory.
     import os
     prefix=os.path.relpath(output,reports)
+    readme_prefix=os.path.relpath(output,root)
     def source(name, selector='all rows'):
         return f'Source: [`{name}.csv`]({prefix}/{name}.csv), {selector}; run `{rid}`.'
     banner=f'Run ID: `{rid}`. Generated from verified outputs; all numerical claims below refer to this run.\n'
@@ -178,17 +277,11 @@ These are exploratory observational results. Ranking upsets are a ranking-based 
     quality=read('attrition');flow=read('exclusion_flow');chron=read('chronology_checks');cov=read('coverage_by_group');miss=read('missingness_by_group')
     ledger=pd.read_csv(output/'unresolved_event_ledger.csv')
     checks=read('spotcheck_evidence')
-    baseline_path=root/'validation'/'baseline_audit.json'
-    baseline=json.loads(baseline_path.read_text()) if baseline_path.exists() else None
-    previous_summary=root/'outputs'/'run_summary.json'
-    previous=json.loads(previous_summary.read_text()) if previous_summary.exists() else None
-    change=(f'The preserved saved run had {previous["eligible_analysis_matches"]:,} eligible study matches; this run has {s["eligible_analysis_matches"]:,}, a change of {s["eligible_analysis_matches"]-previous["eligible_analysis_matches"]:+,}. '
-            'Legitimate exclusions were retained; no count target was enforced.' if previous else 'No earlier run count is available for comparison.')
     overlap = s.get('chronology', {})
     dq=f'''# Data quality and reconstruction audit
 
 {banner}
-{change} The eligible unique-match count is substantial for these class questions; subgroup support and dependent observations still constrain inference. Source: current and preserved `run_summary.json`, `eligible_analysis_matches`.
+The authoritative run contains {s['eligible_analysis_matches']:,} eligible unique study matches. No count target was enforced. Subgroup support and dependent observations still constrain inference. Source: [`run_summary.json`]({prefix}/run_summary.json), `eligible_analysis_matches`. Historical baseline checks remain in `validation/baseline_audit.json` and `validation/final_checks.json`; they do not imply an `outputs/` directory is included in this clone.
 
 ## Attrition and units
 
@@ -351,32 +444,38 @@ Additional limitations include source incompleteness/errors, selected ATP scope,
 
 ## Reproducibility and sources
 
-Use the commands in [README.md](../README.md). [`run_summary.json`]({prefix}/run_summary.json) records run ID/timestamps, configuration, actual inputs, source revision, code hashes, git base/dirty state, package versions, analysis warnings and output hashes. Results were staged and hash-verified before publication; the original saved `outputs/` remain intact. The actual environment is also frozen in `requirements-lock.txt`. [TEST_RESULTS.md](../TEST_RESULTS.md) distinguishes full-data execution, real-demo smoke testing and explicitly synthetic regressions. The executed [Tennis_Project.ipynb](../Tennis_Project.ipynb) uses the same modules and final output directory; its displayed findings are read from the same tables. [SOURCES.md](../SOURCES.md), [DATA_LICENSE.txt](../DATA_LICENSE.txt), [METHODS.md](../docs/METHODS.md), and [DATA_QUALITY.md](DATA_QUALITY.md) provide the source, method and audit details.
+Use the commands in [README.md](../README.md). [`run_summary.json`]({prefix}/run_summary.json) records run ID/timestamps, configuration, actual inputs, source revision, code hashes, git base/dirty state, package versions, analysis warnings and output hashes. The authoritative results are in `outputs_final/`, staged and hash-verified at analysis execution. Earlier run directories, if present on a local machine, are optional local backups and are not part of the current clone. Reporting-only revisions do not change the original analysis date or source hashes; see the separately dated notes in [TEST_RESULTS.md](../TEST_RESULTS.md). The actual environment is also frozen in `requirements-lock.txt`. [TEST_RESULTS.md](../TEST_RESULTS.md) distinguishes full-data execution, real-demo smoke testing and explicitly synthetic regressions. The executed [Tennis_Project.ipynb](../Tennis_Project.ipynb) uses the same modules and final output directory; its displayed findings are read from the same tables. [SOURCES.md](../SOURCES.md), [DATA_LICENSE.txt](../DATA_LICENSE.txt), [METHODS.md](../docs/METHODS.md), and [DATA_QUALITY.md](DATA_QUALITY.md) provide the source, method and audit details.
 '''
     (reports/'FINAL_REPORT.md').write_text(final)
     claims={'run_id':rid,'output_directory':str(output),'answers':answers,
             'tables':{n:json.loads(read(n).to_json(orient='records',double_precision=15)) for n in ['q1_summary_overall','q1_adjusted_contrasts','q2_model_metrics','q2_paired_improvements','q3_adjusted_contrasts','q3_descriptive_contrasts']}}
     (reports/'report_claims.json').write_text(json.dumps(claims,indent=2,allow_nan=False))
     (reports/'report_manifest.json').write_text(json.dumps({'run_id':rid,'outputs_summary_sha256':sha256(output/'run_summary.json'),'files':{p.name:sha256(p) for p in sorted(reports.iterdir()) if p.is_file() and p.name!='report_manifest.json'}},indent=2))
-    readme=root/'README.md'
-    if readme.exists():
-        content=readme.read_text()
-        start,end='<!-- GENERATED_FINDINGS_START -->','<!-- GENERATED_FINDINGS_END -->'
-        if start in content and end in content:
-            import re
-            first=one(q1,outcome='next3_win_rate',sample='all_windows',contrast='average_upset_minus_ordinary',subgroup='all')
-            comparisons=read('q2_paired_improvements')
-            count=one(comparisons,first_model='baseline',second_model='plus_meeting_count',metric='brier')
-            history=one(comparisons,first_model='baseline',second_model='plus_h2h_results',metric='brier')
-            brief=(f'**Q1:** Adjusted next-three performance after ranking upsets versus ordinary losses: {interval(first)}. '
-                   'See the report for separate age/experience interactions, next-match results, and non-overlap sensitivity.\n\n'
-                   f'**Q2:** Brier improvement from meeting count alone: {interval(count,"mean_improvement","ci95_lower","ci95_upper",6,"")}; '
-                   f'with previous head-to-head results: {interval(history,"mean_improvement","ci95_lower","ci95_upper",6,"")}.\n\n'
-                   f'**Q3:** Adjusted opponent L-minus-R differences: {interval(one(q3,player_hand="R"),"difference_pp")} for right-handed focal players; '
-                   f'{interval(one(q3,player_hand="L"),"difference_pp")} for left-handed focal players.\n\n'
-                   'All are observational estimates with dependence and chronology limitations; see the report for sample sizes and interpretation.')
-            generated=f'{start}\nVerified run: `{rid}`; **{s["eligible_analysis_matches"]:,} eligible unique study matches**.\n\n{brief}\n{end}'
-            readme.write_text(re.sub(re.escape(start)+r'.*?'+re.escape(end),lambda _:generated,content,flags=re.S))
+    first=one(q1,outcome='next3_win_rate',sample='all_windows',contrast='average_upset_minus_ordinary',subgroup='all')
+    comparisons=read('q2_paired_improvements')
+    count=one(comparisons,first_model='baseline',second_model='plus_meeting_count',metric='brier')
+    history=one(comparisons,first_model='baseline',second_model='plus_h2h_results',metric='brier')
+    meeting_answers=[]
+    for label, row in [('Meeting count alone', count), ('Previous head-to-head results', history)]:
+        state=contrast_evidence(row, 'mean_improvement', 'ci95_lower', 'ci95_upper')
+        wording={'uncertain':'gave no clear improvement', 'positive':'lowered prediction error',
+                 'negative':'increased prediction error', 'unavailable':'had unavailable uncertainty'}
+        meeting_answers.append(f'{label} {wording[state]}.')
+    brief=(f'**1. Does performance after a ranking upset vary with age or experience?** '
+           f'{q1_age_experience_conclusion(q1)} '
+           f'The overall adjusted next-three-match difference from ordinary losses was {interval(first)} '
+           f'({int(first.events):,} loss events, {int(first.players):,} players).\n\n'
+           f'**2. Do previous meetings help predict the next match?** {" ".join(meeting_answers)} '
+           f'Meeting count alone: Brier improvement {interval(count,"mean_improvement","ci95_lower","ci95_upper",6,"")}. '
+           f'Including previous head-to-head results: {interval(history,"mean_improvement","ci95_lower","ci95_upper",6,"")} '
+           f'({s["q2"]["test_matches"]:,} held-out matches). Positive improvement means lower prediction error.\n\n'
+           f'**3. Does performance differ by opponent handedness?** {handedness_conclusion(q3)} '
+           f'Adjusted left-minus-right differences: {interval(one(q3,player_hand="R"),"difference_pp")} for right-handed focal players; '
+           f'{interval(one(q3,player_hand="L"),"difference_pp")} for left-handed focal players.\n\n'
+           f'Source rows: [`q1_adjusted_contrasts.csv`]({readme_prefix}/q1_adjusted_contrasts.csv), primary average and age/experience interactions; '
+           f'[`q2_paired_improvements.csv`]({readme_prefix}/q2_paired_improvements.csv), baseline Brier comparisons; '
+           f'[`q3_adjusted_contrasts.csv`]({readme_prefix}/q3_adjusted_contrasts.csv), both focal hands.')
+    write_readme_findings(root, s, brief)
     return s,answers
 
 

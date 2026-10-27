@@ -74,7 +74,34 @@ def test_final_notebook_executed_same_run_and_source_hashes_match():
     assert evidence['run_id']==summary['run_id']
     assert evidence['execution_errors']==0 and evidence['fresh_kernel']
     assert evidence['executed_code_cells']==len(cells)
-    for name,digest in summary['code']['source_hashes'].items(): assert sha256(name)==digest
+    # The saved notebook is an execution artifact, not newly manufactured output.
+    assert sha256('Tennis_Project.ipynb') == evidence['notebook_sha256']
+    source_hashes = summary['code']['source_hashes']
+    changed = {name for name, digest in source_hashes.items() if sha256(name) != digest}
+    if changed:
+        # Reporting-only maintenance can follow an analysis without pretending
+        # that the new prose generator executed that historical run. All other
+        # executable analysis sources and requirements remain hash-identical.
+        assert changed == {'tennis_reporting.py'}
+        cleanup = json.loads(Path('validation/cleanup_verification.json').read_text())
+        assert cleanup['analysis_run_id'] == summary['run_id']
+        revision = cleanup['historical_source_revision']
+        assert len(revision) == 40 and set(revision) <= set('0123456789abcdef')
+        declared = cleanup['reporting_only_source_changes']
+        assert set(declared) == changed
+        for name, hashes in declared.items():
+            assert hashes['analysis_sha256'] == source_hashes[name]
+            assert hashes['cleanup_sha256'] == sha256(name)
+        protected = cleanup['authoritative_outputs_sha256']
+        expected = {str(output / r['path']) for r in summary['output_inventory']}
+        expected.add(str(output / 'run_summary.json'))
+        assert set(protected) == expected
+        for name, digest in protected.items():
+            assert sha256(name) == digest
+        assert cleanup['preserved_notebook_sha256'] == evidence['notebook_sha256']
+    for name, digest in source_hashes.items():
+        if name not in changed:
+            assert sha256(name) == digest
 
 
 def test_demo_report_labels_inference_unavailable_instead_of_inventing_results(tmp_path):

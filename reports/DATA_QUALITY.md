@@ -2,7 +2,7 @@
 
 Run ID: `20261027T121134Z-20f069d1`. Generated from verified outputs; all numerical claims below refer to this run.
 
-The preserved saved run had 63,784 eligible study matches; this run has 63,784, a change of +0. Legitimate exclusions were retained; no count target was enforced. The eligible unique-match count is substantial for these class questions; subgroup support and dependent observations still constrain inference. Source: current and preserved `run_summary.json`, `eligible_analysis_matches`.
+The authoritative run contains 63,784 eligible unique study matches. No count target was enforced. Subgroup support and dependent observations still constrain inference. Source: [`run_summary.json`](../outputs_final/run_summary.json), `eligible_analysis_matches`. Historical baseline checks remain in `validation/baseline_audit.json` and `validation/final_checks.json`; they do not imply an `outputs/` directory is included in this clone.
 
 ## Attrition and units
 
