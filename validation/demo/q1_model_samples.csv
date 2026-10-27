@@ -1,0 +1,5 @@
+outcome,sample,available_windows,excluded_missing_covariates,model_events,model_players,status,design_columns,design_rank
+next3_win_rate,all_windows,0,0,0,0,insufficient,,
+next3_win_rate,nonoverlapping,0,0,0,0,insufficient,,
+next1_win,all_windows,0,0,0,0,insufficient,,
+next1_win,nonoverlapping,0,0,0,0,insufficient,,

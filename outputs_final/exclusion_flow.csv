@@ -1,0 +1,9 @@
+period,first_reason,records
+study,ambiguous_order,938
+study,eligible,63784
+study,outside_individual_AMG_scope,7780
+study,unfinished_or_unrecognized_score,2404
+warmup,ambiguous_order,318
+warmup,eligible,32717
+warmup,outside_individual_AMG_scope,3327
+warmup,unfinished_or_unrecognized_score,788

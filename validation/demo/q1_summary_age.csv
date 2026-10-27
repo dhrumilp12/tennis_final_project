@@ -1,0 +1,5 @@
+loss_type,age_group,index_losses,unique_players,usable_next_matches,complete_three_match_windows,incomplete_or_unusable_windows,mean_age,median_age,mean_prior_matches,median_prior_matches,next_match_win_rate,next_match_ci95_lower,next_match_ci95_upper,next_match_players,next_three_win_rate,next_three_ci95_lower,next_three_ci95_upper,next_three_players
+other_ranked_loss,under_23,3,3,0,0,3,21.533333333333335,21.2,2.0,2.0,,,,0,,,,0
+other_ranked_loss,23_to_29,5,5,0,0,5,24.580000000000002,24.4,1.0,1.0,,,,0,,,,0
+other_ranked_loss,30_plus,1,1,0,0,1,36.6,36.6,0.0,0.0,,,,0,,,,0
+ranking_upset,23_to_29,2,2,0,0,2,23.7,23.7,0.0,0.0,,,,0,,,,0

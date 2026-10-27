@@ -1,0 +1,389 @@
+{
+  "raw_match_rows": 31,
+  "exact_duplicates_removed": 0,
+  "unique_source_rows": 31,
+  "eligible_history_matches": 29,
+  "eligible_analysis_matches": 29,
+  "exclusion_flag_counts_nonexclusive": {
+    "invalid_player_ids": 0,
+    "conflicting_match_key": 0,
+    "outside_individual_AMG_scope": 0,
+    "unfinished_or_unrecognized_score": 2,
+    "ambiguous_order": 0,
+    "outside_history_window": 0,
+    "missing_match_key": 0
+  },
+  "run_id": "20261027T120758Z-f2f0e39b",
+  "started_at_utc": "2026-10-27T12:07:58.019624+00:00",
+  "completed_at_utc": "2026-10-27T12:08:06.704086+00:00",
+  "publication_status": "verified",
+  "configuration": {
+    "output_dir": "validation/demo",
+    "raw_dir": "data/raw",
+    "history_start": 2024,
+    "analysis_start": 2024,
+    "end_year": 2024,
+    "test_start": 2020,
+    "upset_max_rank": 50,
+    "upset_rank_gap": 30,
+    "recent_matches": 10,
+    "min_hand_matches": 10,
+    "bootstrap_samples": 500,
+    "random_seed": 42,
+    "offline": false,
+    "make_plots": true
+  },
+  "source_repository": "Aneeshers/tennis-sackmann-archive",
+  "source_revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+  "inputs": [
+    {
+      "path": "/Users/dhrumil/Fall 2026/FDA/tennis_final_project/tests/fixtures/brisbane_2024_excerpt.csv",
+      "sha256": "5d956456e8e65d257780df6a3f2f91bf373912ecc92f02602933dce9601f5fea",
+      "bytes": 6780,
+      "origin": "provided_local_file"
+    }
+  ],
+  "cache_inventory_is_separate": true,
+  "input_mode": "provided_local_files",
+  "test_data_warning": "Provided files may be partial or synthetic; not full-study findings.",
+  "q1": {
+    "index_losses": 29,
+    "index_players": 29,
+    "ranking_upsets": 2,
+    "complete_three_match_followups": 0,
+    "rank_eligible_losses": 11,
+    "rank_eligible_players": 11,
+    "status": "Descriptive Q1 tables saved; insufficient data or identification for adjusted inference.",
+    "warnings": [
+      "Follow-up context adjustment estimates a conditional association; focal-player clustering does not cover all shared-opponent dependence."
+    ],
+    "descriptive_population": "Both ranks known and focal rank <= 50.",
+    "nonoverlap_rule": "Greedily retain earliest available complete windows in sequence per focal player; neither index nor follow-up match can be reused. Selection precedes covariate exclusion and does not use outcomes.",
+    "uncertainty": "Focal-player cluster sandwich with t critical value (players minus one degrees of freedom); shared-opponent/network dependence remains.",
+    "adjusted_model_eligible_events": 0,
+    "models": [
+      {
+        "outcome": "next3_win_rate",
+        "sample": "all_windows",
+        "available_windows": 0,
+        "excluded_missing_covariates": 0,
+        "model_events": 0,
+        "model_players": 0,
+        "status": "insufficient",
+        "design_columns": null,
+        "design_rank": null
+      },
+      {
+        "outcome": "next3_win_rate",
+        "sample": "nonoverlapping",
+        "available_windows": 0,
+        "excluded_missing_covariates": 0,
+        "model_events": 0,
+        "model_players": 0,
+        "status": "insufficient",
+        "design_columns": null,
+        "design_rank": null
+      },
+      {
+        "outcome": "next1_win",
+        "sample": "all_windows",
+        "available_windows": 0,
+        "excluded_missing_covariates": 0,
+        "model_events": 0,
+        "model_players": 0,
+        "status": "insufficient",
+        "design_columns": null,
+        "design_rank": null
+      },
+      {
+        "outcome": "next1_win",
+        "sample": "nonoverlapping",
+        "available_windows": 0,
+        "excluded_missing_covariates": 0,
+        "model_events": 0,
+        "model_players": 0,
+        "status": "insufficient",
+        "design_columns": null,
+        "design_rank": null
+      }
+    ],
+    "analysis_status": "insufficient",
+    "status_code": "insufficient_or_unavailable"
+  },
+  "q2": {
+    "status": "Q2 history features saved; insufficient earlier/later data or outcome variation for a model comparison.",
+    "training_matches": 0,
+    "test_matches": 29,
+    "test_start": 2020,
+    "orientation": "Player A has the smaller numeric player ID, independent of match outcome.",
+    "warnings": [],
+    "status_code": "insufficient_or_unavailable"
+  },
+  "q3": {
+    "status": "Q3 descriptive tables saved; insufficient players with both opponent hands and complete covariates for adjustment.",
+    "analysis_status": "descriptive_only",
+    "player_match_rows": 58,
+    "unique_matches": 29,
+    "warnings": [
+      "Adjusted inference unavailable: fewer than 200 rows or 20 focal players."
+    ],
+    "players_meeting_raw_comparison_minimum": 0,
+    "adjusted_player_match_rows": 0,
+    "adjusted_unique_matches": 0,
+    "adjusted_players": 0,
+    "status_code": "insufficient_or_unavailable"
+  },
+  "quality": {
+    "chronology": {
+      "order_reliable": 0,
+      "identity_ok": 0,
+      "missing_dates": 0,
+      "conflicting_source_rows": 0,
+      "conflicting_match_keys": 0,
+      "same_date_multiple_events": 0,
+      "repeated_player_round": 0,
+      "unsupported_round_event": 0,
+      "missing_tournament_date": 0
+    },
+    "study_unique_match_keys": 31,
+    "q1_rank_eligible_losses": 11
+  },
+  "chronology": {
+    "candidate_event_pairs_all_history": 0,
+    "candidate_players_all_history": 0,
+    "candidate_event_pairs_study_individual": 0,
+    "candidate_players_study_individual": 0,
+    "study_individual_short_gap_pairs": 0,
+    "study_individual_G_screen_pairs": 0,
+    "screening_rule": "Distinct events for a known player: start gap 1\u20136 days, or 7\u201313 days after a G start.",
+    "interpretation": "Potential overlaps unresolved without match dates; early exits or ordinary calendar differences may explain candidates. No event end dates were imputed and this diagnostic does not change eligibility."
+  },
+  "spot_checks": {
+    "checks": 21,
+    "all_passed": true,
+    "scope": "Automated local source/history consistency only; no independent external verification or human review."
+  },
+  "runtime": {
+    "python": "3.13.7",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "numpy": "2.5.4",
+    "pandas": "2.3.3",
+    "scipy": "1.18.1",
+    "scikit_learn": "1.9.1",
+    "statsmodels": "0.14.6",
+    "matplotlib": "3.11.2",
+    "requests": "2.34.2",
+    "pytest": "9.1.1",
+    "nbformat": "5.11.1",
+    "nbclient": "0.11.0",
+    "ipykernel": "7.4.0",
+    "jupyterlab": "4.6.4"
+  },
+  "code": {
+    "revision": "27f3cdca880281396badef197949aaa75008313f",
+    "dirty": true,
+    "status_porcelain": "M DATA_LICENSE.txt\n M README.md\n M SOURCES.md\n M Tennis_Project.ipynb\n M data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/manifest.json\n M requirements.txt\n M tennis_analyses.py\n M tennis_project.py\n?? .github/\n?? docs/\n?? execute_notebook.py\n?? requirements-lock.txt\n?? tennis_chronology.py\n?? tennis_handedness.py\n?? tennis_reporting.py\n?? tennis_repro.py\n?? tests/test_analysis_extensions.py\n?? tests/test_chronology_diagnostics.py\n?? tests/test_handedness.py\n?? tests/test_provenance.py\n?? tests/test_recovery_blockers.py\n?? tests/test_reporting.py\n?? validation/",
+    "source_hashes": {
+      "execute_notebook.py": "5a5fbd96fa0f37b1517e40a206be2a15f3585ed9a77709d37e23da6dc9519fe3",
+      "requirements-lock.txt": "7b74fd94d56275471bb4f8cd0456f51541ef6b6ca31077e16a46cb0418e5243a",
+      "requirements.txt": "0a97440b99518087afe328d39292447d1ca49267078c2c740a16281b5ee6b354",
+      "tennis_analyses.py": "44cb46ff0d98d93d73dad49aa47a7fac33c327dbf057337e6b73384ab398994f",
+      "tennis_chronology.py": "3b9f232558ef0984a5d1fcc88c0be2aed2ba977a96b29bfe21abb3801dc09865",
+      "tennis_handedness.py": "edd38fd72e061482c2f4f4417754fa73fd890f0deb83dfce08ea6ad1763e8588",
+      "tennis_project.py": "58fee5db414e7f30ec7d1d1686093329ad9d28dbe020f94ee115d82f17ad9ab6",
+      "tennis_reporting.py": "73d78d16c77e8072eca035dfb1c810797ec0ad2c1dd6e051c1d5aae57ed48a30",
+      "tennis_repro.py": "a636b78e2bc979cb378db9648b6c70ef16747599ced075aed1039a7e6a490b0e"
+    },
+    "note": "Revision identifies the base commit; source hashes identify the actual working code used."
+  },
+  "runtime_warnings": [
+    {
+      "category": "DeprecationWarning",
+      "message": "The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.",
+      "count": 1
+    }
+  ],
+  "output_inventory": [
+    {
+      "path": "RUN_SUMMARY.md",
+      "bytes": 806,
+      "sha256": "43b3b3ece671ffc6a1de2fc78245947f3605baab24cf47ee6cc4a1e07975f271"
+    },
+    {
+      "path": "attrition.csv",
+      "bytes": 1046,
+      "sha256": "a0f53998f6b61298c35fa03b4056290844e5df03be0adec19d60eadb04a9376b"
+    },
+    {
+      "path": "chronology_checks.csv",
+      "bytes": 224,
+      "sha256": "e642a1e3c4a4c055165edd761b2952a623bfa74f424a537d9d28d4dadb60b1c9"
+    },
+    {
+      "path": "chronology_overlap_candidates.csv",
+      "bytes": 512,
+      "sha256": "19583ca6a48d169d18af70b99960e692e8ca4b0a7e444c6d378ff055143153e5"
+    },
+    {
+      "path": "chronology_start_gap_counts.csv",
+      "bytes": 1175,
+      "sha256": "8b99dca9a02c12798bb003dd4276386eabfe89f1d8bb80b7d61ed3e1445d1978"
+    },
+    {
+      "path": "coverage_by_group.csv",
+      "bytes": 224,
+      "sha256": "08fd80712626ee9a0d4cd42d4eee15d2eeeff26d1ea29d7454e8ecb4153b4a1c"
+    },
+    {
+      "path": "coverage_by_year.csv",
+      "bytes": 95,
+      "sha256": "7f582ab2b412e2bae658fd03a8da3ca3abb6141137e7ed9a349fda0c8683252c"
+    },
+    {
+      "path": "exact_duplicate_rows.csv",
+      "bytes": 512,
+      "sha256": "94cece8f9334270b7232a73d84a7d29f46cbe911f71cca47efb248f5af9b147a"
+    },
+    {
+      "path": "excluded_matches.csv.gz",
+      "bytes": 747,
+      "sha256": "1b9a51a7c7bf6474174ab619b9f5f4ce3ab1c8dba7236ec062acb174e4f87f8c"
+    },
+    {
+      "path": "exclusion_flow.csv",
+      "bytes": 87,
+      "sha256": "3dd508bb6b9a54fcab9efb23c0751b5579084d4968212ec484e7c352e5d99f8d"
+    },
+    {
+      "path": "matches_audited.csv.gz",
+      "bytes": 3007,
+      "sha256": "988144e1bd39bcd6b903bcb774e566a23552c7259ef399e72dde4fa39fa392a4"
+    },
+    {
+      "path": "missing_values.csv",
+      "bytes": 402,
+      "sha256": "12877fd5899b633c1d92f8c50d4859e6dca9b60a08c70092572f8a893ce2be59"
+    },
+    {
+      "path": "missingness_by_group.csv",
+      "bytes": 2471,
+      "sha256": "ea2bf76eb3e7a23baf5feaee6b4c740e561900b0727b3a440e63ab382933bae3"
+    },
+    {
+      "path": "player_match_features.csv.gz",
+      "bytes": 5779,
+      "sha256": "fa937dee0c1287713ce2a17bf0f233cec9c1cba17ff28bdf31cf4e3d8f9e83d2"
+    },
+    {
+      "path": "player_row_quality.csv",
+      "bytes": 104,
+      "sha256": "98e8748cfc106870dc5c5f6e91cc04f2dbc82739d80e63260582175383ed474f"
+    },
+    {
+      "path": "q1_adjusted_contrasts.csv",
+      "bytes": 140,
+      "sha256": "a55edd5899b3ba87815f8eca44d15ead605f4345bc06098eb059cce8f0aeae85"
+    },
+    {
+      "path": "q1_all_adjusted_coefficients.csv",
+      "bytes": 69,
+      "sha256": "4e5fd09e67a985049b3bcecf5e81436bfc4fab44fbff8d0b4de083e4c4f49514"
+    },
+    {
+      "path": "q1_followup_status.csv",
+      "bytes": 159,
+      "sha256": "627be5b01fa3afdf2aece68379993774d0b761150662c8f0c297df99ce43742a"
+    },
+    {
+      "path": "q1_model_samples.csv",
+      "bytes": 318,
+      "sha256": "0f42bd2cc86306fe632a447cc5c91835a53ceba5a53ec344882cbcb91aad73a6"
+    },
+    {
+      "path": "q1_model_windows.csv.gz",
+      "bytes": 93,
+      "sha256": "ad4583757fcc54d84b8d565b717c9b37296159c0b2a2e818d6bee17afb71d3a7"
+    },
+    {
+      "path": "q1_population_flow.csv",
+      "bytes": 137,
+      "sha256": "1d4d70b8dfff45c8f195791cda3fe68235b4dedd0a17e950824452d9107164d8"
+    },
+    {
+      "path": "q1_recovery_events.csv.gz",
+      "bytes": 4156,
+      "sha256": "8472c605ca97e1aff620b74fda0b79755c3ebcfb904201a6c38cfc6cc3009ef8"
+    },
+    {
+      "path": "q1_summary_age.csv",
+      "bytes": 637,
+      "sha256": "beeb5e7166604be6f1829fabeb707c1fbbdb0bc848be3b816804e659cf190e54"
+    },
+    {
+      "path": "q1_summary_experience.csv",
+      "bytes": 504,
+      "sha256": "2aca5487d9d3c064c1086e02026a3a5a98dd8a637cc603a0d5721e20a88ee15e"
+    },
+    {
+      "path": "q1_summary_overall.csv",
+      "bytes": 467,
+      "sha256": "45224ba628031c641ac465b0be5c93ea9e2381d226c07fe28add9d3665fbd18a"
+    },
+    {
+      "path": "q1_threshold_sensitivity.csv",
+      "bytes": 592,
+      "sha256": "d2e4cd4db39b58ed5892016368e28c08cdc0b4e8c5e4a205623b76c86b73bc9c"
+    },
+    {
+      "path": "q2_meeting_count_summary.csv",
+      "bytes": 64,
+      "sha256": "0ae6df771622669442b564edaea400581a2078cfeeeedaaab68eab49940b17a4"
+    },
+    {
+      "path": "q3_by_player_and_hand.csv",
+      "bytes": 1761,
+      "sha256": "06718e1dfb70a9b4f9fb8ce58df6ad33aa114ee72278514ed2e588e1a92210f5"
+    },
+    {
+      "path": "q3_descriptive_contrasts.csv",
+      "bytes": 222,
+      "sha256": "51978e64fe1d2869c4459e6b54ff67040c97796f7e1696e6cc0e63f5c534e2dc"
+    },
+    {
+      "path": "q3_paired_player_comparison.csv",
+      "bytes": 294,
+      "sha256": "cd66f457a4a909f1e4896fb2ac1e33b55e2952552df0b679d72aa1833b01bb12"
+    },
+    {
+      "path": "q3_subgroup_support.csv",
+      "bytes": 327,
+      "sha256": "faf011d2b73dedb74575b572451ef84bb5b0a96f36cc4505cc4ffa025453a155"
+    },
+    {
+      "path": "spotcheck_evidence.csv",
+      "bytes": 1881,
+      "sha256": "025fec32a162a3580113bb2525c0fce552ea7e6b5f31e9dde44755140c4c24b8"
+    },
+    {
+      "path": "spotcheck_opponent_pairs.csv",
+      "bytes": 2122,
+      "sha256": "142d01b9130455af42fac21eb01b21025473592b75c392333bed54529d0e79b3"
+    },
+    {
+      "path": "spotcheck_player_histories.csv",
+      "bytes": 6482,
+      "sha256": "0e47e6f524b9f857b22bf87a7df78babbdd10ff2f6a60e5abe11a07d6960b6f5"
+    },
+    {
+      "path": "spotcheck_recovery_windows.csv",
+      "bytes": 3015,
+      "sha256": "2f1ae157d3469f337ff6016a243be05637b80a6dfa812bd2ce7c823e27ac6e1c"
+    },
+    {
+      "path": "unresolved_event_ledger.csv",
+      "bytes": 177,
+      "sha256": "11cb1757e97ccab271e7431502b951e6c3453eca666a3ad00dd1c34de35d95c9"
+    }
+  ],
+  "inventory_note": "Hashes cover generated artifacts except this self-referential JSON summary; unrelated preserved user files are not run artifacts."
+}

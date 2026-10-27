@@ -25,3 +25,17 @@ not definitions supplied or endorsed by the dataset compiler.
 
 Installed and tested versions are recorded in `TEST_RESULTS.md` and each run's
 `run_summary.json`. No claims of statistical significance are hard-coded.
+
+## Inference and current verification
+
+- Aronow, P. M., Samii, C., and Assenova, V. A. (2015). *Cluster-Robust Variance Estimation for Dyadic Data*. Political Analysis 23(4), 564–577. Author manuscript: https://arxiv.org/abs/1312.3398 . The Q3 implementation aggregates repeat directed views by unordered player pair, then accounts for score dependence through either participant.
+- NumPy matrix-rank documentation: https://numpy.org/doc/stable/reference/generated/numpy.linalg.matrix_rank.html .
+
+The pinned source dictionary and archive license were inspected from their cached
+files in `data/raw/<revision>/`. The full study is now executed from that cache;
+`reports/DATA_QUALITY.md` and `TEST_RESULTS.md` identify the actual final run and
+checks. Internal spot checks compare local source rows and reconstructed histories;
+no independent external match-day verification or human review is claimed.
+
+Code is MIT-licensed (`LICENSE`); source/derived data have separate CC BY-NC-SA
+4.0 attribution (`DATA_LICENSE.txt`). Current results use annual match data only.

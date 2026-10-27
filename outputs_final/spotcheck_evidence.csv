@@ -1,0 +1,28 @@
+kind,player_id,match_id,evidence,expected,observed,passed
+history_count,103819,1998-314:2,atp_matches_1998.csv: CSV row 2032,0.0,0.0,True
+source_outcome,103819,1998-314:2,atp_matches_1998.csv: CSV row 2032,0.0,0.0,True
+history_count,103819,2009-451:16,atp_matches_2009.csv: CSV row 1562,678.0,678.0,True
+source_outcome,103819,2009-451:16,atp_matches_2009.csv: CSV row 1562,1.0,1.0,True
+history_count,103819,2021-540:223,atp_matches_2021.csv: CSV row 1677,1356.0,1356.0,True
+source_outcome,103819,2021-540:223,atp_matches_2021.csv: CSV row 1677,0.0,0.0,True
+history_count,104745,2002-573:6,atp_matches_2002.csv: CSV row 2502,0.0,0.0,True
+source_outcome,104745,2002-573:6,atp_matches_2002.csv: CSV row 2502,1.0,1.0,True
+history_count,104745,2012-451:1,atp_matches_2012.csv: CSV row 60,589.0,589.0,True
+source_outcome,104745,2012-451:1,atp_matches_2012.csv: CSV row 60,1.0,1.0,True
+history_count,104745,2024-M-DC-2024-FLS-M-NED-ESP-01:1,atp_matches_2024.csv: CSV row 2876,1181.0,1181.0,True
+source_outcome,104745,2024-M-DC-2024-FLS-M-NED-ESP-01:1,atp_matches_2024.csv: CSV row 2876,0.0,0.0,True
+history_count,104925,2004-D045:5,atp_matches_2004.csv: CSV row 3135,0.0,0.0,True
+source_outcome,104925,2004-D045:5,atp_matches_2004.csv: CSV row 3135,1.0,1.0,True
+history_count,104925,2014-580:96,atp_matches_2014.csv: CSV row 236,572.0,572.0,True
+source_outcome,104925,2014-580:96,atp_matches_2014.csv: CSV row 236,1.0,1.0,True
+history_count,104925,2024-5014:369,atp_matches_2024.csv: CSV row 2441,1145.0,1145.0,True
+source_outcome,104925,2024-5014:369,atp_matches_2024.csv: CSV row 2441,0.0,0.0,True
+window_mean,102271,2000-451:9,2000-338:6; 2000-338:19; 2000-580:14,0.6666666666666666,0.6666666666666666,True
+window_mean,102338,2000-891:1,2000-580:64; 2000-580:96; 2000-580:112,1.0,1.0,True
+window_mean,102434,2000-339:8,2000-338:4; 2000-580:34; 2000-402:21,0.0,0.0,True
+prior_meetings,104745,2022-520:220,atp_matches_2022.csv: CSV row 1369; pair 104745:104925,48.0,48.0,True
+prior_meetings,104745,2024-0096:133,atp_matches_2024.csv: CSV row 2000; pair 104745:104925,49.0,49.0,True
+prior_meetings,103819,2019-0605:291,atp_matches_2019.csv: CSV row 2606; pair 103819:104925,41.0,41.0,True
+prior_meetings,103819,2020-580:225,atp_matches_2020.csv: CSV row 294; pair 103819:104925,41.0,41.0,True
+prior_meetings,103819,2019-520:1602,atp_matches_2019.csv: CSV row 1332; pair 103819:104745,33.0,33.0,True
+prior_meetings,103819,2019-540:225,atp_matches_2019.csv: CSV row 1629; pair 103819:104745,34.0,34.0,True

@@ -1,0 +1,30 @@
+{
+  "fixture_type": "explicitly_synthetic_not_research_data",
+  "recorded_at_utc": "2026-10-27T11:56:01.241107+00:00",
+  "baseline_commit": "27f3cdca880281396badef197949aaa75008313f",
+  "baseline_check": {
+    "command": ".venv/bin/python -m pytest -q tests/test_recovery_blockers.py",
+    "outcome": "Observed 1 failed test before the fix: first.followup_complete was True for the January 1 loss despite conflicting January 8 records."
+  },
+  "fixture": {
+    "index_loss_date": "2024-01-01",
+    "unresolved_event_date": "2024-01-08",
+    "conflicting_source_copies": 2,
+    "later_matches": [
+      "2024-01-15",
+      "2024-01-22",
+      "2024-01-29"
+    ]
+  },
+  "fixed_check": {
+    "followup_complete": false,
+    "followup_status": "followup_contains_unresolved_record",
+    "next_three_win_rate": null,
+    "next1_match_id": "2024-T2:2",
+    "next2_match_id": "2024-T3:3",
+    "next3_match_id": "2024-T4:4",
+    "next1_outcome": null,
+    "blocker_keys": "2024-T2:2;"
+  },
+  "interpretation": "Synthetic edge-case regression, not evidence of corruption in the saved real-data results. Current cached-data audit contains zero conflicting keys."
+}

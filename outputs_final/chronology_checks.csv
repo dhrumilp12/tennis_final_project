@@ -1,0 +1,10 @@
+check,records_or_keys
+unreliable_order_records,12385
+invalid_identity_records,0
+missing_dates,0
+conflicting_source_rows,0
+conflicting_match_keys,0
+same_date_multiple_events,4
+repeated_player_round,9804
+unsupported_round_event,12384
+missing_tournament_date,0

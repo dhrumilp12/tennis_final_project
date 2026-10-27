@@ -1,0 +1,3 @@
+player_hand,players,matches_vs_L,matches_vs_R,mean_player_win_difference_pp,median_player_win_difference_pp,service_eligible_players,mean_player_service_difference_pp,service_points_vs_L,service_points_vs_R,interpretation
+L,56,1890,12759,1.672411192844133,2.217873450750163,56,-0.12632202797681663,149398.0,1025885.0,Unadjusted equal-player means; service differences require minimum valid service matches against each hand.
+R,371,13219,86506,3.4448487309389866,3.6581789746346627,370,0.8691443968352175,1058530.0,6961834.0,Unadjusted equal-player means; service differences require minimum valid service matches against each hand.

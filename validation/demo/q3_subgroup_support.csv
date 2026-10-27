@@ -1,0 +1,4 @@
+sample,player_hand,opponent_hand,player_match_rows,unique_matches,players,opponents,opponent_pairs,tournaments,largest_player_share,top5_player_share
+known_hand_descriptive,L,R,5,5,3,5,5,1,0.6,1.0
+known_hand_descriptive,R,L,5,5,5,3,5,1,0.2,1.0
+known_hand_descriptive,R,R,48,24,25,25,24,1,0.10416666666666667,0.3958333333333333

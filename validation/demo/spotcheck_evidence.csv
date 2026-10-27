@@ -1,0 +1,22 @@
+kind,player_id,match_id,evidence,expected,observed,passed
+history_count,208029,2024-0339:285,brisbane_2024_excerpt.csv: CSV row 17,0,0.0,True
+source_outcome,208029,2024-0339:285,brisbane_2024_excerpt.csv: CSV row 17,1,1.0,True
+history_count,208029,2024-0339:297,brisbane_2024_excerpt.csv: CSV row 5,2,2.0,True
+source_outcome,208029,2024-0339:297,brisbane_2024_excerpt.csv: CSV row 5,1,1.0,True
+history_count,208029,2024-0339:300,brisbane_2024_excerpt.csv: CSV row 2,4,4.0,True
+source_outcome,208029,2024-0339:300,brisbane_2024_excerpt.csv: CSV row 2,0,0.0,True
+history_count,105777,2024-0339:270,brisbane_2024_excerpt.csv: CSV row 32,0,0.0,True
+source_outcome,105777,2024-0339:270,brisbane_2024_excerpt.csv: CSV row 32,1,1.0,True
+history_count,105777,2024-0339:294,brisbane_2024_excerpt.csv: CSV row 8,2,2.0,True
+source_outcome,105777,2024-0339:294,brisbane_2024_excerpt.csv: CSV row 8,1,1.0,True
+history_count,105777,2024-0339:300,brisbane_2024_excerpt.csv: CSV row 2,4,4.0,True
+source_outcome,105777,2024-0339:300,brisbane_2024_excerpt.csv: CSV row 2,1,1.0,True
+history_count,126128,2024-0339:281,brisbane_2024_excerpt.csv: CSV row 21,0,0.0,True
+source_outcome,126128,2024-0339:281,brisbane_2024_excerpt.csv: CSV row 21,1,1.0,True
+history_count,126128,2024-0339:296,brisbane_2024_excerpt.csv: CSV row 6,2,2.0,True
+source_outcome,126128,2024-0339:296,brisbane_2024_excerpt.csv: CSV row 6,1,1.0,True
+history_count,126128,2024-0339:299,brisbane_2024_excerpt.csv: CSV row 3,3,3.0,True
+source_outcome,126128,2024-0339:299,brisbane_2024_excerpt.csv: CSV row 3,0,0.0,True
+prior_meetings,104745,2024-0339:289,brisbane_2024_excerpt.csv: CSV row 13; pair 104745:106186,0,0.0,True
+prior_meetings,104745,2024-0339:276,brisbane_2024_excerpt.csv: CSV row 26; pair 104745:106233,0,0.0,True
+prior_meetings,104745,2024-0339:295,brisbane_2024_excerpt.csv: CSV row 7; pair 104745:111442,0,0.0,True

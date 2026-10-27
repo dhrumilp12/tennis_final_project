@@ -1,0 +1,1123 @@
+{
+  "raw_match_rows": 112056,
+  "exact_duplicates_removed": 0,
+  "unique_source_rows": 112056,
+  "eligible_history_matches": 96501,
+  "eligible_analysis_matches": 63784,
+  "exclusion_flag_counts_nonexclusive": {
+    "invalid_player_ids": 0,
+    "conflicting_match_key": 0,
+    "outside_individual_AMG_scope": 11107,
+    "unfinished_or_unrecognized_score": 3505,
+    "ambiguous_order": 12385,
+    "outside_history_window": 0,
+    "missing_match_key": 0
+  },
+  "run_id": "20261027T121134Z-20f069d1",
+  "started_at_utc": "2026-10-27T12:11:34.854710+00:00",
+  "completed_at_utc": "2026-10-27T12:12:09.144252+00:00",
+  "publication_status": "verified",
+  "configuration": {
+    "output_dir": "outputs_final",
+    "raw_dir": "data/raw",
+    "history_start": 1990,
+    "analysis_start": 2000,
+    "end_year": 2024,
+    "test_start": 2020,
+    "upset_max_rank": 50,
+    "upset_rank_gap": 30,
+    "recent_matches": 10,
+    "min_hand_matches": 10,
+    "bootstrap_samples": 500,
+    "random_seed": 42,
+    "offline": true,
+    "make_plots": true
+  },
+  "source_repository": "Aneeshers/tennis-sackmann-archive",
+  "source_revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+  "inputs": [
+    {
+      "filename": "atp_matches_1990.csv",
+      "source_path": "atp/atp_matches_1990.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_1990.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "4c65abf16c98f1a96634bdc464961f058555677539203cd23b50031155fa037c",
+      "bytes": 630930,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:35:57.230846+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.878205+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_1990.csv"
+    },
+    {
+      "filename": "atp_matches_1991.csv",
+      "source_path": "atp/atp_matches_1991.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_1991.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "8366632e1d874fcfb700017d8ff8bf59fe05e25e44ca86dfcfb314a198d303a0",
+      "bytes": 743040,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:35:57.448346+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.878669+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_1991.csv"
+    },
+    {
+      "filename": "atp_matches_1992.csv",
+      "source_path": "atp/atp_matches_1992.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_1992.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "b2ede0ff352a34e59b9cdc0e2a7c9af764a6fe6ac7326a09c4c923f5736b7922",
+      "bytes": 760047,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:35:57.651882+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.879229+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_1992.csv"
+    },
+    {
+      "filename": "atp_matches_1993.csv",
+      "source_path": "atp/atp_matches_1993.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_1993.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "4620a9807ae69e2e04bad72a1c26c2994f8d20cbbe7a2933d4e533cf2d9fc43b",
+      "bytes": 779735,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:35:57.840404+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.879748+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_1993.csv"
+    },
+    {
+      "filename": "atp_matches_1994.csv",
+      "source_path": "atp/atp_matches_1994.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_1994.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "e8c577594c4495945d337d95b44ca5a8441c952eb693f7e6c9bcb61bb762580e",
+      "bytes": 787913,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:35:58.229581+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.880243+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_1994.csv"
+    },
+    {
+      "filename": "atp_matches_1995.csv",
+      "source_path": "atp/atp_matches_1995.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_1995.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "d480e93dc75e4631d4811edc1f98c168f9e80f8eab8ab2eb6040a22bda7b3b21",
+      "bytes": 762360,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:35:58.742139+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.880703+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_1995.csv"
+    },
+    {
+      "filename": "atp_matches_1996.csv",
+      "source_path": "atp/atp_matches_1996.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_1996.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "0e8fd6303e8a2f400a4a6f3ebc5aa04200e4d31bffd18593c815688d01e6052b",
+      "bytes": 757247,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:35:58.936812+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.881210+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_1996.csv"
+    },
+    {
+      "filename": "atp_matches_1997.csv",
+      "source_path": "atp/atp_matches_1997.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_1997.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "74f69b97695a85e97a1e905244ca2e0f872c9ecc56862f5e595c612a3c656796",
+      "bytes": 730300,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:35:59.110412+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.881696+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_1997.csv"
+    },
+    {
+      "filename": "atp_matches_1998.csv",
+      "source_path": "atp/atp_matches_1998.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_1998.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "396ad4be1a5843badd0c6a5ffee976cabbf43be865ce859a295b82ae403f9164",
+      "bytes": 725069,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:35:59.300156+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.882157+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_1998.csv"
+    },
+    {
+      "filename": "atp_matches_1999.csv",
+      "source_path": "atp/atp_matches_1999.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_1999.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "bf864d0c188947369fa8f2e280ab571fc43b9db2e9e657d29e03683b4dbd26a4",
+      "bytes": 673043,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:35:59.505791+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.882596+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_1999.csv"
+    },
+    {
+      "filename": "atp_matches_2000.csv",
+      "source_path": "atp/atp_matches_2000.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2000.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "a2176b0d9e70f238536d0a2d0957bc54dc1bfbfb47c368d8f3cbe28457b5ebe4",
+      "bytes": 680357,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:35:59.764540+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.883062+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2000.csv"
+    },
+    {
+      "filename": "atp_matches_2001.csv",
+      "source_path": "atp/atp_matches_2001.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2001.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "b07bcb7e7239fb451eae6b4e99ef9a0c892083a21185405c8627d5edc9a113be",
+      "bytes": 669112,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:35:59.982249+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.883534+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2001.csv"
+    },
+    {
+      "filename": "atp_matches_2002.csv",
+      "source_path": "atp/atp_matches_2002.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2002.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "d161c2ef78158d167372ebc38b7eea2038c5b9e42bbb4b2804d8c19540c33adf",
+      "bytes": 649377,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:00.159656+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.883976+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2002.csv"
+    },
+    {
+      "filename": "atp_matches_2003.csv",
+      "source_path": "atp/atp_matches_2003.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2003.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "387a1dec62d014fdf5c7dc83329b87c3a4041fc4ebf8a25b19352c82d1f67c31",
+      "bytes": 649296,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:00.366052+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.884400+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2003.csv"
+    },
+    {
+      "filename": "atp_matches_2004.csv",
+      "source_path": "atp/atp_matches_2004.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2004.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "79251fec7d9751ea2eebb005a962f69fea466f827172d53f47b381aac53634af",
+      "bytes": 662757,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:00.550110+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.884805+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2004.csv"
+    },
+    {
+      "filename": "atp_matches_2005.csv",
+      "source_path": "atp/atp_matches_2005.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2005.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "7ab77584b319b65830d4b5c988cf8349d14a7a4e867633e9717801f8d9b97b27",
+      "bytes": 659963,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:00.739463+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.885412+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2005.csv"
+    },
+    {
+      "filename": "atp_matches_2006.csv",
+      "source_path": "atp/atp_matches_2006.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2006.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "c7f28866e127c665072ed6e4a8fc5812cd82f804660fbdd37e8b00063d1b8f53",
+      "bytes": 660698,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:00.906522+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.885898+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2006.csv"
+    },
+    {
+      "filename": "atp_matches_2007.csv",
+      "source_path": "atp/atp_matches_2007.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2007.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "d392402109561d6d3e19fd41dc8cc3a3f72ccb52d3988edbe7c18cc47b603db0",
+      "bytes": 644456,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:01.079939+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.886449+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2007.csv"
+    },
+    {
+      "filename": "atp_matches_2008.csv",
+      "source_path": "atp/atp_matches_2008.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2008.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "6725bd6e56d32538282e5a77bd30a2502014917138df180dce9259c535a93310",
+      "bytes": 631452,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:01.308537+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.886957+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2008.csv"
+    },
+    {
+      "filename": "atp_matches_2009.csv",
+      "source_path": "atp/atp_matches_2009.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2009.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "bab7523386fddcaeb684b2b354016075d035516e65c2f54d3e1d23c3a8fe22f9",
+      "bytes": 626700,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:01.490873+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.887538+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2009.csv"
+    },
+    {
+      "filename": "atp_matches_2010.csv",
+      "source_path": "atp/atp_matches_2010.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2010.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "135a4a1e2ab69c33318b6e5ad59efc67cc5358629b15bf28fb2f905d48f7aeb0",
+      "bytes": 614299,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:01.649473+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.888093+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2010.csv"
+    },
+    {
+      "filename": "atp_matches_2011.csv",
+      "source_path": "atp/atp_matches_2011.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2011.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "8e91e4b680f0b4e9605a3c71b4c676b55e2a102de8544a7d3b2fbaca5977575a",
+      "bytes": 611939,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:01.850813+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.888543+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2011.csv"
+    },
+    {
+      "filename": "atp_matches_2012.csv",
+      "source_path": "atp/atp_matches_2012.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2012.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "03f03612691af370c9c47939dde4202d9858e05ea044367388115e627d4d13f3",
+      "bytes": 610116,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:02.033561+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.889013+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2012.csv"
+    },
+    {
+      "filename": "atp_matches_2013.csv",
+      "source_path": "atp/atp_matches_2013.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2013.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "9e1e3b124ac22c1b840118f78475a910cb2ea68684289581f70b54a022f2832c",
+      "bytes": 596714,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:02.203970+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.889429+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2013.csv"
+    },
+    {
+      "filename": "atp_matches_2014.csv",
+      "source_path": "atp/atp_matches_2014.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2014.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "7c102ee3b0da1fee59edc6a5f280eb0784ac0bad69988583f65791dcb7084177",
+      "bytes": 589216,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:02.353380+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.889890+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2014.csv"
+    },
+    {
+      "filename": "atp_matches_2015.csv",
+      "source_path": "atp/atp_matches_2015.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2015.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "20c1f723df86b367f3ec205bbda3d8a7163fa6d4e46dcfda15095e24965bc5ed",
+      "bytes": 594438,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:02.550276+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.890350+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2015.csv"
+    },
+    {
+      "filename": "atp_matches_2016.csv",
+      "source_path": "atp/atp_matches_2016.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2016.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "86dda3871cb79d3226a047774c8fc97b86267cfe96709dea832a347dfbf81684",
+      "bytes": 617660,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:02.757883+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.890778+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2016.csv"
+    },
+    {
+      "filename": "atp_matches_2017.csv",
+      "source_path": "atp/atp_matches_2017.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2017.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "4bb295788c37487b120cd39171d413cef0ebc6f4c2d9fa40b7261f5143f3719f",
+      "bytes": 611380,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:02.979277+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.891211+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2017.csv"
+    },
+    {
+      "filename": "atp_matches_2018.csv",
+      "source_path": "atp/atp_matches_2018.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2018.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "0363dc6012190f337fcf34b4ca443634f192c4670cc6c14c94342a54b9adf7eb",
+      "bytes": 608903,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:03.182207+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.891620+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2018.csv"
+    },
+    {
+      "filename": "atp_matches_2019.csv",
+      "source_path": "atp/atp_matches_2019.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2019.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "7f1a21451ff622bb0c6a09690898db46d51e59dcdf08086d369753822e1d5478",
+      "bytes": 586071,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:03.357628+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.892051+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2019.csv"
+    },
+    {
+      "filename": "atp_matches_2020.csv",
+      "source_path": "atp/atp_matches_2020.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2020.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "985a917b72d5efb7dd5ef9df8ecc58c637ed6b88561ccad364653af71ac12da0",
+      "bytes": 307277,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:03.584325+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.892482+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2020.csv"
+    },
+    {
+      "filename": "atp_matches_2021.csv",
+      "source_path": "atp/atp_matches_2021.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2021.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "b9b1d31a4b0b9273b8f338cbb1347c5a847ad2361334ec760a286f5990fba347",
+      "bytes": 573056,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:03.694849+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.893012+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2021.csv"
+    },
+    {
+      "filename": "atp_matches_2022.csv",
+      "source_path": "atp/atp_matches_2022.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2022.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "7190042565ab8400e74f44fda60700acb36ddf3c82d393f331a07589e05b5f52",
+      "bytes": 608789,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:03.850030+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.893466+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2022.csv"
+    },
+    {
+      "filename": "atp_matches_2023.csv",
+      "source_path": "atp/atp_matches_2023.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2023.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "9b9671aa7c8156e74c2e4466675b7ed4e762bb8a58b7237a30daefd84ffceff5",
+      "bytes": 625341,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:04.070496+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.893936+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2023.csv"
+    },
+    {
+      "filename": "atp_matches_2024.csv",
+      "source_path": "atp/atp_matches_2024.csv",
+      "source_url": "https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp/atp_matches_2024.csv",
+      "revision": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+      "sha256": "73aec32247a0db68d8aa8fd8003eefea132905177f1cb145502d9215b53311be",
+      "bytes": 650136,
+      "origin": "downloaded_pinned_url",
+      "retrieved_at_utc": "2026-10-25T22:36:04.236174+00:00",
+      "checked_at_utc": "2026-10-27T12:11:34.894407+00:00",
+      "path": "data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/atp_matches_2024.csv"
+    }
+  ],
+  "cache_inventory_is_separate": true,
+  "input_mode": "pinned_download_or_cached_files",
+  "test_data_warning": null,
+  "q1": {
+    "index_losses": 63784,
+    "index_players": 1582,
+    "ranking_upsets": 7536,
+    "complete_three_match_followups": 47037,
+    "rank_eligible_losses": 24021,
+    "rank_eligible_players": 345,
+    "status": "Q1 descriptive tables and exploratory adjusted recovery-rate regression fitted; conditional associations with dependence limitations.",
+    "warnings": [
+      "Follow-up context adjustment estimates a conditional association; focal-player clustering does not cover all shared-opponent dependence."
+    ],
+    "descriptive_population": "Both ranks known and focal rank <= 50.",
+    "nonoverlap_rule": "Greedily retain earliest available complete windows in sequence per focal player; neither index nor follow-up match can be reused. Selection precedes covariate exclusion and does not use outcomes.",
+    "uncertainty": "Focal-player cluster sandwich with t critical value (players minus one degrees of freedom); shared-opponent/network dependence remains.",
+    "adjusted_model_eligible_events": 18471,
+    "model_events": 18471,
+    "model_players": 341,
+    "model_formula": "next3_win_rate ~ ranking_upset * (age_centered + log_experience) + recent_win_rate + log_player_rank + context_rank_advantage + followup_clay_share + followup_grass_share + followup_carpet_share + followup_best_of_5_share + C(surface) + C(season)",
+    "models": [
+      {
+        "outcome": "next3_win_rate",
+        "sample": "all_windows",
+        "available_windows": 18546,
+        "excluded_missing_covariates": 75,
+        "model_events": 18471,
+        "model_players": 341,
+        "status": "fitted",
+        "design_columns": 40,
+        "design_rank": 40,
+        "formula": "next3_win_rate ~ ranking_upset * (age_centered + log_experience) + recent_win_rate + log_player_rank + context_rank_advantage + followup_clay_share + followup_grass_share + followup_carpet_share + followup_best_of_5_share + C(surface) + C(season)"
+      },
+      {
+        "outcome": "next3_win_rate",
+        "sample": "nonoverlapping",
+        "available_windows": 9723,
+        "excluded_missing_covariates": 39,
+        "model_events": 9684,
+        "model_players": 341,
+        "status": "fitted",
+        "design_columns": 40,
+        "design_rank": 40,
+        "formula": "next3_win_rate ~ ranking_upset * (age_centered + log_experience) + recent_win_rate + log_player_rank + context_rank_advantage + followup_clay_share + followup_grass_share + followup_carpet_share + followup_best_of_5_share + C(surface) + C(season)"
+      },
+      {
+        "outcome": "next1_win",
+        "sample": "all_windows",
+        "available_windows": 21245,
+        "excluded_missing_covariates": 39,
+        "model_events": 21206,
+        "model_players": 345,
+        "status": "fitted",
+        "design_columns": 40,
+        "design_rank": 40,
+        "formula": "next1_win ~ ranking_upset * (age_centered + log_experience) + recent_win_rate + log_player_rank + context_rank_advantage + C(next1_surface) + C(next1_best_of) + C(surface) + C(season)"
+      },
+      {
+        "outcome": "next1_win",
+        "sample": "nonoverlapping",
+        "available_windows": 16295,
+        "excluded_missing_covariates": 32,
+        "model_events": 16263,
+        "model_players": 345,
+        "status": "fitted",
+        "design_columns": 40,
+        "design_rank": 40,
+        "formula": "next1_win ~ ranking_upset * (age_centered + log_experience) + recent_win_rate + log_player_rank + context_rank_advantage + C(next1_surface) + C(next1_best_of) + C(surface) + C(season)"
+      }
+    ],
+    "analysis_status": "fitted_with_limitations",
+    "status_code": "fitted_with_limitations"
+  },
+  "q2": {
+    "status": "Chronological Q2 comparison fitted: baseline, +meeting count, +head-to-head results.",
+    "training_matches": 52444,
+    "test_matches": 11340,
+    "test_start": 2020,
+    "orientation": "Player A has the smaller numeric player ID, independent of match outcome.",
+    "analysis_status": "fitted_with_limitations",
+    "warnings": [
+      "Paired intervals cluster opponent pairs; shared-player dependence across pairs remains."
+    ],
+    "paired_comparisons": [
+      {
+        "first_model": "baseline",
+        "second_model": "plus_meeting_count",
+        "metric": "brier",
+        "test_matches": 11340,
+        "mean_improvement": -2.1306340258071893e-05,
+        "ci95_lower": -9.145465573997805e-05,
+        "ci95_upper": 3.8601576956385376e-05,
+        "pair_clusters": 7824,
+        "resamples": 500,
+        "limitation": "Pair-cluster resampling does not capture every shared-player dependence across different pairs.",
+        "mean_brier_improvement": -2.1306340258071893e-05,
+        "status": "Computed"
+      },
+      {
+        "first_model": "baseline",
+        "second_model": "plus_meeting_count",
+        "metric": "log_loss",
+        "test_matches": 11340,
+        "mean_improvement": -2.8420485765680687e-05,
+        "ci95_lower": -0.00021740080126719254,
+        "ci95_upper": 0.00012061253340380207,
+        "pair_clusters": 7824,
+        "resamples": 500,
+        "limitation": "Pair-cluster resampling does not capture every shared-player dependence across different pairs.",
+        "status": "Computed"
+      },
+      {
+        "first_model": "baseline",
+        "second_model": "plus_meeting_count",
+        "metric": "accuracy",
+        "test_matches": 11340,
+        "mean_improvement": 0.0009700176366843034,
+        "ci95_lower": -0.00017724759577667502,
+        "ci95_upper": 0.002298342329360908,
+        "pair_clusters": 7824,
+        "resamples": 500,
+        "limitation": "Pair-cluster resampling does not capture every shared-player dependence across different pairs.",
+        "status": "Computed"
+      },
+      {
+        "first_model": "baseline",
+        "second_model": "plus_h2h_results",
+        "metric": "brier",
+        "test_matches": 11340,
+        "mean_improvement": 0.0005861619938616038,
+        "ci95_lower": 9.464228086397671e-05,
+        "ci95_upper": 0.0010191004962474218,
+        "pair_clusters": 7824,
+        "resamples": 500,
+        "limitation": "Pair-cluster resampling does not capture every shared-player dependence across different pairs.",
+        "mean_brier_improvement": 0.0005861619938616038,
+        "status": "Computed"
+      },
+      {
+        "first_model": "baseline",
+        "second_model": "plus_h2h_results",
+        "metric": "log_loss",
+        "test_matches": 11340,
+        "mean_improvement": 0.0014224432420130825,
+        "ci95_lower": 0.00034233217838486427,
+        "ci95_upper": 0.0023912621538966635,
+        "pair_clusters": 7824,
+        "resamples": 500,
+        "limitation": "Pair-cluster resampling does not capture every shared-player dependence across different pairs.",
+        "status": "Computed"
+      },
+      {
+        "first_model": "baseline",
+        "second_model": "plus_h2h_results",
+        "metric": "accuracy",
+        "test_matches": 11340,
+        "mean_improvement": 0.0015873015873015873,
+        "ci95_lower": -0.0015551272728155084,
+        "ci95_upper": 0.004944819481342813,
+        "pair_clusters": 7824,
+        "resamples": 500,
+        "limitation": "Pair-cluster resampling does not capture every shared-player dependence across different pairs.",
+        "status": "Computed"
+      },
+      {
+        "first_model": "plus_meeting_count",
+        "second_model": "plus_h2h_results",
+        "metric": "brier",
+        "test_matches": 11340,
+        "mean_improvement": 0.0006074683341196757,
+        "ci95_lower": 0.00011261536134250146,
+        "ci95_upper": 0.0010388506768816946,
+        "pair_clusters": 7824,
+        "resamples": 500,
+        "limitation": "Pair-cluster resampling does not capture every shared-player dependence across different pairs.",
+        "mean_brier_improvement": 0.0006074683341196757,
+        "status": "Computed"
+      },
+      {
+        "first_model": "plus_meeting_count",
+        "second_model": "plus_h2h_results",
+        "metric": "log_loss",
+        "test_matches": 11340,
+        "mean_improvement": 0.0014508637277787628,
+        "ci95_lower": 0.00033763194736399847,
+        "ci95_upper": 0.0024113184254357604,
+        "pair_clusters": 7824,
+        "resamples": 500,
+        "limitation": "Pair-cluster resampling does not capture every shared-player dependence across different pairs.",
+        "status": "Computed"
+      },
+      {
+        "first_model": "plus_meeting_count",
+        "second_model": "plus_h2h_results",
+        "metric": "accuracy",
+        "test_matches": 11340,
+        "mean_improvement": 0.0006172839506172839,
+        "ci95_lower": -0.0023343915820716525,
+        "ci95_upper": 0.003870130846793315,
+        "pair_clusters": 7824,
+        "resamples": 500,
+        "limitation": "Pair-cluster resampling does not capture every shared-player dependence across different pairs.",
+        "status": "Computed"
+      }
+    ],
+    "model_features": {
+      "baseline": [
+        "log_rank_advantage",
+        "age_difference",
+        "log_experience_difference",
+        "recent_form_difference",
+        "surface",
+        "round",
+        "best_of",
+        "tourney_level",
+        "player_hand",
+        "opponent_hand"
+      ],
+      "plus_meeting_count": [
+        "log_rank_advantage",
+        "age_difference",
+        "log_experience_difference",
+        "recent_form_difference",
+        "log_prior_h2h_meetings",
+        "surface",
+        "round",
+        "best_of",
+        "tourney_level",
+        "player_hand",
+        "opponent_hand"
+      ],
+      "plus_h2h_results": [
+        "log_rank_advantage",
+        "age_difference",
+        "log_experience_difference",
+        "recent_form_difference",
+        "log_prior_h2h_meetings",
+        "h2h_smoothed_advantage",
+        "prior_h2h_last_won",
+        "surface_h2h_smoothed_advantage",
+        "surface",
+        "round",
+        "best_of",
+        "tourney_level",
+        "player_hand",
+        "opponent_hand"
+      ]
+    },
+    "train_last_tournament_date": "2019-10-28",
+    "test_first_tournament_date": "2020-01-06",
+    "train_test_boundary_gap_days": 21,
+    "preprocessing": "Median imputation, scaling, and category vocabulary fitted on training data only.",
+    "meeting_count_interpretation": "Meeting count is shared by both players; it is not a directional advantage. Orientation is fixed by player ID.",
+    "paired_brier_comparison": {
+      "metric": "brier",
+      "test_matches": 11340,
+      "mean_improvement": 0.0005861619938616038,
+      "ci95_lower": 9.464228086397671e-05,
+      "ci95_upper": 0.0010191004962474218,
+      "pair_clusters": 7824,
+      "resamples": 500,
+      "limitation": "Pair-cluster resampling does not capture every shared-player dependence across different pairs.",
+      "mean_brier_improvement": 0.0005861619938616038,
+      "status": "Computed"
+    },
+    "convergence_warnings": [],
+    "primary_metric": "Brier score (lower is better). All three models are evaluated on exactly the same held-out matches.",
+    "test_history_policy": "Earlier held-out results can update later held-out pre-match histories; model parameters stay frozen.",
+    "status_code": "fitted_with_limitations"
+  },
+  "q3": {
+    "status": "Q3 within-player adjusted model fitted with explicit inference warnings.",
+    "analysis_status": "fitted_with_warnings",
+    "player_match_rows": 127438,
+    "unique_matches": 63719,
+    "warnings": [
+      "Legacy player-by-match covariance has negative coefficient variance(s); affected intervals are unavailable. Primary dyadic covariance clusters through either participant.",
+      "Dyadic intervals assume no residual dependence between disjoint player pairs; tournament-wide shocks and indirect network dependence may remain. Tournament-only sensitivity does not address serial player dependence.",
+      "Left-handed subgroup support is smaller; asymptotic intervals and the exposure-based deletion checks do not establish uniform effects across players."
+    ],
+    "players_meeting_raw_comparison_minimum": 427,
+    "adjusted_player_match_rows": 112503,
+    "adjusted_unique_matches": 61412,
+    "adjusted_players": 420,
+    "within_design_rank": 34,
+    "within_design_columns": 34,
+    "within_condition_number": 953.3617945572545,
+    "absorbed_player_intercepts": 420,
+    "effective_parameters": 454,
+    "residual_degrees_of_freedom": 112049,
+    "dyadic_finite_sample_factor": 1.0040428740997243,
+    "dyadic_nodes": 1252,
+    "dyadic_pairs": 32964,
+    "tournament_clusters": 1585,
+    "primary_negative_variance_terms": 0,
+    "primary_minimum_covariance_eigenvalue": 1.6872748860825528e-07,
+    "legacy_two_way_negative_variance_terms": 1,
+    "legacy_two_way_minimum_covariance_eigenvalue": -2.924866628499158e-05,
+    "covariance": "Primary shared-player dyadic sandwich, preserving repeat dyads and both physical-match views; no clipping or absolute-value variance repair.",
+    "ci_note": "Exploratory normal 95% intervals; (n-1)/(n-player_intercepts-within_rank) finite-sample scaling includes absorbed fixed effects.",
+    "negative_variance_terms": 0,
+    "contrast_inference": {
+      "R": "available",
+      "L": "available"
+    },
+    "method_reference": "https://arxiv.org/abs/1312.3398",
+    "interpretation": "Adjusted opponent L-minus-R probability contrasts are reported separately by focal hand in percentage points. L uses the coefficient sum and full covariance.",
+    "status_code": "fitted_with_limitations"
+  },
+  "quality": {
+    "chronology": {
+      "unreliable_order_records": 12385,
+      "invalid_identity_records": 0,
+      "missing_dates": 0,
+      "conflicting_source_rows": 0,
+      "conflicting_match_keys": 0,
+      "same_date_multiple_events": 4,
+      "repeated_player_round": 9804,
+      "unsupported_round_event": 12384,
+      "missing_tournament_date": 0
+    },
+    "study_unique_match_keys": 74906,
+    "q1_rank_eligible_losses": 24021
+  },
+  "chronology": {
+    "candidate_event_pairs_all_history": 4228,
+    "candidate_players_all_history": 625,
+    "candidate_event_pairs_study_individual": 2029,
+    "candidate_players_study_individual": 319,
+    "study_individual_short_gap_pairs": 1956,
+    "study_individual_G_screen_pairs": 73,
+    "screening_rule": "Distinct events for a known player: start gap 1\u20136 days, or 7\u201313 days after a G start.",
+    "interpretation": "Potential overlaps unresolved without match dates; early exits or ordinary calendar differences may explain candidates. No event end dates were imputed and this diagnostic does not change eligibility."
+  },
+  "spot_checks": {
+    "checks": 27,
+    "all_passed": true,
+    "scope": "Automated local source/history consistency only; no independent external verification or human review."
+  },
+  "runtime": {
+    "python": "3.13.7",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "numpy": "2.5.4",
+    "pandas": "2.3.3",
+    "scipy": "1.18.1",
+    "scikit_learn": "1.9.1",
+    "statsmodels": "0.14.6",
+    "matplotlib": "3.11.2",
+    "requests": "2.34.2",
+    "pytest": "9.1.1",
+    "nbformat": "5.11.1",
+    "nbclient": "0.11.0",
+    "ipykernel": "7.4.0",
+    "jupyterlab": "4.6.4"
+  },
+  "code": {
+    "revision": "27f3cdca880281396badef197949aaa75008313f",
+    "dirty": true,
+    "status_porcelain": "M .gitignore\n M DATA_LICENSE.txt\n M README.md\n M SOURCES.md\n M Tennis_Project.ipynb\n M data/raw/83733587353df8a41f2fd4f516147d5aa83f5a8d/manifest.json\n M requirements.txt\n M tennis_analyses.py\n M tennis_project.py\n?? .github/\n?? docs/\n?? execute_notebook.py\n?? outputs_final/\n?? reports/\n?? requirements-lock.txt\n?? tennis_chronology.py\n?? tennis_handedness.py\n?? tennis_reporting.py\n?? tennis_repro.py\n?? tests/test_analysis_extensions.py\n?? tests/test_chronology_diagnostics.py\n?? tests/test_handedness.py\n?? tests/test_provenance.py\n?? tests/test_recovery_blockers.py\n?? tests/test_reporting.py\n?? validation/",
+    "source_hashes": {
+      "execute_notebook.py": "5a5fbd96fa0f37b1517e40a206be2a15f3585ed9a77709d37e23da6dc9519fe3",
+      "requirements-lock.txt": "7b74fd94d56275471bb4f8cd0456f51541ef6b6ca31077e16a46cb0418e5243a",
+      "requirements.txt": "0a97440b99518087afe328d39292447d1ca49267078c2c740a16281b5ee6b354",
+      "tennis_analyses.py": "44cb46ff0d98d93d73dad49aa47a7fac33c327dbf057337e6b73384ab398994f",
+      "tennis_chronology.py": "3b9f232558ef0984a5d1fcc88c0be2aed2ba977a96b29bfe21abb3801dc09865",
+      "tennis_handedness.py": "edd38fd72e061482c2f4f4417754fa73fd890f0deb83dfce08ea6ad1763e8588",
+      "tennis_project.py": "58fee5db414e7f30ec7d1d1686093329ad9d28dbe020f94ee115d82f17ad9ab6",
+      "tennis_reporting.py": "f7e9448986d1b0cb086db587b254a9e98688756d1bda5c4fc813c3fd6f7001a5",
+      "tennis_repro.py": "7aa9fcf2a87768e2b9fe9682f416acd48c0e16a8f2974a14c0f1e14896931092"
+    },
+    "note": "Revision identifies the base commit; source hashes identify the actual working code used."
+  },
+  "runtime_warnings": [
+    {
+      "category": "DeprecationWarning",
+      "message": "The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.",
+      "count": 1
+    }
+  ],
+  "output_inventory": [
+    {
+      "path": "RUN_SUMMARY.md",
+      "bytes": 1363,
+      "sha256": "d4f59b69de2706cd720281c08179d201b3f1fe0c5aef364c07eded8dac561aef"
+    },
+    {
+      "path": "attrition.csv",
+      "bytes": 1141,
+      "sha256": "361f87e7b36418e662cddb96eb88d86b3089db1e63fa3afe2761610d01169adb"
+    },
+    {
+      "path": "charts/q1_adjusted_contrasts.png",
+      "bytes": 66418,
+      "sha256": "67688bb84dbe3f5a1ceccf13c17dccded01b063c6dd0989b0c5e9a3106d61bd0"
+    },
+    {
+      "path": "charts/q1_recovery_by_age.png",
+      "bytes": 73233,
+      "sha256": "7ac16a1573600adaf530cda08b1e197aaa75ea88dcbbda909815bc2f3b5309ed"
+    },
+    {
+      "path": "charts/q2_calibration.png",
+      "bytes": 97686,
+      "sha256": "2314f6233b1a19325e27684053d7fac4e9649b6c45010177b0e68347fbd697e5"
+    },
+    {
+      "path": "charts/q2_model_comparison.png",
+      "bytes": 46481,
+      "sha256": "2bdb760e781956d186d4678a4282afb6cfee89a395d4cae2948f769d62ab053e"
+    },
+    {
+      "path": "charts/q3_adjusted_contrasts.png",
+      "bytes": 47987,
+      "sha256": "dfc1ed2a85a2f6f9613fc9e4f6c6a763053a5a6097218c57e2647c6a8b79e8ae"
+    },
+    {
+      "path": "charts/q3_handedness_differences.png",
+      "bytes": 44097,
+      "sha256": "f2ef6e1e02a0851bb7961890350d679d2700cce5edb39e0b3d356d292f7d7842"
+    },
+    {
+      "path": "chronology_checks.csv",
+      "bytes": 258,
+      "sha256": "fb29b2a88bfc4f43093af61d2a67443d08536f25a11e27ae8ecf2bae8d3441fe"
+    },
+    {
+      "path": "chronology_overlap_candidates.csv",
+      "bytes": 1416779,
+      "sha256": "7aad3e499f15660c0e0cadc3dbc1dde26ec7e08787784f136f96d53f303660c8"
+    },
+    {
+      "path": "chronology_start_gap_counts.csv",
+      "bytes": 1222,
+      "sha256": "a5374fbf1a0cb7eff17c4cea4719c0eb0e0584699d3ab9404011910b8218839d"
+    },
+    {
+      "path": "coverage_by_group.csv",
+      "bytes": 1981,
+      "sha256": "d4122724b5f9721aaa6e784337cc4428d6ab37df84e9edec8d36e80eb8ccf39f"
+    },
+    {
+      "path": "coverage_by_year.csv",
+      "bytes": 803,
+      "sha256": "8aeac9096c3d5554197c3afb9567755c44c223823ba409184cb71167009fc6fd"
+    },
+    {
+      "path": "exact_duplicate_rows.csv",
+      "bytes": 512,
+      "sha256": "94cece8f9334270b7232a73d84a7d29f46cbe911f71cca47efb248f5af9b147a"
+    },
+    {
+      "path": "excluded_matches.csv.gz",
+      "bytes": 954874,
+      "sha256": "49755f69eeb7f61f997e81cca5c756d419da67867c622a861c43ed7c0d0999e6"
+    },
+    {
+      "path": "exclusion_flow.csv",
+      "bytes": 293,
+      "sha256": "9ff90c6d458b371d7eba8b4eb97f3fb7bdfc836610a9bb4f73b306a97eeff1b9"
+    },
+    {
+      "path": "matches_audited.csv.gz",
+      "bytes": 6883931,
+      "sha256": "c52d00b66ea7cebc351210dc9d7a15facf04429bff6d3d42de4aee4fb2ec7f98"
+    },
+    {
+      "path": "missing_values.csv",
+      "bytes": 483,
+      "sha256": "2845f3d4339b7910828a66099e09bc8e0e712ccd5dc32a503a9053e8784372c5"
+    },
+    {
+      "path": "missingness_by_group.csv",
+      "bytes": 14836,
+      "sha256": "1cb6caedcba0c8f845b8f97f407bdaf95c5d5f8fa57dc152ed2a9941be2a853f"
+    },
+    {
+      "path": "player_match_features.csv.gz",
+      "bytes": 14031230,
+      "sha256": "507179e0caf3d2fbd97fbcd0474c3374599abefa518b860e9e2fdf312324e5a0"
+    },
+    {
+      "path": "player_row_quality.csv",
+      "bytes": 114,
+      "sha256": "655359e3ea5d45a51ef24f21a07dc477b8567f7098b63fcb748db7ce0ddd3e7d"
+    },
+    {
+      "path": "q1_adjusted_coefficients.csv",
+      "bytes": 4111,
+      "sha256": "c729bc284263d6f200390cee2af825cd9380de127910f567aa9ffb271a4c3729"
+    },
+    {
+      "path": "q1_adjusted_contrasts.csv",
+      "bytes": 6353,
+      "sha256": "8a8b08cd02cb4b3564414a65b83b31c11c74ab4bba7d64bbc431ebe14e46b958"
+    },
+    {
+      "path": "q1_adjusted_model.txt",
+      "bytes": 3804,
+      "sha256": "68ea58f8fd428219395b6a42d6d75b11628cf3a33f73ae2821485088c60378f4"
+    },
+    {
+      "path": "q1_all_adjusted_coefficients.csv",
+      "bytes": 20488,
+      "sha256": "892c3ca3dcbb0f1cd26d604540ae00c1826df015956ebfed5b51fa3e79fe2933"
+    },
+    {
+      "path": "q1_followup_status.csv",
+      "bytes": 374,
+      "sha256": "1cdb0a6474efc40d041b1df114c8959808052b15cda497566bb5b1f99d323aa4"
+    },
+    {
+      "path": "q1_model_samples.csv",
+      "bytes": 1222,
+      "sha256": "1cf653cc35525cb692a3f5028137034630e587b840b05dabdafd9b7062a1b363"
+    },
+    {
+      "path": "q1_model_windows.csv.gz",
+      "bytes": 650339,
+      "sha256": "fcd5013a1d4319d7ed4e6d8eadbb391345895764217ad6205bcd86f0c8e6023f"
+    },
+    {
+      "path": "q1_next_match_adjusted_coefficients.csv",
+      "bytes": 4118,
+      "sha256": "727382f93f9c8c904ab6870c8991848011e16d9c37ba2bc6e1a3578e90d6804f"
+    },
+    {
+      "path": "q1_population_flow.csv",
+      "bytes": 148,
+      "sha256": "dc4358bc7b51cb457e7a18255b3ed37568194cf986bfc581d0b9251cd0f3eeb7"
+    },
+    {
+      "path": "q1_recovery_events.csv.gz",
+      "bytes": 11333947,
+      "sha256": "1aabb90fde76fbec3d83b81719ca2d3e74a9827639cadf940c561f2e9bc3589c"
+    },
+    {
+      "path": "q1_summary_age.csv",
+      "bytes": 1660,
+      "sha256": "cfc3eafee1278e143048bd14d4165f5b68f50a2f89d7ffe389e6fe59e4abb0d3"
+    },
+    {
+      "path": "q1_summary_experience.csv",
+      "bytes": 1667,
+      "sha256": "67866f2494d76cb44df797dc9c750fdee8028be13e7ee8d07e04e0c3f4f8b32b"
+    },
+    {
+      "path": "q1_summary_overall.csv",
+      "bytes": 767,
+      "sha256": "79eb7dc7332ac0d93f1e823b7f79385e304d76656fde89e836dfe0688316d977"
+    },
+    {
+      "path": "q1_threshold_sensitivity.csv",
+      "bytes": 1543,
+      "sha256": "0cb7c8bd7990b4f5b864b33f4380cea6dbd2979574a91516b101dbf373311bc2"
+    },
+    {
+      "path": "q2_calibration.csv",
+      "bytes": 2118,
+      "sha256": "4cc7b75125c71cfaa020017ff67d03b25ca9596b67ef362d365a6c7c57874bd1"
+    },
+    {
+      "path": "q2_meeting_count_summary.csv",
+      "bytes": 159,
+      "sha256": "ffc5a5c9f7bdf7cfc5a5e12cd4ca8f389567120ee2b99ba71f6392d709a88dac"
+    },
+    {
+      "path": "q2_model_metrics.csv",
+      "bytes": 1290,
+      "sha256": "a6c07d47ac2f16a8618835e9d0b1f3884e412337fb826b679409aa71138013e7"
+    },
+    {
+      "path": "q2_paired_improvements.csv",
+      "bytes": 2252,
+      "sha256": "8499cd6cf1f61f92c190705d6ee86f9d9ac0ccfe38dda84768406316650471db"
+    },
+    {
+      "path": "q2_test_predictions.csv.gz",
+      "bytes": 483300,
+      "sha256": "9dc8fbbec5c84229ec5c066f6a33590ad706b6135e790cbe64c145b0517f96c8"
+    },
+    {
+      "path": "q3_adjusted_coefficients.csv",
+      "bytes": 7606,
+      "sha256": "5234dc625f740e9f1d82c2573baf5ff6228d02e287b9d46dac721965998f391b"
+    },
+    {
+      "path": "q3_adjusted_contrasts.csv",
+      "bytes": 691,
+      "sha256": "63c08a15687300f847eeb16e98b72761e4d2dac355d4bb9e5a066e4d852a4f4c"
+    },
+    {
+      "path": "q3_adjusted_covariance.csv",
+      "bytes": 26902,
+      "sha256": "a1471d925795fb3a62daf99b338319925c719949e8d6c1eda09fb0a1e4e6b21f"
+    },
+    {
+      "path": "q3_by_player_and_hand.csv",
+      "bytes": 147152,
+      "sha256": "0df96d1a89cdde69886116aad0ba0367b2ba678e1f56eb6c7db74c42e1a76260"
+    },
+    {
+      "path": "q3_descriptive_contrasts.csv",
+      "bytes": 632,
+      "sha256": "ae06947c3b9eea28eea904e4523f522d926367a91b1e94df5fe31cb003b1a4b4"
+    },
+    {
+      "path": "q3_inference_sensitivity.csv",
+      "bytes": 1722,
+      "sha256": "718cbb0b739986b743046b7f84fbdb4041c237a607bb0a72ecbd969f81ae4e99"
+    },
+    {
+      "path": "q3_legacy_coefficients.csv",
+      "bytes": 7663,
+      "sha256": "65c3d54f3973b9b6cf7a678d255c4f0908fc25bf45da725bf55ddf86a4d089f3"
+    },
+    {
+      "path": "q3_paired_player_comparison.csv",
+      "bytes": 76563,
+      "sha256": "9c72db968e3361baf1a80872c8898d2439d6970f6e1dddb02c61d54ab51b52ee"
+    },
+    {
+      "path": "q3_player_exposure.csv",
+      "bytes": 10363,
+      "sha256": "d037a38c2da9b374d25a77aabd0d6e245f9d13a9d15ca9235b4daf6165e9103b"
+    },
+    {
+      "path": "q3_player_influence.csv",
+      "bytes": 5094,
+      "sha256": "cbd0948b1257047e209aefe99e131cf8d372d54de5d93046a0db0c9376d8ebbf"
+    },
+    {
+      "path": "q3_subgroup_support.csv",
+      "bytes": 870,
+      "sha256": "9d6dded87be9bbf18c02c14bd63d2f098858aef7e2511a0df612f2bfd28e1e85"
+    },
+    {
+      "path": "spotcheck_evidence.csv",
+      "bytes": 2497,
+      "sha256": "7f67a6e85cf878e1f056455ab50d28d3207924c92a7dbcd7a8c3930e8acb0d30"
+    },
+    {
+      "path": "spotcheck_opponent_pairs.csv",
+      "bytes": 73024,
+      "sha256": "586c385f3aabaa8a67958a87cfa5a2db29ccd6e2d584484b44a574d0febdc40f"
+    },
+    {
+      "path": "spotcheck_player_histories.csv",
+      "bytes": 1944785,
+      "sha256": "6b6f26c08c450e7fbf0c6c34adb1bb01e6608441dc3cf7d4ed57e242359bd442"
+    },
+    {
+      "path": "spotcheck_recovery_windows.csv",
+      "bytes": 8613,
+      "sha256": "dc6619f903f4d73e202d82f1958f87da7be59b538ee0ffc227e507a56bdba0bd"
+    },
+    {
+      "path": "unresolved_event_ledger.csv",
+      "bytes": 177,
+      "sha256": "11cb1757e97ccab271e7431502b951e6c3453eca666a3ad00dd1c34de35d95c9"
+    }
+  ],
+  "inventory_note": "Hashes cover generated artifacts except this self-referential JSON summary; unrelated preserved user files are not run artifacts."
+}

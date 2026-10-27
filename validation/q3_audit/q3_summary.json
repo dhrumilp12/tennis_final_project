@@ -1,0 +1,38 @@
+{
+  "status": "Q3 within-player adjusted model fitted with explicit inference warnings.",
+  "analysis_status": "fitted_with_warnings",
+  "player_match_rows": 127438,
+  "unique_matches": 63719,
+  "warnings": [
+    "Legacy player-by-match covariance has negative coefficient variance(s); affected intervals are unavailable. Primary dyadic covariance clusters through either participant.",
+    "Dyadic intervals assume no residual dependence between disjoint player pairs; tournament-wide shocks and indirect network dependence may remain. Tournament-only sensitivity does not address serial player dependence.",
+    "Left-handed subgroup support is smaller; asymptotic intervals and the exposure-based deletion checks do not establish uniform effects across players."
+  ],
+  "players_meeting_raw_comparison_minimum": 427,
+  "adjusted_player_match_rows": 112503,
+  "adjusted_unique_matches": 61412,
+  "adjusted_players": 420,
+  "within_design_rank": 34,
+  "within_design_columns": 34,
+  "within_condition_number": 953.3617945572545,
+  "absorbed_player_intercepts": 420,
+  "effective_parameters": 454,
+  "residual_degrees_of_freedom": 112049,
+  "dyadic_finite_sample_factor": 1.0040428740997243,
+  "dyadic_nodes": 1252,
+  "dyadic_pairs": 32964,
+  "tournament_clusters": 1585,
+  "primary_negative_variance_terms": 0,
+  "primary_minimum_covariance_eigenvalue": 1.687274886061072e-07,
+  "legacy_two_way_negative_variance_terms": 1,
+  "legacy_two_way_minimum_covariance_eigenvalue": -2.924866628505315e-05,
+  "covariance": "Primary shared-player dyadic sandwich, preserving repeat dyads and both physical-match views; no clipping or absolute-value variance repair.",
+  "ci_note": "Exploratory normal 95% intervals; (n-1)/(n-player_intercepts-within_rank) finite-sample scaling includes absorbed fixed effects.",
+  "negative_variance_terms": 0,
+  "contrast_inference": {
+    "R": "available",
+    "L": "available"
+  },
+  "method_reference": "https://arxiv.org/abs/1312.3398",
+  "interpretation": "Adjusted opponent L-minus-R probability contrasts are reported separately by focal hand in percentage points. L uses the coefficient sum and full covariance."
+}

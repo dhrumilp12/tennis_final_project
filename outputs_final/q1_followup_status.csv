@@ -1,0 +1,7 @@
+loss_type,followup_status,index_losses,players
+other_ranked_loss,complete,12661,335
+other_ranked_loss,fewer_than_three_recorded_followups,56,41
+other_ranked_loss,followup_contains_excluded_or_ambiguous_match,3768,293
+ranking_upset,complete,5885,317
+ranking_upset,fewer_than_three_recorded_followups,21,19
+ranking_upset,followup_contains_excluded_or_ambiguous_match,1630,268

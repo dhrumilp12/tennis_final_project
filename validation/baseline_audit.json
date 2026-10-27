@@ -1,0 +1,34 @@
+{
+  "baseline_revision": "27f3cdca880281396badef197949aaa75008313f",
+  "test_fixture": "Mock network returns Brisbane schema for both synthetic year requests; not research findings",
+  "manifest_regression": {
+    "2023_entry_lost_after_subset": true,
+    "2023_origin_after_full_reuse": "local_unverified"
+  },
+  "preserved_output_hashes": {
+    "outputs/q1_summary_experience.csv": "f4b9afc0e73604b4838ff8ea4fde14b1b62d3d18734bf384c8012a39122cbbdf",
+    "outputs/matches_audited.csv.gz": "dece2705096d33012b4afa88cc9eddd81bb562b43d68c8fa4e7ef7a7e92938ad",
+    "outputs/q1_adjusted_coefficients.csv": "5a540a431a1e260dbe797294a30b80a9251814ae14d5a1d34b2e74a67528b228",
+    "outputs/q1_recovery_events.csv.gz": "1f72322dd3f09a363acddd1c1a8cdb64440c844f2edb2f3bb3826cef013c9341",
+    "outputs/run_summary.json": "7eda2912db1ad84daece1c9df09eefb2362f406af83c6f2ff145a4a834906049",
+    "outputs/exact_duplicate_rows.csv": "94cece8f9334270b7232a73d84a7d29f46cbe911f71cca47efb248f5af9b147a",
+    "outputs/RUN_SUMMARY.md": "7588e6a8bff69f693c5709c134a1ecb86f538a576d16ebbe57e2ef3f3756b9fd",
+    "outputs/q3_adjusted_coefficients.csv": "3dbabc83f24be80d3448dea53af7552593bc2951de99e9d504cedca75f1aad52",
+    "outputs/q3_paired_player_comparison.csv": "010d9179f1e0fc021c276128f87da1ba06b35b7941d08f633968b8c276e57297",
+    "outputs/q2_test_predictions.csv.gz": "364e68d5d6453b4d676864ee0b3f643512e3d0576d5140049289a486fb71f200",
+    "outputs/q2_meeting_count_summary.csv": "ffc5a5c9f7bdf7cfc5a5e12cd4ca8f389567120ee2b99ba71f6392d709a88dac",
+    "outputs/q2_model_metrics.csv": "a6c07d47ac2f16a8618835e9d0b1f3884e412337fb826b679409aa71138013e7",
+    "outputs/q1_adjusted_model.txt": "afce7bd4d2c4ddea86c3bd89b0a8b34044f2df6024f3feece61c88a7d3a616e3",
+    "outputs/q1_summary_age.csv": "55fdbdbf7a6c4bf32ee5cdd472bdc0fe9190359f75065c158a3b63fa574ecdfa",
+    "outputs/excluded_matches.csv.gz": "7d656756afa0b58ce68f816342805fbce0a9d1e7c793310162a6aea60e696c15",
+    "outputs/q3_by_player_and_hand.csv": "0df96d1a89cdde69886116aad0ba0367b2ba678e1f56eb6c7db74c42e1a76260",
+    "outputs/missing_values.csv": "2845f3d4339b7910828a66099e09bc8e0e712ccd5dc32a503a9053e8784372c5",
+    "outputs/player_match_features.csv.gz": "c106e08942b8f8380afb598cb299a7f091d69dcf249f57bd2e313289d71dc58d",
+    "outputs/coverage_by_year.csv": "8aeac9096c3d5554197c3afb9567755c44c223823ba409184cb71167009fc6fd",
+    "outputs/q1_threshold_sensitivity.csv": "35e70610af67401d9ab389502db5092cf5be79e77b86f0a925fcddfcab874ad1",
+    "outputs/player_row_quality.csv": "655359e3ea5d45a51ef24f21a07dc477b8567f7098b63fcb748db7ce0ddd3e7d",
+    "outputs/charts/q3_handedness_differences.png": "0fed4fb565531c7b33cd547bfab2f20a98ffce916e48cf1ebf9c012a66bc685b",
+    "outputs/charts/q2_model_comparison.png": "20e764b6c8366b6806ecba0d543f0e7058f8c087e8716319da406752b17c8673",
+    "outputs/charts/q1_recovery_by_age.png": "b0b3a5211a06172cd7f34ed7899cc5abbee08cca054f139d89ea312a7b2f728a"
+  }
+}

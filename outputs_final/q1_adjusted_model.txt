@@ -1,0 +1,46 @@
+Conditional association with subsequent context, not a causal recovery effect.
+Focal-player cluster covariance accounts for repeated and overlapping windows.
+Formula: next3_win_rate ~ ranking_upset * (age_centered + log_experience) + recent_win_rate + log_player_rank + context_rank_advantage + followup_clay_share + followup_grass_share + followup_carpet_share + followup_best_of_5_share + C(surface) + C(season)
+Events: 18471; players: 341
+
+                        term  coefficient  standard_error  ci95_lower  ci95_upper
+                   Intercept     0.255358        0.055933    0.145339    0.365376
+          C(surface)[T.Clay]    -0.008381        0.014485   -0.036873    0.020111
+         C(surface)[T.Grass]     0.038273        0.015609    0.007571    0.068975
+          C(surface)[T.Hard]     0.014785        0.013177   -0.011134    0.040704
+           C(season)[T.2001]     0.007519        0.021027   -0.033840    0.048879
+           C(season)[T.2002]     0.018603        0.019497   -0.019746    0.056952
+           C(season)[T.2003]     0.024482        0.020590   -0.016018    0.064982
+           C(season)[T.2004]     0.042659        0.020104    0.003116    0.082202
+           C(season)[T.2005]     0.013853        0.017373   -0.020319    0.048024
+           C(season)[T.2006]     0.027800        0.018935   -0.009445    0.065045
+           C(season)[T.2007]     0.016315        0.019923   -0.022873    0.055502
+           C(season)[T.2008]     0.049346        0.017473    0.014977    0.083715
+           C(season)[T.2009]     0.019495        0.018415   -0.016727    0.055716
+           C(season)[T.2010]     0.035393        0.018089   -0.000187    0.070972
+           C(season)[T.2011]     0.029410        0.018011   -0.006017    0.064837
+           C(season)[T.2012]     0.026196        0.021304   -0.015709    0.068101
+           C(season)[T.2013]     0.027640        0.018042   -0.007847    0.063128
+           C(season)[T.2014]     0.024950        0.018461   -0.011362    0.061263
+           C(season)[T.2015]     0.051294        0.018017    0.015854    0.086733
+           C(season)[T.2016]     0.045080        0.018733    0.008234    0.081926
+           C(season)[T.2017]     0.029169        0.018226   -0.006680    0.065019
+           C(season)[T.2018]     0.029603        0.020454   -0.010630    0.069836
+           C(season)[T.2019]     0.003289        0.018360   -0.032825    0.039403
+           C(season)[T.2020]     0.020927        0.021547   -0.021454    0.063308
+           C(season)[T.2021]     0.032640        0.019956   -0.006613    0.071893
+           C(season)[T.2022]     0.038413        0.018695    0.001640    0.075185
+           C(season)[T.2023]     0.009077        0.018890   -0.028079    0.046232
+           C(season)[T.2024]     0.023687        0.019952   -0.015558    0.062931
+               ranking_upset    -0.073253        0.043174   -0.158176    0.011670
+                age_centered    -0.014529        0.001523   -0.017524   -0.011535
+              log_experience     0.066508        0.007526    0.051705    0.081310
+  ranking_upset:age_centered     0.000273        0.001637   -0.002947    0.003493
+ranking_upset:log_experience     0.010799        0.008010   -0.004957    0.026554
+             recent_win_rate     0.195295        0.019341    0.157253    0.233337
+             log_player_rank    -0.054308        0.005686   -0.065494   -0.043123
+      context_rank_advantage     0.018002        0.003559    0.011002    0.025003
+         followup_clay_share     0.011815        0.010059   -0.007970    0.031601
+        followup_grass_share     0.028755        0.010850    0.007414    0.050097
+       followup_carpet_share    -0.026783        0.019351   -0.064845    0.011279
+    followup_best_of_5_share     0.045090        0.006957    0.031407    0.058774

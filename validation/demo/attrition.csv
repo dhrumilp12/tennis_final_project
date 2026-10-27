@@ -1,0 +1,18 @@
+stage,count,unit,population,note
+raw_records,31,source_rows,all_input_files,
+exact_duplicates_removed,0,source_rows,all_input_files,
+warmup_records,0,deduplicated_source_rows,history,
+study_period_records,31,deduplicated_source_rows,study,
+study_unique_match_keys,31,distinct_source_match_keys,study,"Conflicting keys are unresolved physical matches, counted once here."
+study_resolved_unique_physical_matches,31,physical_matches,study,
+study_eligible_matches,29,physical_matches,study,
+study_player_perspective_rows,62,player_views,study,Includes excluded records retained for follow-up; not independent matches.
+study_eligible_player_perspective_rows,58,player_views,study,
+q1_all_eligible_index_losses,29,loss_events,Q1,
+q1_rank_eligible_known_rank_losses,11,loss_events,Q1,
+q1_complete_next3_windows,0,loss_events,Q1,
+q2_training_matches,0,physical_matches,q2,
+q2_test_matches,29,physical_matches,q2,
+q3_unique_matches,29,physical_matches,q3,
+q3_adjusted_unique_matches,0,physical_matches,q3,
+q3_adjusted_player_match_rows,0,player_views,q3,

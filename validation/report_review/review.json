@@ -1,0 +1,22 @@
+{
+  "reviewed_run_id": "20261027T115549Z-59dfea01",
+  "review_scope": "Assistant review of generated reports and plots; not independent external data verification or human review.",
+  "generator_command": ".venv/bin/python tennis_reporting.py --output-dir validation/full_review --root validation/report_review",
+  "generator_exit_code": 0,
+  "checks": [
+    "Report numerical claims compared to Q1/Q2/Q3 generated CSV rows",
+    "Q3 both subgroup contrast estimates and standard errors independently recomputed from saved coefficients and full covariance",
+    "Report claims run ID equals source run ID",
+    "Six generated plots opened and visually inspected: labels, sample sizes, uncertainty, legibility, no clipped content",
+    "Code MIT and data CC BY-NC-SA license separation checked",
+    "Observational, chronology, shared-dependence, censored follow-up, and nonhuman spot-check caveats checked"
+  ],
+  "issues_sent_to_parent": [
+    "Nonoverlap prose implies one window per player instead of sequential greedy windows",
+    "Q1 subgroup table uses total fitted model players for subgroup players field",
+    "Q2 positive improvement/small gain prose hardcoded rather than sign-aware",
+    "Q3 full-rank prose hardcoded rather than conditional",
+    "Report generator does not handle absent/skipped model contrast files",
+    "Q3 high-exposure deletion shifts should be acknowledged as magnitude sensitivity"
+  ]
+}

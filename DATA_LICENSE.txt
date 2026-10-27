@@ -11,8 +11,8 @@ Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0).
 License text: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
 
 The real-data fixture is an extracted subset of the 2024 annual ATP file
-(31 Brisbane rows, source CSV lines 2-32). The full annual dataset is not
-bundled. Processing code generates filtered records, history features,
+(31 Brisbane rows, source CSV lines 2-32). The repository also contains cached annual ATP files for the full study,
+with their original source bytes and provenance manifest. Processing code generates filtered records, history features,
 aggregates, and exploratory statistical results; these are derived products,
 not additional observations or information supplied by the original compiler.
 Retain attribution, identify changes, and retain the applicable data license
@@ -20,3 +20,6 @@ when sharing data or derived data. The archive claims no ownership over the data
 
 The synthetic tests are explicitly artificial software-test fixtures and must
 not be presented as real match data or research evidence.
+
+The Python implementation has a separate MIT code license in LICENSE. That
+code license does not replace or expand the rights in source or derived data.

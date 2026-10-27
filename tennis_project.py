@@ -13,9 +13,11 @@ import argparse
 import hashlib
 import json
 import logging
+import os
 import platform
 import re
 import sys
+import tempfile
 from collections import defaultdict, deque
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
@@ -70,8 +72,21 @@ class Config:
 
 
 def write_json(path: Path, obj: Any) -> None:
+    """Atomically replace a valid JSON document, retaining the previous on failure."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(obj, indent=2, default=str, allow_nan=False), encoding="utf-8")
+    payload = json.dumps(obj, indent=2, default=str, allow_nan=False)
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=path.parent,
+                                         prefix=f".{path.name}.", suffix=".tmp", delete=False) as stream:
+            temporary = Path(stream.name)
+            stream.write(payload)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, path)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
 
 
 def digest(path: Path) -> str:
@@ -94,48 +109,51 @@ def download_data(cfg: Config) -> list[Path]:
     session.headers["User-Agent"] = "Tennis-Class-Research/1.0"
     retry = Retry(total=3, backoff_factor=1, status_forcelist=[429, 500, 502, 503, 504])
     session.mount("https://", HTTPAdapter(max_retries=retry))
-    files, records = [], []
+    files, records = [], previous.copy()
     relative_paths = ["LICENSE", "README.md", "atp/UPSTREAM_README.md", "atp/matches_data_dictionary.txt"]
     relative_paths += [f"atp/atp_matches_{y}.csv" for y in range(cfg.history_start, cfg.end_year + 1)]
-    for relative in relative_paths:
-        filename = relative.replace("/", "__") if not relative.endswith(".csv") else Path(relative).name
-        target = root / filename
-        url = f"{BASE_URL}/{relative}"
-        old = previous.get(filename)
-        now = datetime.now(timezone.utc).isoformat()
-        if target.exists():
-            current_hash = digest(target)
-            if old and current_hash != old["sha256"]:
-                raise ValueError(f"Cached file changed: {target}. Restore it or use a new raw directory.")
-            origin = old.get("origin", "local_unverified") if old else "local_unverified"
-            retrieved = old.get("retrieved_at_utc") if old else None
-        elif cfg.offline:
+    try:
+        for relative in relative_paths:
+            filename = relative.replace("/", "__") if not relative.endswith(".csv") else Path(relative).name
+            target = root / filename
+            url = f"{BASE_URL}/{relative}"
+            old = previous.get(filename)
+            now = datetime.now(timezone.utc).isoformat()
+            if target.exists():
+                current_hash = digest(target)
+                if old and current_hash != old["sha256"]:
+                    raise ValueError(f"Cached file changed: {target}. Restore it or use a new raw directory.")
+                origin = old.get("origin", "local_unverified") if old else "local_unverified"
+                retrieved = old.get("retrieved_at_utc") if old else None
+            elif cfg.offline:
+                if relative.endswith(".csv"):
+                    raise FileNotFoundError(f"Offline file missing: {target}")
+                continue
+            else:
+                LOG.info("Downloading %s", relative)
+                try:
+                    response = session.get(url, timeout=(10, 90))
+                    response.raise_for_status()
+                except requests.RequestException as exc:
+                    raise RuntimeError(f"Could not download {relative}. Check your internet connection. "
+                                       "No missing year has been silently skipped.") from exc
+                body = response.content
+                if relative.endswith(".csv") and b"winner_id" not in body.splitlines()[0]:
+                    raise ValueError(f"Unexpected CSV header from {url}")
+                temp = target.with_suffix(target.suffix + ".partial")
+                temp.write_bytes(body)
+                temp.replace(target)
+                current_hash, origin, retrieved = digest(target), "downloaded_pinned_url", now
+            records[filename] = {**(old or {}), "filename": filename, "source_path": relative, "source_url": url,
+                            "revision": REVISION, "sha256": current_hash, "bytes": target.stat().st_size,
+                            "origin": origin, "retrieved_at_utc": retrieved, "checked_at_utc": now}
+            # Save after each file so interrupted runs retain provenance.
+            write_json(manifest_path, {"repository": REPOSITORY, "revision": REVISION,
+                                      "files": [records[key] for key in sorted(records)]})
             if relative.endswith(".csv"):
-                raise FileNotFoundError(f"Offline file missing: {target}")
-            continue
-        else:
-            LOG.info("Downloading %s", relative)
-            try:
-                response = session.get(url, timeout=(10, 90))
-                response.raise_for_status()
-            except requests.RequestException as exc:
-                raise RuntimeError(f"Could not download {relative}. Check your internet connection. "
-                                   "No missing year has been silently skipped.") from exc
-            body = response.content
-            if relative.endswith(".csv") and b"winner_id" not in body.splitlines()[0]:
-                raise ValueError(f"Unexpected CSV header from {url}")
-            temp = target.with_suffix(target.suffix + ".partial")
-            temp.write_bytes(body)
-            temp.replace(target)
-            current_hash, origin, retrieved = digest(target), "downloaded_pinned_url", now
-        records.append({"filename": filename, "source_path": relative, "source_url": url,
-                        "revision": REVISION, "sha256": current_hash, "bytes": target.stat().st_size,
-                        "origin": origin, "retrieved_at_utc": retrieved, "checked_at_utc": now})
-        # Save after each file so interrupted runs retain provenance.
-        write_json(manifest_path, {"repository": REPOSITORY, "revision": REVISION, "files": records})
-        if relative.endswith(".csv"):
-            files.append(target)
-    session.close()
+                files.append(target)
+    finally:
+        session.close()
     return files
 
 
@@ -200,11 +218,16 @@ def clean_matches(raw: pd.DataFrame, cfg: Config) -> tuple[pd.DataFrame, pd.Data
     # Exclude ambiguous same-player ordering, rather than sort arbitrary match_num.
     views = []
     for side in ["winner", "loser"]:
-        v = d.loc[identity_ok, ["match_id", "tourney_id", "tourney_date", "round", f"{side}_id"]].rename(columns={f"{side}_id": "player_id"})
+        known = d[f"{side}_id"].gt(0) & d[f"{side}_id"].mod(1).eq(0)
+        v = d.loc[known, ["match_id", "tourney_id", "tourney_date", "round", f"{side}_id"]].rename(columns={f"{side}_id": "player_id"})
         views.append(v)
     ids = pd.concat(views, ignore_index=True)
     simultaneous = ids.groupby(["player_id", "tourney_date"], dropna=False)["tourney_id"].transform("nunique").gt(1)
     same_round = ids.duplicated(["player_id", "tourney_id", "round"], keep=False)
+    d["same_date_multiple_events"] = d["match_id"].isin(ids.loc[simultaneous, "match_id"])
+    d["repeated_player_round"] = d["match_id"].isin(ids.loc[same_round, "match_id"])
+    d["unsupported_round_event"] = d["tourney_id"].isin(unsupported_events)
+    d["missing_tournament_date"] = d["tourney_date"].isna()
     bad_matches = set(ids.loc[simultaneous | same_round, "match_id"])
     d.loc[d["match_id"].isin(bad_matches), "order_reliable"] = False
     d["within_history_window"] = d["season"].between(cfg.history_start, cfg.end_year)
@@ -226,8 +249,68 @@ def clean_matches(raw: pd.DataFrame, cfg: Config) -> tuple[pd.DataFrame, pd.Data
     return d, duplicate_rows, audit
 
 
+def build_event_ledger(matches: pd.DataFrame) -> pd.DataFrame:
+    """One unresolved record group per known player, never one per conflicting copy.
+
+    These records cannot supply an outcome or enter pre-match history. A date is
+    supplied only when all copies agree. Date bounds describe conflicting source
+    claims, not imputed match days. A missing date leaves chronology unbounded.
+    Unknown players are retained in the ledger but cannot be linked to histories.
+    """
+    columns = ["event_key", "match_id", "player_id", "tourney_id", "tourney_date",
+               "earliest_claimed_date", "latest_claimed_date", "round_order",
+               "placement_status", "blocker_reason", "source_record_count", "source_references"]
+    missing_from_views = (~matches["identity_ok"] | matches["conflicting_key"] |
+                          matches["tourney_date"].isna())
+    unresolved = matches.loc[missing_from_views].copy()
+    if unresolved.empty:
+        return pd.DataFrame(columns=columns)
+    # A missing physical key cannot justify combining unrelated source rows.
+    unresolved["event_key"] = unresolved["match_id"]
+    no_key = unresolved["tourney_id"].eq("") | unresolved["match_num"].isna()
+    unresolved.loc[no_key, "event_key"] = [
+        f"unkeyed:{r.source_file}:{r.source_csv_row}" for r in unresolved.loc[no_key].itertuples()]
+    records = []
+    for key, group in unresolved.groupby("event_key", sort=True):
+        identifiers = pd.concat([group["winner_id"], group["loser_id"]])
+        identifiers = identifiers.loc[identifiers.gt(0) & identifiers.mod(1).eq(0)].dropna().unique()
+        known_players = sorted(int(x) for x in identifiers) or [np.nan]
+        date_known = group["tourney_date"].notna().all()
+        one_date = date_known and group["tourney_date"].nunique() == 1
+        one_round = group["round_order"].notna().all() and group["round_order"].nunique() == 1
+        placement = ("dated_round_resolved" if one_date and one_round else
+                     "dated_round_unknown" if one_date else
+                     "date_range_conflict" if date_known else "date_unknown")
+        reasons = []
+        if group["conflicting_key"].any():
+            reasons.append("conflicting_match_key")
+        if (~group["identity_ok"]).any():
+            reasons.append("invalid_player_identity")
+        if not date_known:
+            reasons.append("missing_date")
+        if not one_date and date_known:
+            reasons.append("conflicting_dates")
+        if not one_round:
+            reasons.append("unresolved_round")
+        source_refs = "|".join(sorted({f"{r.source_file}:{r.source_csv_row}" for r in group.itertuples()}))
+        for player in known_players:
+            records.append({"event_key": key, "match_id": group["match_id"].iloc[0],
+                            "player_id": player, "tourney_id": group["tourney_id"].iloc[0],
+                            "tourney_date": group["tourney_date"].iloc[0] if one_date else pd.NaT,
+                            "earliest_claimed_date": group["tourney_date"].min() if date_known else pd.NaT,
+                            "latest_claimed_date": group["tourney_date"].max() if date_known else pd.NaT,
+                            "round_order": group["round_order"].iloc[0] if one_round else np.nan,
+                            "placement_status": placement, "blocker_reason": ";".join(reasons),
+                            "source_record_count": len(group), "source_references": source_refs})
+    return pd.DataFrame(records, columns=columns)
+
+
 def make_player_rows(matches: pd.DataFrame) -> pd.DataFrame:
-    """Two views of a physical match. Never count these as independent matches."""
+    """Two views of a resolved physical match, with a separate blocker ledger.
+
+    The ledger is preserved in attrs through history construction and consumed
+    by build_recovery_events; excluded identities never acquire invented wins.
+    """
     valid = matches["identity_ok"] & ~matches["conflicting_key"] & matches["tourney_date"].notna()
     m = matches.loc[valid].copy()
     metadata = ["match_id", "source_file", "source_csv_row", "tourney_id", "tourney_name", "tourney_date",
@@ -248,14 +331,17 @@ def make_player_rows(matches: pd.DataFrame) -> pd.DataFrame:
         sw = p["1stWon"] + p["2ndWon"]
         valid_service = (p["svpt"].gt(0) & p["1stIn"].between(0, p["svpt"]) &
                          p["1stWon"].between(0, p["1stIn"]) &
-                         p["2ndWon"].between(0, p["svpt"] - p["1stIn"]))
+                         p["2ndWon"].between(0, p["svpt"] - p["1stIn"]) &
+                         p[["svpt", "1stIn", "1stWon", "2ndWon"]].mod(1).eq(0).all(axis=1))
         p["valid_service_stats"] = valid_service
         p["service_points_won"] = sw.where(valid_service)
         p["service_points_observed"] = p["svpt"].where(valid_service)
         p["service_win_rate"] = (sw / p["svpt"]).where(valid_service)
         p["double_fault_rate"] = (p["df"] / p["svpt"]).where(p["svpt"].gt(0) & p["df"].between(0, p["svpt"]))
         frames.append(p)
-    return pd.concat(frames, ignore_index=True)
+    result = pd.concat(frames, ignore_index=True)
+    result.attrs["event_blocker_ledger"] = build_event_ledger(matches).to_dict("records")
+    return result
 
 
 def add_history(player_rows: pd.DataFrame, cfg: Config) -> pd.DataFrame:
@@ -307,33 +393,91 @@ def add_history(player_rows: pd.DataFrame, cfg: Config) -> pd.DataFrame:
     # Smaller ID is Player A regardless of outcome: exactly one row per match for Q2.
     p["is_player_a"] = p["player_id"] < p["opponent_id"]
     p["pair_id"] = [f"{min(a,b)}:{max(a,b)}" for a,b in zip(p["player_id"], p["opponent_id"])]
+    p.attrs["event_blocker_ledger"] = player_rows.attrs.get("event_blocker_ledger", [])
     return p
 
 
-def build_recovery_events(players: pd.DataFrame, cfg: Config) -> pd.DataFrame:
+def build_recovery_events(players: pd.DataFrame, cfg: Config,
+                          event_ledger: pd.DataFrame | None = None) -> pd.DataFrame:
     """Loss-level records with transparent censoring of incomplete follow-up.
 
     We inspect the next three *recorded* matches. We do not skip a retirement,
     an out-of-scope match, or an ambiguous event to make follow-up look complete.
     Completely absent source matches cannot be detected by this code.
     """
-    p = players.sort_values(["player_id", "tourney_date", "round_order", "tourney_id", "match_id"], na_position="last").copy()
+    ledger = event_ledger.copy() if event_ledger is not None else pd.DataFrame(players.attrs.get("event_blocker_ledger", []))
+    p = players.copy()
+    p.attrs = {}
+    p["recovery_blocker"] = False
+    p["blocker_reason"] = ""
+    # Only source-agreed dates and rounds may occupy a particular sequence slot.
+    # Each conflicting key appears once for each potentially affected player.
+    if not ledger.empty:
+        placeable = ledger.loc[ledger["placement_status"].eq("dated_round_resolved") &
+                               ledger["player_id"].notna()].copy()
+        if not placeable.empty:
+            extra = pd.DataFrame({col: pd.Series(
+                False if pd.api.types.is_bool_dtype(dtype) else
+                pd.NaT if pd.api.types.is_datetime64_any_dtype(dtype) else
+                np.nan if pd.api.types.is_numeric_dtype(dtype) else None,
+                index=placeable.index,
+                dtype=bool if pd.api.types.is_bool_dtype(dtype) else
+                dtype if pd.api.types.is_datetime64_any_dtype(dtype) else
+                float if pd.api.types.is_numeric_dtype(dtype) else object)
+                for col, dtype in p.dtypes.items()})
+            for col in ["match_id", "player_id", "tourney_id", "tourney_date", "round_order", "blocker_reason"]:
+                extra[col] = placeable[col]
+            extra["recovery_blocker"] = True
+            extra["eligible"] = False
+            extra["order_reliable"] = False
+            extra["in_analysis_period"] = False
+            p = pd.concat([p, extra], ignore_index=True)
+    p = p.sort_values(["player_id", "tourney_date", "round_order", "tourney_id", "match_id"],
+                      na_position="last").reset_index(drop=True)
+    # Position includes resolved blockers; it is an ordinal, never a match date.
+    p["recorded_event_position"] = p.groupby("player_id").cumcount()
     grouped = p.groupby("player_id", sort=False)
     for k in [1, 2, 3]:
-        for col in ["match_id", "won", "eligible", "log_rank_advantage", "surface", "best_of", "order_reliable"]:
+        for col in ["match_id", "won", "eligible", "log_rank_advantage", "surface", "best_of", "order_reliable",
+                    "tourney_date", "recovery_blocker", "blocker_reason", "recorded_event_position"]:
             p[f"next{k}_{col}"] = grouped[col].shift(-k)
+    p["next1_unresolved_record"] = p["next1_recovery_blocker"].eq(True)
+    p["followup_unresolved_record"] = p[[f"next{k}_recovery_blocker" for k in [1, 2, 3]]].eq(True).any(axis=1)
+    p["followup_blocker_keys"] = ""
+    if not ledger.empty:
+        uncertain = ledger.loc[~ledger["placement_status"].eq("dated_round_resolved") & ledger["player_id"].notna()]
+        # An unplaceable known-player event can lie between recorded candidates.
+        # Bound conflicting-date claims where possible; missing-date uncertainty
+        # conservatively affects all windows for that player in the loaded data.
+        for blocker in uncertain.itertuples():
+            focal = p["player_id"].eq(blocker.player_id)
+            if pd.notna(blocker.earliest_claimed_date) and pd.notna(blocker.latest_claimed_date):
+                after_index = p["tourney_date"].le(blocker.latest_claimed_date)
+                next1_before = p["next1_tourney_date"].isna() | p["next1_tourney_date"].ge(blocker.earliest_claimed_date)
+                next3_before = p["next3_tourney_date"].isna() | p["next3_tourney_date"].ge(blocker.earliest_claimed_date)
+                affects_one = focal & after_index & next1_before
+                affects_three = focal & after_index & next3_before
+            else:
+                affects_one = affects_three = focal
+            p.loc[affects_one, "next1_unresolved_record"] = True
+            p.loc[affects_three, "followup_unresolved_record"] = True
+            p.loc[affects_three, "followup_blocker_keys"] += str(blocker.event_key) + ";"
+        for k in [1, 2, 3]:
+            mask = p[f"next{k}_recovery_blocker"].eq(True)
+            p.loc[mask, "followup_blocker_keys"] += p.loc[mask, f"next{k}_match_id"].astype(str) + ";"
     ranked = p["player_rank"].notna() & p["opponent_rank"].notna()
     p["ranking_upset"] = (ranked & p["won"].eq(0) & p["player_rank"].le(cfg.upset_max_rank) & p["rank_gap"].ge(cfg.upset_rank_gap))
     p["loss_type"] = np.where(~ranked, "unknown_rank", np.where(p["ranking_upset"], "ranking_upset", "other_ranked_loss"))
     p["age_group"] = pd.cut(p["player_age"], [-np.inf, 23, 30, np.inf], right=False, labels=["under_23", "23_to_29", "30_plus"])
     p["experience_group"] = pd.cut(p["prior_matches"], [-1, 100, 300, np.inf], right=False, labels=["under_100", "100_to_299", "300_plus"])
-    p["next1_usable"] = p["next1_eligible"].eq(True)
+    p["next1_usable"] = p["next1_eligible"].eq(True) & ~p["next1_unresolved_record"]
     p["next1_win"] = p["next1_won"].where(p["next1_usable"])
     all_three_present = p[[f"next{k}_match_id" for k in [1, 2, 3]]].notna().all(axis=1)
     all_three_eligible = p[[f"next{k}_eligible" for k in [1, 2, 3]]].eq(True).all(axis=1)
-    p["followup_complete"] = all_three_present & all_three_eligible
-    p["followup_status"] = np.select([~all_three_present, ~all_three_eligible],
-                                      ["fewer_than_three_recorded_followups", "followup_contains_excluded_or_ambiguous_match"], default="complete")
+    p["followup_complete"] = all_three_present & all_three_eligible & ~p["followup_unresolved_record"]
+    p["followup_status"] = np.select([p["followup_unresolved_record"], ~all_three_present, ~all_three_eligible],
+                                      ["followup_contains_unresolved_record", "fewer_than_three_recorded_followups",
+                                       "followup_contains_excluded_or_ambiguous_match"], default="complete")
     p["next3_win_rate"] = p[[f"next{k}_won" for k in [1, 2, 3]]].mean(axis=1, skipna=False).where(p["followup_complete"])
     p["followup_mean_log_rank_advantage"] = p[[f"next{k}_log_rank_advantage" for k in [1, 2, 3]]].mean(axis=1, skipna=False).where(p["followup_complete"])
     for label in ["Clay", "Grass", "Carpet", "Unknown"]:
@@ -356,66 +500,115 @@ def save_quality_tables(matches: pd.DataFrame, players: pd.DataFrame, output: Pa
 
 
 def run_project(cfg: Config | None = None, input_files: list[Path] | None = None) -> dict:
-    """Run from notebook or CLI. Supplied files are for local input or smoke tests."""
+    """Build and verify a complete staged run, then replace the output directory.
+
+    Previous runs remain in a sibling backup. A failed run cannot leave a new
+    successful summary or a mixture of old and new generated tables.
+    """
+    import shutil
+    import uuid
+    from collections import Counter
+    import warnings
+    from tennis_repro import (code_provenance, environment, input_records, quality_extensions,
+                              spot_checks, output_inventory, verify_output)
     cfg = cfg or Config()
     cfg.validate()
     output = Path(cfg.output_dir)
-    output.mkdir(parents=True, exist_ok=True)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    started = datetime.now(timezone.utc)
+    run_id = started.strftime("%Y%m%dT%H%M%SZ") + "-" + uuid.uuid4().hex[:8]
+    code = code_provenance()
     files = input_files if input_files is not None else download_data(cfg)
-    # Remove only known program-generated results, so a skipped model on a
-    # rerun cannot leave behind an old coefficient table or chart.
-    generated = ["matches_audited.csv.gz", "exact_duplicate_rows.csv", "excluded_matches.csv.gz",
-                 "player_match_features.csv.gz", "q1_recovery_events.csv.gz", "missing_values.csv",
-                 "coverage_by_year.csv", "player_row_quality.csv", "q1_summary_age.csv",
-                 "q1_summary_experience.csv", "q1_threshold_sensitivity.csv", "q1_adjusted_coefficients.csv",
-                 "q1_adjusted_model.txt", "q2_meeting_count_summary.csv", "q2_test_predictions.csv.gz",
-                 "q2_model_metrics.csv", "q3_by_player_and_hand.csv", "q3_paired_player_comparison.csv",
-                 "q3_adjusted_coefficients.csv", "run_summary.json", "RUN_SUMMARY.md",
-                 "charts/q1_recovery_by_age.png", "charts/q2_model_comparison.png", "charts/q3_handedness_differences.png"]
-    input_resolved = {Path(x).resolve() for x in files}
-    for name in generated:
-        target = output / name
-        if target.resolve() in input_resolved:
-            raise ValueError(f"Input file would be overwritten by generated output: {target}")
-    for name in generated:
-        (output / name).unlink(missing_ok=True)
-    raw = load_files(files)
-    LOG.info("Loaded %s raw match rows from %s file(s).", len(raw), len(files))
-    matches, duplicates, audit = clean_matches(raw, cfg)
-    players = add_history(make_player_rows(matches), cfg)
-    events = build_recovery_events(players, cfg)
-    # Atomic analysis folders are easiest to audit: use a fresh output_dir for each configuration.
-    matches.to_csv(output / "matches_audited.csv.gz", index=False)
-    duplicates.to_csv(output / "exact_duplicate_rows.csv", index=False)
-    matches.loc[~matches["eligible"]].to_csv(output / "excluded_matches.csv.gz", index=False)
-    study_players = players.loc[players["in_analysis_period"]].copy()
-    study_players.to_csv(output / "player_match_features.csv.gz", index=False)
-    events.to_csv(output / "q1_recovery_events.csv.gz", index=False)
-    save_quality_tables(matches, players, output)
-    from tennis_analyses import analyze_recovery, analyze_head_to_head, analyze_handedness, make_charts
-    q1 = analyze_recovery(events, cfg, output)
-    q2 = analyze_head_to_head(study_players, cfg, output)
-    q3 = analyze_handedness(study_players, cfg, output)
-    if cfg.make_plots:
-        make_charts(output)
-    import sklearn
-    import statsmodels
-    audit.update({"configuration": asdict(cfg), "source_repository": REPOSITORY, "source_revision": REVISION,
-                  "inputs": [{"path": str(x), "sha256": digest(x), "bytes": x.stat().st_size} for x in files],
-                  "input_mode": "provided_local_files" if input_files is not None else "pinned_download_or_cached_files",
-                  "test_data_warning": "Local files may be partial fixtures; check the input paths and row counts." if input_files is not None else None,
-                  "q1": q1, "q2": q2, "q3": q3,
-                  "runtime": {"python": platform.python_version(), "pandas": pd.__version__, "numpy": np.__version__, "scikit_learn": sklearn.__version__, "statsmodels": statsmodels.__version__}})
-    write_json(output / "run_summary.json", audit)
-    lines = ["# Run summary", "", f"Raw match rows: {audit['raw_match_rows']:,}",
-             f"Eligible study matches: {audit['eligible_analysis_matches']:,}", "",
-             "Q1: " + q1["status"], "Q2: " + q2["status"], "Q3: " + q3["status"], "",
-             "These are exploratory associations, not causal or psychological conclusions.",
-             "Read README.md for filtering, approximate chronology, coverage, and model limitations.",
-             "The manifest and JSON summary record the exact inputs and configuration."]
-    (output / "RUN_SUMMARY.md").write_text("\n".join(lines), encoding="utf-8")
-    LOG.info("Saved results in %s", output.resolve())
-    return audit
+    files = [Path(f) for f in files]
+    # Never replace a directory holding input files.
+    if any(output.resolve() == f.resolve() or output.resolve() in f.resolve().parents for f in files):
+        raise ValueError("Output directory must not contain an input file.")
+    stage = Path(tempfile.mkdtemp(prefix=f".{output.name}.staging-", dir=output.parent))
+    backup = output.with_name(f".{output.name}.previous-{run_id}")
+    try:
+        with warnings.catch_warnings(record=True) as captured:
+            warnings.simplefilter("always")
+            raw = load_files(files)
+            LOG.info("Loaded %s raw match rows from %s file(s).", len(raw), len(files))
+            matches, duplicates, audit = clean_matches(raw, cfg)
+            players = add_history(make_player_rows(matches), cfg)
+            events = build_recovery_events(players, cfg, event_ledger=build_event_ledger(matches))
+            matches.to_csv(stage / "matches_audited.csv.gz", index=False)
+            duplicates.to_csv(stage / "exact_duplicate_rows.csv", index=False)
+            matches.loc[~matches["eligible"]].to_csv(stage / "excluded_matches.csv.gz", index=False)
+            if "build_event_ledger" in globals():
+                build_event_ledger(matches).to_csv(stage / "unresolved_event_ledger.csv", index=False)
+            study_players = players.loc[players["in_analysis_period"]].copy()
+            study_players.to_csv(stage / "player_match_features.csv.gz", index=False)
+            events.to_csv(stage / "q1_recovery_events.csv.gz", index=False)
+            save_quality_tables(matches, players, stage)
+            from tennis_analyses import analyze_recovery, analyze_head_to_head, analyze_handedness, make_charts
+            q1 = analyze_recovery(events, cfg, stage)
+            q2 = analyze_head_to_head(study_players, cfg, stage)
+            q3 = analyze_handedness(study_players, cfg, stage)
+            if cfg.make_plots:
+                make_charts(stage)
+            quality = quality_extensions(raw, matches, players, events, cfg, stage, {'q1':q1,'q2':q2,'q3':q3})
+            from tennis_chronology import write_chronology_diagnostics
+            chronology = write_chronology_diagnostics(matches, cfg, stage)
+            checks = spot_checks(matches, players, events, stage)
+        warning_counts = Counter((w.category.__name__, str(w.message)) for w in captured)
+        run_warnings = [{"category":c,"message":m,"count":n} for (c,m),n in warning_counts.items()]
+        for name, result in [('q1', q1), ('q2', q2), ('q3', q3)]:
+            result.setdefault('warnings', [])
+            result.setdefault('status_code', 'fitted_with_limitations' if 'fitted' in result['status'] and 'not fitted' not in result['status'] else 'insufficient_or_unavailable')
+        audit.update({"run_id":run_id,"started_at_utc":started.isoformat(),
+                      "completed_at_utc":datetime.now(timezone.utc).isoformat(),
+                      "publication_status":"verified", "configuration":asdict(cfg),
+                      "source_repository":REPOSITORY,"source_revision":REVISION,
+                      "inputs":input_records(files),"cache_inventory_is_separate":True,
+                      "input_mode":"provided_local_files" if input_files is not None else "pinned_download_or_cached_files",
+                      "test_data_warning":"Provided files may be partial or synthetic; not full-study findings." if input_files is not None else None,
+                      "q1":q1,"q2":q2,"q3":q3,"quality":quality,"chronology":chronology,"spot_checks":checks,
+                      "runtime":environment(),"code":code,"runtime_warnings":run_warnings})
+        warning_text = [f"{q.upper()}: {w}" for q in ['q1','q2','q3'] for w in audit[q]['warnings']]
+        lines = ["# Run summary", "", f"Run ID: `{run_id}`", "",
+                 f"Raw match rows: {audit['raw_match_rows']:,}",
+                 f"Eligible study matches: {audit['eligible_analysis_matches']:,}", "",
+                 "Q1: " + q1["status"], "Q2: " + q2["status"], "Q3: " + q3["status"], "", *warning_text, "",
+                 "Observational associations, not causal or psychological conclusions.",
+                 "See generated reports, configuration, input/code hashes, and output inventory in run_summary.json."]
+        (stage / "RUN_SUMMARY.md").write_text("\n".join(lines),encoding="utf-8")
+        audit['output_inventory'] = output_inventory(stage)
+        audit['inventory_note'] = 'Hashes cover generated artifacts except this self-referential JSON summary; unrelated preserved user files are not run artifacts.'
+        write_json(stage / 'run_summary.json', audit)
+        verify_output(stage, audit)
+        # Preserve unrelated user files. Known results from older runs are retired.
+        if output.exists():
+            previous_inventory = set()
+            prior = output / 'run_summary.json'
+            if prior.exists():
+                previous_inventory = {r['path'] for r in json.loads(prior.read_text()).get('output_inventory', [])}
+            known = {'run_summary.json','RUN_SUMMARY.md','matches_audited.csv.gz','exact_duplicate_rows.csv',
+                     'excluded_matches.csv.gz','player_match_features.csv.gz','missing_values.csv',
+                     'coverage_by_year.csv','player_row_quality.csv'}
+            for old in output.rglob('*'):
+                relative = old.relative_to(output)
+                generated = (str(relative) in previous_inventory or str(relative) in known or
+                             old.name.startswith(('q1_', 'q2_', 'q3_')) or relative.parts[0]=='charts')
+                target = stage / relative
+                if old.is_file() and not generated and not target.exists():
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(old, target)
+            output.rename(backup)
+        try:
+            stage.rename(output)
+        except BaseException:
+            if backup.exists() and not output.exists(): backup.rename(output)
+            raise
+        LOG.info("Verified run %s saved in %s", run_id, output.resolve())
+        return audit
+    except BaseException:
+        # Keep failed-stage evidence separate and explicitly unsuccessful.
+        if stage.exists():
+            write_json(stage / 'FAILED_RUN.json', {'run_id':run_id,'status':'failed','output_target':str(output)})
+            (stage / 'run_summary.json').unlink(missing_ok=True)
+        raise
 
 
 def main() -> None:
