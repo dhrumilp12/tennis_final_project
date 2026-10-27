@@ -26,21 +26,21 @@ dist/
 *.executed.tmp.ipynb
 
 # Disposable run logs; these three small logs substantiate historical claims
-validation/*.log
-!validation/demo_final.log
-!validation/full_cli.log
-!validation/notebook.log
+Dhrumil/validation/*.log
+!Dhrumil/validation/demo_final.log
+!Dhrumil/validation/full_cli.log
+!Dhrumil/validation/notebook.log
 
 # Reproducible intermediate runs, not authoritative results or retained evidence
-/validation/full_review/
-/validation/report_review/reports/
-/validation/q1_review/
-/validation/q3_audit/
-/validation/q3_empty/
-/validation/chronology/
-/validation/cleanup-demo/
-/validation/full-study/
-/validation/demo-run/
-/validation/notebook_demo/
-/validation/ci-demo/
-/validation/notebook_failed.ipynb
+/Dhrumil/validation/full_review/
+/Dhrumil/validation/report_review/reports/
+/Dhrumil/validation/q1_review/
+/Dhrumil/validation/q3_audit/
+/Dhrumil/validation/q3_empty/
+/Dhrumil/validation/chronology/
+/Dhrumil/validation/cleanup-demo/
+/Dhrumil/validation/full-study/
+/Dhrumil/validation/demo-run/
+/Dhrumil/validation/notebook_demo/
+/Dhrumil/validation/ci-demo/
+/Dhrumil/validation/notebook_failed.ipynb
