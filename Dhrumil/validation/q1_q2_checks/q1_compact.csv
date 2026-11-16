@@ -1,0 +1,5 @@
+Outcome,Sample,Events / players,"Age, pp/year (95% interval)","Experience, pp/log unit (95% interval)"
+Next three (primary),all_windows,"18,471 / 341",-1.43 pp (95% interval -1.81 to -1.04 pp),+7.73 pp (95% interval +5.95 to +9.51 pp)
+Next match (secondary),all_windows,"21,206 / 345",-1.85 pp (95% interval -2.34 to -1.37 pp),+9.47 pp (95% interval +7.00 to +11.94 pp)
+Next three (primary),nonoverlapping,"9,684 / 341",-1.49 pp (95% interval -1.92 to -1.05 pp),+7.74 pp (95% interval +5.68 to +9.80 pp)
+Next match (secondary),nonoverlapping,"16,263 / 345",-1.80 pp (95% interval -2.40 to -1.20 pp),+8.85 pp (95% interval +5.99 to +11.70 pp)

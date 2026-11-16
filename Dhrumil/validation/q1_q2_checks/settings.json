@@ -1,0 +1,22 @@
+{
+  "source_run_id": "20261027T121134Z-20f069d1",
+  "configuration": {
+    "output_dir": "outputs_final",
+    "raw_dir": "data/raw",
+    "history_start": 1990,
+    "analysis_start": 2000,
+    "end_year": 2024,
+    "test_start": 2020,
+    "upset_max_rank": 50,
+    "upset_rank_gap": 30,
+    "recent_matches": 10,
+    "min_hand_matches": 10,
+    "bootstrap_samples": 500,
+    "random_seed": 42,
+    "offline": true,
+    "make_plots": true
+  },
+  "Q1": "Reconstruct unchanged four original fits, exact event/window IDs and historical coefficients; post-upset sums with full original focal-player covariance and t(players-1); no new model or practical contrast.",
+  "Q2": "Use frozen saved predictions; all/repeat(prior>=1)/first(prior=0); original pair bootstrap alongside shared-player dyadic mean sandwich; Brier primary, log loss/accuracy secondary; no refits.",
+  "chronology": "Trace original candidate event screen without changing dates, eligibility, histories, or windows."
+}

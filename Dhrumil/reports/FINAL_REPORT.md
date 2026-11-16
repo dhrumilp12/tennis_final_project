@@ -2,7 +2,9 @@
 
 **Team:** Phouvadeth Vathana, Joseph Bronyah, Dhrumil Patel
 
-Run ID: `20261027T121134Z-20f069d1`. Generated from verified outputs; all numerical claims below refer to this run.
+Run ID: `20261027T121134Z-20f069d1`. Generated from verified outputs; primary numerical claims below refer to this run.
+The separately labeled opponent-comparability validation was produced later.
+The supplemental Q1/Q2 validation is separate from the historical primary analysis.
 
 ## Objectives and motivation
 
@@ -36,13 +38,13 @@ The original focal-player × physical-match covariance omitted cross-role/shared
 
 ### Performance following ranking upsets
 
-We did not find clear evidence that the upset-related difference varied with age or prior recorded match experience. This does not show that all players recover identically. After a ranking upset, adjusted next-three-match performance differed from ordinary losses by -1.37 pp (95% interval -2.24 to -0.51 pp) across 18,471 complete, covariate-usable loss events from 341 players. The next-match difference was -1.46 pp (95% interval -2.84 to -0.07 pp). Age modification was +0.03 pp (95% interval -0.29 to +0.35 pp) per year; experience modification was +1.08 pp (95% interval -0.50 to +2.66 pp) per unit of log(1 + prior matches). For age, the interval includes zero; for experience, the interval includes zero. Interpret the joint age and experience interactions using their intervals, rather than treating descriptive age bands as experience groups. Adjustment includes subsequent playing context, so this is a conditional association, not a causal recovery effect.
+**Historical primary analysis.** We did not find clear evidence that the upset-related difference varied with age or prior recorded match experience. This does not show that all players recover identically. After a ranking upset, adjusted next-three-match performance differed from ordinary losses by -1.37 pp (95% interval -2.24 to -0.51 pp) across 18,471 complete, covariate-usable loss events from 341 players. The next-match difference was -1.46 pp (95% interval -2.84 to -0.07 pp). Age modification was +0.03 pp (95% interval -0.29 to +0.35 pp) per year; experience modification was +1.08 pp (95% interval -0.50 to +2.66 pp) per unit of log(1 + prior matches). For age, the interval includes zero; for experience, the interval includes zero. Interpret the joint age and experience interactions using their intervals, rather than treating descriptive age bands as experience groups. Adjustment includes subsequent playing context, so this is a conditional association, not a causal recovery effect.
 
 Source: [`q1_adjusted_contrasts.csv`](../outputs_final/q1_adjusted_contrasts.csv), sample=all_windows, subgroup=all; run `20261027T121134Z-20f069d1`.
 
 ### Previous meetings and prediction
 
-On 11,340 held-out matches, meeting count alone changed Brier performance by -0.000021 (95% interval -0.000091 to +0.000039); the interval includes zero. Adding previous head-to-head results changed Brier performance by +0.000586 (95% interval +0.000095 to +0.001019). Positive improvement means lower prediction error; for previous results, the interval is above zero. Meeting count and previous outcomes answer different questions. Pair-cluster intervals leave shared-player dependence across pairs unresolved.
+**Historical primary analysis.** On 11,340 held-out matches, meeting count alone changed Brier performance by -0.000021 (95% interval -0.000091 to +0.000039); the interval includes zero. Adding previous head-to-head results changed Brier performance by +0.000586 (95% interval +0.000095 to +0.001019). Positive improvement means lower prediction error; for previous results, the interval is above zero. Meeting count and previous outcomes answer different questions. Pair-cluster intervals leave shared-player dependence across pairs unresolved.
 
 Source: [`q2_paired_improvements.csv`](../outputs_final/q2_paired_improvements.csv), metric=brier, first_model=baseline; run `20261027T121134Z-20f069d1`.
 
@@ -54,9 +56,62 @@ Source: [`q2_paired_improvements.csv`](../outputs_final/q2_paired_improvements.c
 
 Source: [`q2_model_metrics.csv`](../outputs_final/q2_model_metrics.csv), meeting_group=all; run `20261027T121134Z-20f069d1`.
 
+### Supplemental Q1/Q2 validation
+
+Later validation of unchanged source run `20261027T121134Z-20f069d1`: exact Q1 samples/coefficients and original Q2 prediction results were reproduced. [Checks and settings](../validation/q1_q2_checks/summary.json) · [Separate provenance](../validation/q1_q2_checks/manifest.json).
+
+**Q1: separate the questions.** The primary overall upset-minus-ordinary difference remains -1.37 pp (95% interval -2.24 to -0.51 pp). Interactions measure changes in that difference; post-upset slopes measure age/experience associations within upset cases. Uncertain interactions do not imply zero post-upset slopes.
+
+Post-upset slopes sum the existing main and upset-interaction coefficients, using `Vaa + Vbb + 2Vab`, original player-cluster covariance and t(players−1) intervals. Units are percentage points per age year or natural-log(1 + prior eligible recorded matches) unit, holding other predictors fixed. Counts below are model-wide; [full contrasts](../validation/q1_q2_checks/q1_post_upset_contrasts.csv) include upset-only support, SEs and separate interaction rows:
+
+| Outcome | Sample | Events / players | Age, pp/year (95% interval) | Experience, pp/log unit (95% interval) |
+| --- | --- | --- | --- | --- |
+| Next three (primary) | all_windows | 18,471 / 341 | -1.43 pp (95% interval -1.81 to -1.04 pp) | +7.73 pp (95% interval +5.95 to +9.51 pp) |
+| Next match (secondary) | all_windows | 21,206 / 345 | -1.85 pp (95% interval -2.34 to -1.37 pp) | +9.47 pp (95% interval +7.00 to +11.94 pp) |
+| Next three (primary) | nonoverlapping | 9,684 / 341 | -1.49 pp (95% interval -1.92 to -1.05 pp) | +7.74 pp (95% interval +5.68 to +9.80 pp) |
+| Next match (secondary) | nonoverlapping | 16,263 / 345 | -1.80 pp (95% interval -2.40 to -1.20 pp) | +8.85 pp (95% interval +5.99 to +11.70 pp) |
+
+Next three (primary): age has a negative conditional association. Next three (primary): prior experience has a positive conditional association. Next match (secondary): age has a negative conditional association. Next match (secondary): prior experience has a positive conditional association.
+
+The separate primary next-three interactions are +0.03 pp (95% interval -0.29 to +0.35 pp) per age year and +1.08 pp (95% interval -0.50 to +2.66 pp) per log-experience unit. The nonoverlapping rows use the existing sensitivity rule and model.
+
+**Q1 support/selection.** Among 24,021 common top-50, known-rank losses (345 players), only 52 combine age under 23 with 300+ prior matches, and 34 combine age 30+ with fewer than 100. The primary design is full rank (40/40), but age/log-experience correlation is 0.709; sparse combinations limit practical overlap. [Cross-tabulations](../validation/q1_q2_checks/q1_support.csv) and [conditioning diagnostics](../validation/q1_q2_checks/q1_model_diagnostics.csv) document this without an arbitrary failure cutoff.
+
+| Loss type | Index events / players | Usable next match | Complete next three | Adjusted next match | Adjusted next three |
+| --- | --- | --- | --- | --- | --- |
+| other_ranked_loss | 16,485 / 339 | 14550 | 12661 | 14524 | 12610 |
+| ranking_upset | 7,536 / 326 | 6695 | 5885 | 6682 | 5861 |
+
+For next-three windows, 77 events lack enough recorded follow-ups, 0 are blocked by unresolved records, 5,398 contain excluded/ambiguous follow-ups, and 75 otherwise available windows lack model covariates. End of recorded history does not establish retirement or administrative study-end censoring. Missing outcomes stay missing. Omitted cases have stronger mean pre-loss rankings (26.05 versus 27.89; lower is better) and higher recent form (0.604 versus 0.589). [Group retention denominators/reasons](../validation/q1_q2_checks/q1_retention.csv) and [age/experience, rank and form distributions](../validation/q1_q2_checks/q1_distributions.csv) therefore warrant caution about selection.
+
+**Q2: paired prediction-error differences.** Positive Brier improvement means lower prediction error for the second model, not a percentage-point rise in winning chances. REPEAT uses `prior_h2h_meetings >= 1`; FIRST uses zero prior meetings. Both methods use the same paired differences and frozen predictions, without subset refits:
+
+| Subset | Comparison | Matches / players / pairs | Brier improvement | Pair bootstrap 95% | Shared-player dyadic 95% |
+| --- | --- | --- | --- | --- | --- |
+| ALL | Baseline → count | 11,340 / 512 / 7,824 | -0.000021 | [-0.000091, +0.000039] | [-0.000065, +0.000022] |
+| ALL | Baseline → H2H results | 11,340 / 512 / 7,824 | +0.000586 | [+0.000095, +0.001019] | [+0.000149, +0.001023] |
+| ALL | Count → H2H results | 11,340 / 512 / 7,824 | +0.000607 | [+0.000113, +0.001039] | [+0.000174, +0.001041] |
+| REPEAT | Baseline → count | 4,880 / 258 / 3,022 | -0.000048 | [-0.000133, +0.000021] | [-0.000121, +0.000024] |
+| REPEAT | Baseline → H2H results | 4,880 / 258 / 3,022 | +0.001056 | [+0.000093, +0.001883] | [+0.000058, +0.002054] |
+| REPEAT | Count → H2H results | 4,880 / 258 / 3,022 | +0.001105 | [+0.000128, +0.001943] | [+0.000115, +0.002094] |
+| FIRST | Baseline → count | 6,460 / 510 / 6,460 | -0.000001 | [-0.000097, +0.000086] | [-0.000086, +0.000084] |
+| FIRST | Baseline → H2H results | 6,460 / 510 / 6,460 | +0.000231 | [+0.000096, +0.000378] | [+0.000060, +0.000402] |
+| FIRST | Count → H2H results | 6,460 / 510 / 6,460 | +0.000232 | [+0.000102, +0.000371] | [+0.000083, +0.000381] |
+
+The added dyadic sandwich accounts for either shared player and repeated pairs, with 1/n² mean scaling, no finite-sample multiplier and normal intervals. Insufficient support or invalid variance withholds inference. The original pair bootstrap uses 500 draws, seed 42. [Paired estimates/SEs/statuses](../validation/q1_q2_checks/q2_comparisons.csv), [Brier and secondary scores](../validation/q1_q2_checks/q2_scores.csv), and [original finer groups](../outputs_final/q2_model_metrics.csv) are retained. First-meeting gains can reflect different global fitted coefficients, not benefits from nonexistent prior meetings.
+
+ALL, Baseline → count: both methods leave the direction uncertain. ALL, Baseline → H2H results: both methods support lower prediction error. REPEAT, Baseline → count: both methods leave the direction uncertain. REPEAT, Baseline → H2H results: both methods support lower prediction error.
+
+**Chronology and remaining limits.** The existing screen flags candidate-event exposure in 3,222/18,471 primary Q1 windows for their focal player, 565/11,340 Q2 evaluation matches for either participant, and 2,387/11,340 Q2 matches through either player’s last-ten eligible history. [Traceable counts](../validation/q1_q2_checks/chronology_summary.csv) use tournament-week/round order, not verified match dates. These are candidate overlaps, not proven errors; no dates or replacement windows were invented.
+
+Q1 remains a complete-case conditional association. Focal-player clustering does not remove follow-up selection, persistent player-level confounding or all shared-opponent dependence; adjustment for subsequent context prevents a simple causal recovery interpretation. Match outcomes do not measure psychological recovery. Q2 dyadic intervals assume negligible dependence between disjoint pairs; tournament shocks may remain. Both Q2 methods condition on fitted models/period, omit training uncertainty, and do not establish causal or universal gains or performance in a new era. The existing primary results and Q3 validation are preserved.
+
+Separate validation: `q1-q2-checks-20261116T222522Z`; [validation manifest](../validation/q1_q2_checks/manifest.json).
+
+
 ### Opponent handedness
 
-We found no clear evidence of an adjusted difference against left- versus right-handed opponents in either focal-hand group. Adjusted opponent-left-minus-right win-probability differences were +1.11 pp (95% interval -0.86 to +3.08 pp) for 365 right-handed focal players and +0.99 pp (95% interval -0.63 to +2.62 pp) for 55 left-handed focal players. For right-handed players, the interval includes zero; for left-handed players, the interval includes zero. The results do not establish a uniform handedness advantage. Dyadic intervals account for matches sharing either participant; the smaller left-handed subgroup and remaining event/network dependence warrant caution.
+**Primary analysis.** We found no clear evidence of an adjusted difference against left- versus right-handed opponents in either focal-hand group. Adjusted opponent-left-minus-right win-probability differences were +1.11 pp (95% interval -0.86 to +3.08 pp) for 365 right-handed focal players and +0.99 pp (95% interval -0.63 to +2.62 pp) for 55 left-handed focal players. For right-handed players, the interval includes zero; for left-handed players, the interval includes zero. The results do not establish a uniform handedness advantage. Dyadic intervals account for matches sharing either participant; the smaller left-handed subgroup and remaining event/network dependence warrant caution.
 
 Source: [`q3_adjusted_contrasts.csv`](../outputs_final/q3_adjusted_contrasts.csv), method=dyadic_primary; run `20261027T121134Z-20f069d1`.
 
@@ -68,6 +123,30 @@ Unadjusted service comparisons use valid point totals and equal-player differenc
 | R | 371 | 13219 | 86506 | 370 | 0.869 | 1,058,530.000 | 6,961,834.000 |
 
 Source: [`q3_descriptive_contrasts.csv`](../outputs_final/q3_descriptive_contrasts.csv), all rows; run `20261027T121134Z-20f069d1`.
+
+### Opponent comparability
+
+Unequal counts do not automatically invalidate this comparison. Ranking and prior-form adjustment are already present, but do not guarantee comparable observations. This separate check reconstructs the exact adjusted sample: 11,071 player × surface × season strata, with 14,851 left-opponent and 97,652 right-opponent observations (61,412 physical matches; 420 focal players). Player-match observations, physical matches, focal players and distinct opponents are counted separately in the [detailed check](../validation/q3_comparability/DETAILS.md); totals across groups overlap.
+
+Left-opponent historical rank has median 57 (middle half 33–95), versus 51 (22–88) for right opponents; lower rank numbers indicate higher rankings. 6,271/11,071 strata contain both hands, covering 14,579/14,851 (98.2%) left and 78,743/97,652 (80.6%) right observations. 5,608 both-hand strata have fewer than five observations in at least one hand; 1,091 have no pair meeting both rank calipers. Sparse observations and absent comparable observations are different limitations. Only 78.5% of left and 32.1% of right observations have such a candidate. A shared season does not ensure identical conditions.
+
+Coverage remained uncertain, so **one matched sensitivity** used the [outcome-blind recorded rule](../validation/q3_comparability/protocol.json): same player, surface and season; both focal and opponent ranks within a factor of 1.5; nearest summed log-rank differences, without replacement, with stable-ID ties. The caliper is pragmatic, not universal. Original opportunity/support checks and shared-player dyadic uncertainty were retained. The refit retains 21,266 observations, 19,499 physical matches and 330 players: 71.6% of original left-opponent and 10.9% of right-opponent observations. See [retention by focal hand](../validation/q3_comparability/retention.csv).
+
+| Focal hand | Primary L-minus-R | Matched sensitivity |
+| --- | --- | --- |
+| R | +1.11 pp (95% interval -0.86 to +3.08 pp) | +0.62 pp (95% interval -1.18 to +2.42 pp) |
+| L | +0.99 pp (95% interval -0.63 to +2.62 pp) | -0.13 pp (95% interval -3.20 to +2.94 pp) |
+
+Right-handed: the point estimate keeps its direction; the interval is narrower and includes zero. Left-handed: the point estimate changes direction; the interval is wider and includes zero.
+
+The mean log-opponent-rank gap (L-minus-R) falls from 0.163 to 0.000. Prior-form gaps fall from -0.009 to -0.002 for focal players and -0.024 to -0.008 for opponents. Form is a prior win proportion; see [full rank/form balance](../validation/q3_comparability/balance.csv).
+
+The matched covariance matrix is indefinite; both reported contrast variances are positive. Under the unchanged safeguards their intervals remain available but exploratory; no variance repair was applied.
+
+Rankings imperfectly measure strength; restrictions select a narrower sample and do not remove all form or playing-condition differences. This remains observational, not causal. **Primary Q1/Q2/Q3 results are preserved.** [Normalized rank plot](../validation/q3_comparability/rank_distributions.png) · [Within-player coverage](../validation/q3_comparability/within_player_coverage.png) · [Summary table](../validation/q3_comparability/compact_summary.csv) · [Detailed distributions and limitations](../validation/q3_comparability/DETAILS.md) · [Validation provenance](../validation/q3_comparability/manifest.json).
+
+Separate validation: `q3-comparability-20261110T065912Z`; [validation manifest](../validation/q3_comparability/manifest.json).
+
 
 ## Sensitivity checks
 

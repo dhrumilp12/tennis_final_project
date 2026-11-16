@@ -74,8 +74,23 @@ def test_final_notebook_executed_same_run_and_source_hashes_match():
     assert evidence['run_id']==summary['run_id']
     assert evidence['execution_errors']==0 and evidence['fresh_kernel']
     assert evidence['executed_code_cells']==len(cells)
-    # The saved notebook is an execution artifact, not newly manufactured output.
-    assert sha256('Tennis_Project.ipynb') == evidence['notebook_sha256']
+    # Later Markdown may explain a separate validation, but original cells,
+    # code and execution outputs remain the historical execution artifact.
+    if sha256('Tennis_Project.ipynb') != evidence['notebook_sha256']:
+        from tennis_reporting import canonical_cell_hash, supplemental_validation, SUPPLEMENTAL_CELL_ID
+        _, reference, _ = supplemental_validation(output, Path('.'), summary)
+        assert reference is not None
+        folder = Path('validation/q1_q2_checks')
+        baseline = json.loads((folder/'baseline.json').read_text())
+        historical = json.loads((folder/'historical_notebook_cells.json').read_text())
+        assert baseline['notebook_sha256'] == historical['source_notebook_sha256'] == evidence['notebook_sha256']
+        count = historical['historical_cell_count']
+        assert [canonical_cell_hash(c) for c in notebook['cells'][:count]] == historical['canonical_cell_hashes']
+        assert len(notebook['cells']) == count + 1
+        appended = notebook['cells'][count]
+        assert appended['cell_type'] == 'markdown' and appended['id'] == SUPPLEMENTAL_CELL_ID
+        import nbformat
+        nbformat.validate(nbformat.from_dict(notebook))
     source_hashes = summary['code']['source_hashes']
     changed = {name for name, digest in source_hashes.items() if sha256(name) != digest}
     if changed:
@@ -91,7 +106,25 @@ def test_final_notebook_executed_same_run_and_source_hashes_match():
         assert set(declared) == changed
         for name, hashes in declared.items():
             assert hashes['analysis_sha256'] == source_hashes[name]
-            assert hashes['cleanup_sha256'] == sha256(name)
+            if hashes['cleanup_sha256'] != sha256(name):
+                # A later, separately recorded reporting revision must not
+                # rewrite the historical cleanup or analysis-run evidence.
+                from tennis_reporting import comparability_validation, supplemental_validation
+                supplement = Path('validation/q1_q2_checks/manifest.json')
+                if supplement.exists():
+                    _, reference, _ = supplemental_validation(output, Path('.'), summary)
+                    validation = json.loads(supplement.read_text())
+                    # Q3 evidence and its earlier code version stay historical.
+                    baseline = json.loads((supplement.parent/'baseline.json').read_text())
+                    for path, digest in baseline['preserved_q3_hashes'].items():
+                        assert sha256(path) == digest
+                else:
+                    _, reference = comparability_validation(output, Path('.'), summary)
+                    validation = json.loads(Path('validation/q3_comparability/manifest.json').read_text())
+                assert reference is not None
+                assert validation['source_run_id'] == summary['run_id']
+                assert validation['source_run_summary_sha256'] == sha256(output/'run_summary.json')
+                assert validation['code_hashes'][name] == sha256(name)
         protected = cleanup['authoritative_outputs_sha256']
         expected = {str(output / r['path']) for r in summary['output_inventory']}
         expected.add(str(output / 'run_summary.json'))

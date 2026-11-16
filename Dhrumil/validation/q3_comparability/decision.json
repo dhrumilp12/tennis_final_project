@@ -1,0 +1,39 @@
+{
+  "sensitivity_needed": true,
+  "outcomes_examined_for_decision": false,
+  "reason": "Within-player coverage remains uncertain under the recorded descriptive thresholds.",
+  "coverage": [
+    {
+      "player_hand": "all",
+      "opponent_hand": "L",
+      "player_match_rows": 14851,
+      "strata": 11071,
+      "both_hand_strata": 6271,
+      "one_hand_strata": 4800,
+      "no_rank_candidate_strata": 1091,
+      "sparse_both_hand_strata": 5608,
+      "both_hand_rows": 14579,
+      "adequately_observed_rows": 4026,
+      "rank_candidate_rows": 11660,
+      "both_hand_share": 0.981684735,
+      "adequately_observed_share": 0.2710928557,
+      "rank_candidate_share": 0.7851323143
+    },
+    {
+      "player_hand": "all",
+      "opponent_hand": "R",
+      "player_match_rows": 97652,
+      "strata": 11071,
+      "both_hand_strata": 6271,
+      "one_hand_strata": 4800,
+      "no_rank_candidate_strata": 1091,
+      "sparse_both_hand_strata": 5608,
+      "both_hand_rows": 78743,
+      "adequately_observed_rows": 16203,
+      "rank_candidate_rows": 31356,
+      "both_hand_share": 0.8063634129,
+      "adequately_observed_share": 0.1659259411,
+      "rank_candidate_share": 0.3210994142
+    }
+  ]
+}

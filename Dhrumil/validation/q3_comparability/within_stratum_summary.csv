@@ -1,0 +1,4 @@
+measure,strata_with_at_least_5_per_hand,strata_with_overlapping_middle_50_percent,median_within_stratum_ECDF_distance,median_absolute_within_stratum_median_difference
+player_rank,663,645,0.28214285714285714,2.0
+opponent_rank,663,626,0.37777777777777777,16.5
+log_rank_advantage,663,623,0.375,0.3572630062902867

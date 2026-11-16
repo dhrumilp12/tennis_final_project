@@ -1,0 +1,33 @@
+{
+  "source_run_id": "20261027T121134Z-20f069d1",
+  "adjusted_sample": {
+    "player_match_rows": 112503,
+    "unique_matches": 61412,
+    "focal_players": 420,
+    "distinct_opponents": 1252
+  },
+  "minimum_opportunities_per_hand": 10,
+  "sensitivity_needed": true,
+  "sensitivity_executed": true,
+  "sensitivity_sample": {
+    "player_match_rows": 21266,
+    "unique_matches": 19499,
+    "focal_players": 330,
+    "distinct_opponents": 791
+  },
+  "checks_executed": {
+    "exact_ordered_ids_match_original_sampler": true,
+    "directed_observation_ids_unique": true,
+    "historical_summary_counts_match": true,
+    "historical_subgroup_support_matches": true,
+    "historical_exposure_player_ids_and_counts_match": true,
+    "historical_ranks_finite_and_positive": true,
+    "saved_log_rank_advantage_matches_historical_rank_ratio": true,
+    "ordered_sample_ids_sha256": "0b708cc7a0178dff6d427d62832835c439d8c7f1e52d8c94a5663063be278c26",
+    "adjusted_player_match_rows": 112503,
+    "adjusted_unique_matches": 61412,
+    "adjusted_players": 420,
+    "verification_scope": "Exact ordered (player_id, match_id) equality with the unchanged historical sampler, plus historical summary/support/exposure checks. The historical run did not save an explicit adjusted row-ID list; no historical manifest was amended.",
+    "all_historical_output_hashes_unchanged": true
+  }
+}

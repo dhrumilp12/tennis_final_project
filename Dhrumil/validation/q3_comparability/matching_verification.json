@@ -1,0 +1,27 @@
+{
+  "source_run_id": "20261027T121134Z-20f069d1",
+  "reproduction_command": "python -m pytest tests/test_q3_matching.py::test_saved_matching_selection_and_original_ids -q",
+  "checks_executed": {
+    "saved_pairs_equal_predictors_only_reconstruction": true,
+    "all_pair_ids_exist_in_original_adjusted_sample": true,
+    "both_opponent_hands_correct": true,
+    "same_focal_player_surface_and_season": true,
+    "both_original_rank_ratios_at_most_1_5": true,
+    "stored_log_rank_differences_recomputed": true,
+    "no_directed_observation_reused": true,
+    "analysis_ids_exactly_reapply_original_opportunity_minimum": true,
+    "original_focal_opponent_and_match_ids_preserved": true,
+    "outcomes_or_sensitivity_contrasts_loaded": false,
+    "model_refitted": false
+  },
+  "counts": {
+    "pairs": 11296,
+    "selected_player_match_rows": 22592,
+    "selected_focal_players": 420,
+    "selected_unique_matches": 20540,
+    "analyzed_player_match_rows": 21266,
+    "analyzed_focal_players": 330,
+    "analyzed_unique_matches": 19499,
+    "minimum_opportunities_per_hand": 10
+  }
+}

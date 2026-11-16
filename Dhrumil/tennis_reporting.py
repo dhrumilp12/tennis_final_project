@@ -2,12 +2,155 @@
 from __future__ import annotations
 import argparse
 import json
+import os
+import re
 from pathlib import Path
 import numpy as np
 import pandas as pd
 from tennis_repro import verify_output, sha256
 
 TEAM = 'Phouvadeth Vathana, Joseph Bronyah, Dhrumil Patel'
+
+
+def _validation_bundle(output, root, summary, name, label, required):
+    """Verify later evidence without changing the historical run inventory."""
+    folder = Path(root) / 'validation' / name
+    manifest_path = folder / 'manifest.json'
+    if not manifest_path.exists():
+        return None
+    manifest = json.loads(manifest_path.read_text())
+    if (manifest['source_run_id'] != summary['run_id'] or
+            manifest['source_run_summary_sha256'] != sha256(Path(output) / 'run_summary.json')):
+        raise ValueError(f'{label} validation belongs to a different source run.')
+    artifacts = manifest['artifacts']
+    if not set(required) <= artifacts.keys():
+        raise ValueError(f'{label} validation is missing report/summary evidence.')
+    for name, digest in artifacts.items():
+        path = (folder / name).resolve()
+        if not path.is_relative_to(folder.resolve()):
+            raise ValueError(f'{label} artifact escapes its folder: {name}')
+        if not path.is_file() or sha256(path) != digest:
+            raise ValueError(f'{label} artifact hash mismatch: {name}')
+    reference = {
+        'validation_id': manifest['validation_id'],
+        'source_run_id': manifest['source_run_id'],
+        'source_run_summary_sha256': manifest['source_run_summary_sha256'],
+        'manifest': Path(os.path.relpath(manifest_path, Path(root) / 'reports')).as_posix(),
+        'manifest_sha256': sha256(manifest_path),
+        'artifacts': artifacts,
+        'claim_sources': list(required),
+    }
+    return folder, manifest, reference
+
+
+def _validation_markdown(folder, manifest, filename, destination_folder, label):
+    """Rebase verified evidence links for reports, README or notebook Markdown."""
+    text = (folder / filename).read_text().strip()
+    def rebase_link(match):
+        destination = match.group(1)
+        if re.match(r'[a-zA-Z][a-zA-Z0-9+.-]*:', destination) or destination.startswith('#'):
+            return match.group(0)
+        filename, separator, fragment = destination.partition('#')
+        target = (folder / filename).resolve()
+        if not target.is_file():
+            raise ValueError(f'Broken {label} report link: {destination}')
+        if target.is_relative_to(folder.resolve()):
+            relative = target.relative_to(folder.resolve()).as_posix()
+            if relative != 'manifest.json' and relative not in manifest['artifacts']:
+                raise ValueError(f'Uninventoried {label} report link: {destination}')
+        rebased = Path(os.path.relpath(target, destination_folder)).as_posix()
+        return '](' + rebased + (separator + fragment if separator else '') + ')'
+    return re.sub(r'\]\(([^)]+)\)', rebase_link, text)
+
+
+def comparability_validation(output, root, summary):
+    """Regenerate one Q3 section from separately verified validation evidence."""
+    bundle = _validation_bundle(output, root, summary, 'q3_comparability',
+                                'Q3 comparability', ['REPORT.md', 'summary.json'])
+    if bundle is None:
+        return '', None
+    folder, manifest, reference = bundle
+    report = _validation_markdown(folder, manifest, 'REPORT.md', Path(root) / 'reports',
+                                  'Q3 comparability')
+    section = ('### Opponent comparability\n\n' + report + '\n\n'
+               f'Separate validation: `{manifest["validation_id"]}`; '
+               f'[validation manifest]({reference["manifest"]}).\n')
+    return section, reference
+
+
+def supplemental_validation(output, root, summary):
+    """Load separately produced Q1/Q2 findings for the reports and overview."""
+    bundle = _validation_bundle(output, root, summary, 'q1_q2_checks',
+                                'Q1/Q2 supplemental',
+                                ['REPORT.md', 'summary.json', 'README_FINDINGS.md'])
+    if bundle is None:
+        return '', None, ''
+    folder, manifest, reference = bundle
+    report = _validation_markdown(folder, manifest, 'REPORT.md', Path(root) / 'reports',
+                                  'Q1/Q2 supplemental')
+    brief = _validation_markdown(folder, manifest, 'README_FINDINGS.md', Path(root),
+                                 'Q1/Q2 supplemental')
+    section = ('### Supplemental Q1/Q2 validation\n\n' + report + '\n\n'
+               f'Separate validation: `{manifest["validation_id"]}`; '
+               f'[validation manifest]({reference["manifest"]}).\n')
+    return section, reference, brief
+
+
+SUPPLEMENTAL_CELL_ID = 'q1-q2-supplemental-validation'
+
+
+def canonical_cell_hash(cell):
+    import hashlib
+    return hashlib.sha256(json.dumps(cell, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+
+
+def update_supplemental_notebook(output, root, summary):
+    """Append/update only tagged Markdown; preserve all historical execution cells."""
+    import copy
+    import nbformat
+    root = Path(root)
+    path = root / 'Tennis_Project.ipynb'
+    if not path.exists():
+        return
+    bundle = _validation_bundle(output, root, summary, 'q1_q2_checks',
+                                'Q1/Q2 supplemental',
+                                ['REPORT.md', 'summary.json', 'README_FINDINGS.md',
+                                 'baseline.json', 'historical_notebook_cells.json'])
+    if bundle is None:
+        return
+    folder, manifest, _ = bundle
+    historical = json.loads((folder / 'historical_notebook_cells.json').read_text())
+    baseline = json.loads((folder / 'baseline.json').read_text())
+    if baseline['notebook_sha256'] != historical['source_notebook_sha256']:
+        raise ValueError('Supplemental notebook baseline hashes disagree.')
+    notebook = json.loads(path.read_text())
+    count = historical['historical_cell_count']
+    original_cells = notebook['cells'][:count]
+    if [canonical_cell_hash(c) for c in original_cells] != historical['canonical_cell_hashes']:
+        raise ValueError('Historical notebook cells changed; supplemental update refused.')
+    candidates = [i for i, cell in enumerate(notebook['cells'])
+                  if cell.get('id') == SUPPLEMENTAL_CELL_ID]
+    if len(candidates) > 1 or (candidates and candidates[0] < count):
+        raise ValueError('Invalid duplicate or historical supplemental notebook cell.')
+    if candidates and notebook['cells'][candidates[0]]['cell_type'] != 'markdown':
+        raise ValueError('Supplemental notebook cell must remain Markdown.')
+    report = _validation_markdown(folder, manifest, 'REPORT.md', root, 'Q1/Q2 supplemental')
+    manifest_link = Path(os.path.relpath(folder / 'manifest.json', root)).as_posix()
+    text = ('## Supplemental Q1/Q2 validation\n\n'
+            'Added after the historical execution. The preceding cells, code and saved outputs '
+            'remain the original run; this Markdown records a separate validation without '
+            'rerunning notebook code.\n\n' + report + '\n\n'
+            f'Validation: `{manifest["validation_id"]}`; [manifest]({manifest_link}).\n')
+    cell = {'cell_type': 'markdown', 'id': SUPPLEMENTAL_CELL_ID,
+            'metadata': {'tags': ['supplemental-q1-q2-validation']},
+            'source': text.splitlines(keepends=True)}
+    if candidates:
+        notebook['cells'][candidates[0]] = cell
+    else:
+        notebook['cells'].append(cell)
+    nbformat.validate(nbformat.from_dict(copy.deepcopy(notebook)))
+    assert notebook['cells'][:count] == original_cells
+    path.write_text(json.dumps(notebook, indent=1, ensure_ascii=False) + '\n')
 
 
 def markdown_table(frame, columns=None, digits=3):
@@ -200,6 +343,11 @@ def generate_reports(output='outputs_final', root='.'):
             return incomplete_reports(output,root,availability)
     s,answers=findings(output); rid=s['run_id']
     reports=root/'reports';reports.mkdir(parents=True,exist_ok=True)
+    comparability, validation_reference = comparability_validation(output, root, s)
+    supplemental, supplemental_reference, supplemental_brief = supplemental_validation(output, root, s)
+    q1_answer = ('**Historical primary analysis.** ' if supplemental_reference else '') + answers[0]
+    q2_answer = ('**Historical primary analysis.** ' if supplemental_reference else '') + answers[1]
+    q3_answer = ('**Primary analysis.** ' if validation_reference else '') + answers[2]
     read=lambda n: pd.read_csv(output/f'{n}.csv')
     # Relative links keep the project portable as a submission directory.
     import os
@@ -207,7 +355,11 @@ def generate_reports(output='outputs_final', root='.'):
     readme_prefix=os.path.relpath(output,root)
     def source(name, selector='all rows'):
         return f'Source: [`{name}.csv`]({prefix}/{name}.csv), {selector}; run `{rid}`.'
-    banner=f'Run ID: `{rid}`. Generated from verified outputs; all numerical claims below refer to this run.\n'
+    banner=f'Run ID: `{rid}`. Generated from verified outputs; primary numerical claims below refer to this run.\n'
+    if validation_reference:
+        banner += 'The separately labeled opponent-comparability validation was produced later.\n'
+    if supplemental_reference:
+        banner += 'The supplemental Q1/Q2 validation is separate from the historical primary analysis.\n'
     q1=read('q1_adjusted_contrasts');q1overall=read('q1_summary_overall');q2=read('q2_model_metrics');q3=read('q3_adjusted_contrasts')
     primary=q1.loc[q1['subgroup'].eq('all')]
     metrics=q2.loc[q2.meeting_group.eq('all')]
@@ -221,7 +373,7 @@ The study uses **{s['eligible_analysis_matches']:,} eligible physical matches** 
 
 ## 1. Performance after ranking upsets
 
-{answers[0]}
+{q1_answer}
 
 {source('q1_adjusted_contrasts','sample=all_windows, subgroup=all; average and age/experience interaction rows')}
 
@@ -241,7 +393,7 @@ The non-overlapping-window check greedily retains the earliest available complet
 
 ## 2. Do previous meetings improve prediction?
 
-{answers[1]}
+{q2_answer}
 
 {source('q2_paired_improvements','metric=brier; first_model=baseline')}
 
@@ -253,9 +405,11 @@ Training used {s['q2']['training_matches']:,} matches, with a 21-day exclusion g
 
 The same generated table contains results by zero, one, two-to-four and five-plus prior meetings. [`q2_paired_improvements.csv`]({prefix}/q2_paired_improvements.csv) includes paired Brier, log-loss and accuracy intervals for all three model comparisons. [`q2_calibration.csv`]({prefix}/q2_calibration.csv) gives fixed-bin denominators and observed versus predicted rates.
 
+{supplemental}
+
 ## 3. Does opponent handedness matter?
 
-{answers[2]}
+{q3_answer}
 
 {source('q3_adjusted_contrasts','method=dyadic_primary; player_hand=R and L')}
 
@@ -269,6 +423,8 @@ These equal-player service and match summaries are **unadjusted**, not evidence 
 
 The original player-by-match covariance still has {s['q3']['legacy_two_way_negative_variance_terms']} negative coefficient variance term(s). It is retained as a sensitivity with unavailable affected intervals, never replaced by zero or an absolute value. The primary dyadic method uses dependence through either player and includes absorbed fixed-effect degrees of freedom. Left-handed contrasts use the coefficient sum and **the full covariance including its cross term**. See [`q3_inference_sensitivity.csv`]({prefix}/q3_inference_sensitivity.csv), [`q3_subgroup_support.csv`]({prefix}/q3_subgroup_support.csv), and [`q3_player_influence.csv`]({prefix}/q3_player_influence.csv).
 
+{comparability}
+
 ## Interpretation limits
 
 These are exploratory observational results. Ranking upsets are a ranking-based operational definition, not a measure of surprise or psychological recovery. Tournament-week dates and checked rounds approximate chronology; exact match days and recovery durations are unavailable. Missing follow-up is missing, never zero wins. Player and pair intervals do not remove every source of dependence, selection bias or unmeasured confounding. All thresholds, including rank gaps 20, 30 and 50, are reported rather than selected for a preferred finding.
@@ -278,9 +434,10 @@ These are exploratory observational results. Ranking upsets are a ranking-based 
     ledger=pd.read_csv(output/'unresolved_event_ledger.csv')
     checks=read('spotcheck_evidence')
     overlap = s.get('chronology', {})
+    historical_banner = f'Run ID: `{rid}`. Generated from verified outputs; all numerical claims below refer to this run.\n'
     dq=f'''# Data quality and reconstruction audit
 
-{banner}
+{historical_banner}
 The authoritative run contains {s['eligible_analysis_matches']:,} eligible unique study matches. No count target was enforced. Subgroup support and dependent observations still constrain inference. Source: [`run_summary.json`]({prefix}/run_summary.json), `eligible_analysis_matches`. Historical baseline checks remain in `validation/baseline_audit.json` and `validation/final_checks.json`; they do not imply an `outputs/` directory is included in this clone.
 
 ## Attrition and units
@@ -380,13 +537,13 @@ The original focal-player × physical-match covariance omitted cross-role/shared
 
 ### Performance following ranking upsets
 
-{answers[0]}
+{q1_answer}
 
 {source('q1_adjusted_contrasts','sample=all_windows, subgroup=all')}
 
 ### Previous meetings and prediction
 
-{answers[1]}
+{q2_answer}
 
 {source('q2_paired_improvements','metric=brier, first_model=baseline')}
 
@@ -394,9 +551,11 @@ The original focal-player × physical-match covariance omitted cross-role/shared
 
 {source('q2_model_metrics','meeting_group=all')}
 
+{supplemental}
+
 ### Opponent handedness
 
-{answers[2]}
+{q3_answer}
 
 {source('q3_adjusted_contrasts','method=dyadic_primary')}
 
@@ -405,6 +564,8 @@ Unadjusted service comparisons use valid point totals and equal-player differenc
 {markdown_table(desc,['player_hand','players','matches_vs_L','matches_vs_R','service_eligible_players','mean_player_service_difference_pp','service_points_vs_L','service_points_vs_R'],3)}
 
 {source('q3_descriptive_contrasts')}
+
+{comparability}
 
 ## Sensitivity checks
 
@@ -449,8 +610,18 @@ Use the commands in [README.md](../README.md). [`run_summary.json`]({prefix}/run
     (reports/'FINAL_REPORT.md').write_text(final)
     claims={'run_id':rid,'output_directory':str(output),'answers':answers,
             'tables':{n:json.loads(read(n).to_json(orient='records',double_precision=15)) for n in ['q1_summary_overall','q1_adjusted_contrasts','q2_model_metrics','q2_paired_improvements','q3_adjusted_contrasts','q3_descriptive_contrasts']}}
+    validations = {}
+    if validation_reference:
+        validations['q3_comparability'] = validation_reference
+    if supplemental_reference:
+        validations['q1_q2_checks'] = supplemental_reference
+    if validations:
+        claims['separate_validations'] = validations
     (reports/'report_claims.json').write_text(json.dumps(claims,indent=2,allow_nan=False))
-    (reports/'report_manifest.json').write_text(json.dumps({'run_id':rid,'outputs_summary_sha256':sha256(output/'run_summary.json'),'files':{p.name:sha256(p) for p in sorted(reports.iterdir()) if p.is_file() and p.name!='report_manifest.json'}},indent=2))
+    report_manifest = {'run_id':rid,'outputs_summary_sha256':sha256(output/'run_summary.json'),'files':{p.name:sha256(p) for p in sorted(reports.iterdir()) if p.is_file() and p.name!='report_manifest.json'}}
+    if validations:
+        report_manifest['separate_validations'] = validations
+    (reports/'report_manifest.json').write_text(json.dumps(report_manifest,indent=2))
     first=one(q1,outcome='next3_win_rate',sample='all_windows',contrast='average_upset_minus_ordinary',subgroup='all')
     comparisons=read('q2_paired_improvements')
     count=one(comparisons,first_model='baseline',second_model='plus_meeting_count',metric='brier')
@@ -475,7 +646,13 @@ Use the commands in [README.md](../README.md). [`run_summary.json`]({prefix}/run
            f'Source rows: [`q1_adjusted_contrasts.csv`]({readme_prefix}/q1_adjusted_contrasts.csv), primary average and age/experience interactions; '
            f'[`q2_paired_improvements.csv`]({readme_prefix}/q2_paired_improvements.csv), baseline Brier comparisons; '
            f'[`q3_adjusted_contrasts.csv`]({readme_prefix}/q3_adjusted_contrasts.csv), both focal hands.')
+    if supplemental_reference:
+        brief = ('**Historical primary analysis.** The overview below reports the preserved original models; '
+                 'the supplemental Q1/Q2 checks follow separately.\n\n' + brief +
+                 '\n\n**Supplemental Q1/Q2 validation.**\n\n' + supplemental_brief)
     write_readme_findings(root, s, brief)
+    if supplemental_reference:
+        update_supplemental_notebook(output, root, s)
     return s,answers
 
 

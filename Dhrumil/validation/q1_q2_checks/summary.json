@@ -1,0 +1,132 @@
+{
+  "source_run_id": "20261027T121134Z-20f069d1",
+  "q1": {
+    "checks": {
+      "original_four_models_reexecuted_from_saved_events": true,
+      "exact_ordered_event_and_followup_ids_match": true,
+      "coefficients_standard_errors_and_intervals_match": true,
+      "historical_contrasts_and_model_counts_match": true,
+      "no_silent_formula_row_drops": true,
+      "retention_reason_counts_sum_to_denominators": true,
+      "numerical_rtol": 1e-09,
+      "numerical_atol": 1e-10
+    },
+    "common_population": {
+      "events": 24021,
+      "players": 345
+    },
+    "models": [
+      {
+        "outcome": "next3_win_rate",
+        "sample": "all_windows",
+        "events": 18471,
+        "players": 341,
+        "upset_events": 5861,
+        "upset_players": 316,
+        "formula": "next3_win_rate ~ ranking_upset * (age_centered + log_experience) + recent_win_rate + log_player_rank + context_rank_advantage + followup_clay_share + followup_grass_share + followup_carpet_share + followup_best_of_5_share + C(surface) + C(season)"
+      },
+      {
+        "outcome": "next3_win_rate",
+        "sample": "nonoverlapping",
+        "events": 9684,
+        "players": 341,
+        "upset_events": 2498,
+        "upset_players": 290,
+        "formula": "next3_win_rate ~ ranking_upset * (age_centered + log_experience) + recent_win_rate + log_player_rank + context_rank_advantage + followup_clay_share + followup_grass_share + followup_carpet_share + followup_best_of_5_share + C(surface) + C(season)"
+      },
+      {
+        "outcome": "next1_win",
+        "sample": "all_windows",
+        "events": 21206,
+        "players": 345,
+        "upset_events": 6682,
+        "upset_players": 321,
+        "formula": "next1_win ~ ranking_upset * (age_centered + log_experience) + recent_win_rate + log_player_rank + context_rank_advantage + C(next1_surface) + C(next1_best_of) + C(surface) + C(season)"
+      },
+      {
+        "outcome": "next1_win",
+        "sample": "nonoverlapping",
+        "events": 16263,
+        "players": 345,
+        "upset_events": 4353,
+        "upset_players": 308,
+        "formula": "next1_win ~ ranking_upset * (age_centered + log_experience) + recent_win_rate + log_player_rank + context_rank_advantage + C(next1_surface) + C(next1_best_of) + C(surface) + C(season)"
+      }
+    ],
+    "original_analysis_status": "fitted_with_limitations",
+    "uncertainty": "Original focal-player cluster sandwich; full covariance for sums; t critical value with players minus one df.",
+    "interpretation": "Post-upset sums describe age/experience associations after upset losses; interactions describe their difference from ordinary-loss associations. Neither is causal."
+  },
+  "q2": {
+    "checks": {
+      "saved_prediction_schema_valid": true,
+      "unique_physical_matches": true,
+      "probabilities_finite_in_unit_interval": true,
+      "binary_outcomes": true,
+      "valid_distinct_participant_ids_and_fixed_player_a_orientation": true,
+      "canonical_pair_ids": true,
+      "nonnegative_integer_prior_meetings": true,
+      "dates_within_test_period": true,
+      "exact_test_ids_history_and_outcomes_match_saved_features": true,
+      "all_nine_historical_pair_bootstrap_comparisons_reproduced": true,
+      "historical_all_model_scores_reproduced": true,
+      "repeat_and_first_subsets_partition_all_by_prior_meetings_only": true,
+      "models_refitted": false
+    },
+    "counts": [
+      {
+        "subset": "ALL",
+        "n_matches": 11340,
+        "players": 512,
+        "pairs": 7824
+      },
+      {
+        "subset": "REPEAT",
+        "n_matches": 4880,
+        "players": 258,
+        "pairs": 3022
+      },
+      {
+        "subset": "FIRST",
+        "n_matches": 6460,
+        "players": 510,
+        "pairs": 6460
+      }
+    ],
+    "settings": {
+      "bootstrap_resamples": 500,
+      "random_seed": 42,
+      "subsets": {
+        "ALL": "All saved held-out physical matches",
+        "REPEAT": "prior_h2h_meetings >= 1",
+        "FIRST": "prior_h2h_meetings == 0"
+      },
+      "dyadic_finite_sample_correction": 1.0,
+      "dyadic_critical_value": 1.959963984540054,
+      "dyadic_minimum_participants": 20,
+      "dyadic_minimum_pairs": 20,
+      "support_note": "Explicit heuristics, not guarantees of accurate asymptotic inference.",
+      "log_loss_probability_clip": 1e-15,
+      "primary_metric": "brier",
+      "secondary_metrics": [
+        "log_loss",
+        "accuracy"
+      ],
+      "direction": "Positive improvement favors the second model.",
+      "dependence_note": "Dyadic scores account for repeated pairs and pairs sharing either participant. Residual dependence between disjoint pairs, including tournament shocks, is not addressed.",
+      "original_meeting_groups": "Finer saved groups remain in outputs_final/q2_model_metrics.csv; no new model fits or subgroup search."
+    }
+  },
+  "chronology": {
+    "candidate_event_pairs_all_history": 4228,
+    "prior_eligible_record_counts_equal_saved_focal_and_opponent": true,
+    "candidate_event_pairs_study_individual": 2029,
+    "candidate_history_player_records_prior_to_at_least_one_test_match": 4821,
+    "candidate_history_unique_matches_prior_to_at_least_one_test_match": 4024,
+    "method": "Join existing screened player/event IDs to original index/follow-up matches. Q2 history screens use strictly earlier tournament-start/round blocks and original last-ten eligible records.",
+    "count_units": "Q1 flagged_unique_matches counts distinct index-match IDs, not every follow-up match; Q2 counts physical evaluation matches. Window totals and history exposures overlap.",
+    "limitation": "Candidate event exposure is not a proven ordering error or proof that a fitted prediction changed. Histories include warm-up records. Cumulative exposure is broad; last-ten exposure is more specific to prior form. Actual match dates and unrecorded events remain unresolved."
+  },
+  "protected_files_unchanged": 117,
+  "warnings": []
+}

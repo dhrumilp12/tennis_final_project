@@ -1,0 +1,102 @@
+{
+  "source_run_id": "20261027T121134Z-20f069d1",
+  "source_run_summary_sha256": "840cffd0622c9963ab9b687700e4f4f738cdf25e8f9a46907fd7e3e8ac29a7bc",
+  "checks_executed": {
+    "full_suite": {
+      "command": "../.venv/bin/python -m pytest -q",
+      "exit_code": 0,
+      "passed": 130,
+      "warnings": 1504,
+      "log": "tests.txt"
+    },
+    "focused_suite": {
+      "command": "../.venv/bin/python -m pytest tests/test_q3_comparability.py tests/test_q3_matching.py tests/test_comparability_reporting.py tests/test_handedness.py tests/test_reporting.py tests/test_reporting_polish.py -q",
+      "exit_code": 0,
+      "passed": 68,
+      "log": "focused_tests.txt",
+      "note": "Executed before final reporting prose/banners and saved-selection integration test; full suite above covers final sources."
+    },
+    "real_saved_data_validation_executed": true,
+    "same_matching_rule_only": true,
+    "source_manifest_and_input_hashes_verified": true,
+    "all_57_historical_output_files_unchanged": true,
+    "primary_numerical_table_count": 29,
+    "primary_numerical_hashes_unchanged": true,
+    "historical_analysis_sources_and_requirements_unchanged": true,
+    "primary_report_claim_tables_and_answers_unchanged": true,
+    "historical_data_quality_report_unchanged": true,
+    "saved_executed_notebook_unchanged": true,
+    "two_report_regenerations_byte_identical": true,
+    "comparability_section_counts": {
+      "RESULTS.md": 1,
+      "FINAL_REPORT.md": 1
+    },
+    "all_local_report_links_resolve": true,
+    "local_links_checked": 120,
+    "plots_visually_inspected": true,
+    "git_diff_check_passed": true
+  },
+  "primary_numerical_hashes": {
+    "q1_adjusted_coefficients.csv": "c729bc284263d6f200390cee2af825cd9380de127910f567aa9ffb271a4c3729",
+    "q1_adjusted_contrasts.csv": "8a8b08cd02cb4b3564414a65b83b31c11c74ab4bba7d64bbc431ebe14e46b958",
+    "q1_all_adjusted_coefficients.csv": "892c3ca3dcbb0f1cd26d604540ae00c1826df015956ebfed5b51fa3e79fe2933",
+    "q1_followup_status.csv": "1cdb0a6474efc40d041b1df114c8959808052b15cda497566bb5b1f99d323aa4",
+    "q1_model_samples.csv": "1cf653cc35525cb692a3f5028137034630e587b840b05dabdafd9b7062a1b363",
+    "q1_model_windows.csv.gz": "fcd5013a1d4319d7ed4e6d8eadbb391345895764217ad6205bcd86f0c8e6023f",
+    "q1_next_match_adjusted_coefficients.csv": "727382f93f9c8c904ab6870c8991848011e16d9c37ba2bc6e1a3578e90d6804f",
+    "q1_population_flow.csv": "dc4358bc7b51cb457e7a18255b3ed37568194cf986bfc581d0b9251cd0f3eeb7",
+    "q1_recovery_events.csv.gz": "1aabb90fde76fbec3d83b81719ca2d3e74a9827639cadf940c561f2e9bc3589c",
+    "q1_summary_age.csv": "cfc3eafee1278e143048bd14d4165f5b68f50a2f89d7ffe389e6fe59e4abb0d3",
+    "q1_summary_experience.csv": "67866f2494d76cb44df797dc9c750fdee8028be13e7ee8d07e04e0c3f4f8b32b",
+    "q1_summary_overall.csv": "79eb7dc7332ac0d93f1e823b7f79385e304d76656fde89e836dfe0688316d977",
+    "q1_threshold_sensitivity.csv": "0cb7c8bd7990b4f5b864b33f4380cea6dbd2979574a91516b101dbf373311bc2",
+    "q2_calibration.csv": "4cc7b75125c71cfaa020017ff67d03b25ca9596b67ef362d365a6c7c57874bd1",
+    "q2_meeting_count_summary.csv": "ffc5a5c9f7bdf7cfc5a5e12cd4ca8f389567120ee2b99ba71f6392d709a88dac",
+    "q2_model_metrics.csv": "a6c07d47ac2f16a8618835e9d0b1f3884e412337fb826b679409aa71138013e7",
+    "q2_paired_improvements.csv": "8499cd6cf1f61f92c190705d6ee86f9d9ac0ccfe38dda84768406316650471db",
+    "q2_test_predictions.csv.gz": "9dc8fbbec5c84229ec5c066f6a33590ad706b6135e790cbe64c145b0517f96c8",
+    "q3_adjusted_coefficients.csv": "5234dc625f740e9f1d82c2573baf5ff6228d02e287b9d46dac721965998f391b",
+    "q3_adjusted_contrasts.csv": "63c08a15687300f847eeb16e98b72761e4d2dac355d4bb9e5a066e4d852a4f4c",
+    "q3_adjusted_covariance.csv": "a1471d925795fb3a62daf99b338319925c719949e8d6c1eda09fb0a1e4e6b21f",
+    "q3_by_player_and_hand.csv": "0df96d1a89cdde69886116aad0ba0367b2ba678e1f56eb6c7db74c42e1a76260",
+    "q3_descriptive_contrasts.csv": "ae06947c3b9eea28eea904e4523f522d926367a91b1e94df5fe31cb003b1a4b4",
+    "q3_inference_sensitivity.csv": "718cbb0b739986b743046b7f84fbdb4041c237a607bb0a72ecbd969f81ae4e99",
+    "q3_legacy_coefficients.csv": "65c3d54f3973b9b6cf7a678d255c4f0908fc25bf45da725bf55ddf86a4d089f3",
+    "q3_paired_player_comparison.csv": "9c72db968e3361baf1a80872c8898d2439d6970f6e1dddb02c61d54ab51b52ee",
+    "q3_player_exposure.csv": "d037a38c2da9b374d25a77aabd0d6e245f9d13a9d15ca9235b4daf6165e9103b",
+    "q3_player_influence.csv": "cbd0948b1257047e209aefe99e131cf8d372d54de5d93046a0db0c9376d8ebbf",
+    "q3_subgroup_support.csv": "9d6dded87be9bbf18c02c14bd63d2f098858aef7e2511a0df612f2bfd28e1e85"
+  },
+  "test_source_hashes": {
+    "tests/test_analysis_extensions.py": "c556230e10573b9fbb31ea1a42eced8344612359b6a65d6f69a236cc0866166d",
+    "tests/test_chronology_diagnostics.py": "a48b29a7177d3250300fdfcefb6cde453a507e5a9ba5f642b24471b36779338e",
+    "tests/test_comparability_reporting.py": "42abda75d6dac07081476b86bc96b107483d8b659274633a88aeb62906ff157c",
+    "tests/test_handedness.py": "54fb929779bb43f74cdfb79858947e18e7f3fea250ea870c57f65ff8b56a4323",
+    "tests/test_pipeline.py": "14659b83bad9a1d7de46feea77d7d97c285dfdd51fb18f336a64f79d39683f49",
+    "tests/test_provenance.py": "c486fac1e5082126ad585ad6e551619ebf088823e77e853018ce158a12f358cb",
+    "tests/test_q3_comparability.py": "acbe2091b8faa2fbf095666cce754f8f060c54098a7a2bec984ebba8050d2511",
+    "tests/test_q3_matching.py": "d354dd0588bea8e5236c51172842715e27dc21345c3390be55c0d053d0c63736",
+    "tests/test_recovery_blockers.py": "5d7c079366db3507949eb68370670b8ebb79314a259334b401341b3181308475",
+    "tests/test_reporting.py": "d59b91eb4e12afb8737ef607d1634db8c204485dd48774bfb0b888b10ab463d9",
+    "tests/test_reporting_polish.py": "27b45c742d87020be1e8a520cc47129349f3b438af4d278e9a670983809b382c"
+  },
+  "notes": [
+    "Synthetic test data are software checks only; reported research findings use the saved adjusted sample.",
+    "1504 dependency deprecation warnings were reported by the full existing suite; no failed or skipped checks.",
+    "No primary model or dataset rebuild, no commits, no pushes."
+  ],
+  "tested_code_hashes": {
+    "execute_notebook.py": "5a5fbd96fa0f37b1517e40a206be2a15f3585ed9a77709d37e23da6dc9519fe3",
+    "requirements-lock.txt": "7b74fd94d56275471bb4f8cd0456f51541ef6b6ca31077e16a46cb0418e5243a",
+    "requirements.txt": "0a97440b99518087afe328d39292447d1ca49267078c2c740a16281b5ee6b354",
+    "tennis_analyses.py": "44cb46ff0d98d93d73dad49aa47a7fac33c327dbf057337e6b73384ab398994f",
+    "tennis_chronology.py": "3b9f232558ef0984a5d1fcc88c0be2aed2ba977a96b29bfe21abb3801dc09865",
+    "tennis_handedness.py": "edd38fd72e061482c2f4f4417754fa73fd890f0deb83dfce08ea6ad1763e8588",
+    "tennis_project.py": "58fee5db414e7f30ec7d1d1686093329ad9d28dbe020f94ee115d82f17ad9ab6",
+    "tennis_q3_comparability.py": "e968bd8c08ef6899240fbb8a0645fe9ebce72f63139ea6279c346b7057629a67",
+    "tennis_q3_matching.py": "b6685e3228f49c35444fdd5cff1f55ed2384f73c3dc3a212d5347c4abcd6142c",
+    "tennis_q3_sample.py": "4f4333f6d205709a11b57f4974247d1e8e3d5e722796cda09d9e8946bb54a4d1",
+    "tennis_reporting.py": "856990ac4b85ad469f4054929d8d931c6f2d7114d75d103d2f446c19133643f6",
+    "tennis_repro.py": "7aa9fcf2a87768e2b9fe9682f416acd48c0e16a8f2974a14c0f1e14896931092"
+  }
+}

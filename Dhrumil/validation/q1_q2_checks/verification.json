@@ -1,0 +1,88 @@
+{
+  "source_run_id": "20261027T121134Z-20f069d1",
+  "tests": [
+    {
+      "command": "../.venv/bin/python -m pytest tests/test_q1_checks.py tests/test_q2_checks.py tests/test_q1_q2_checks.py tests/test_q1_q2_reporting.py -q",
+      "exit_code": 0,
+      "passed": 61,
+      "log": "focused_tests.txt"
+    },
+    {
+      "command": "../.venv/bin/python -m pytest -q",
+      "exit_code": 0,
+      "passed": 191,
+      "warnings": 1504,
+      "log": "tests.txt"
+    }
+  ],
+  "real_data_command": "../.venv/bin/python tennis_q1_q2_checks.py",
+  "real_data_exit_code": 0,
+  "real_data_log": "run.txt",
+  "checks_executed": {
+    "all_historical_outputs_unchanged": true,
+    "historical_output_files": 57,
+    "primary_numerical_tables_unchanged": true,
+    "primary_numerical_table_count": 29,
+    "raw_input_hashes_unchanged": true,
+    "raw_input_files": 35,
+    "q3_evidence_unchanged": true,
+    "q3_evidence_files": 25,
+    "primary_analysis_sources_and_q3_helpers_unchanged": true,
+    "original_primary_report_tables_and_answers_unchanged": true,
+    "isolated_real_report_readme_notebook_regeneration_idempotent": true,
+    "q3_report_sections_unchanged": true,
+    "exactly_one_supplemental_section_per_report": true,
+    "all_local_links_resolve": true,
+    "local_links_checked": 154,
+    "notebook_nbformat_valid": true,
+    "historical_notebook_cells_unchanged": 19,
+    "historical_code_cells_unchanged": 11,
+    "appended_notebook_cells": 1,
+    "appended_notebook_cell_type": "markdown",
+    "notebook_code_executed_in_this_validation": false,
+    "git_diff_check_passed": true
+  },
+  "tested_code_hashes": {
+    "execute_notebook.py": "5a5fbd96fa0f37b1517e40a206be2a15f3585ed9a77709d37e23da6dc9519fe3",
+    "requirements-lock.txt": "7b74fd94d56275471bb4f8cd0456f51541ef6b6ca31077e16a46cb0418e5243a",
+    "requirements.txt": "0a97440b99518087afe328d39292447d1ca49267078c2c740a16281b5ee6b354",
+    "tennis_analyses.py": "44cb46ff0d98d93d73dad49aa47a7fac33c327dbf057337e6b73384ab398994f",
+    "tennis_chronology.py": "3b9f232558ef0984a5d1fcc88c0be2aed2ba977a96b29bfe21abb3801dc09865",
+    "tennis_handedness.py": "edd38fd72e061482c2f4f4417754fa73fd890f0deb83dfce08ea6ad1763e8588",
+    "tennis_project.py": "58fee5db414e7f30ec7d1d1686093329ad9d28dbe020f94ee115d82f17ad9ab6",
+    "tennis_q1_checks.py": "54ce326c0eaffab46b9492faa4a801621e753eaa522535a1e4080d7f6a12f8a0",
+    "tennis_q1_q2_checks.py": "7af30bb50aa0ec2e8442d20207231e37f2bdceb8042f92faa5f04bea60e4d1cc",
+    "tennis_q2_checks.py": "3d653e4a449b61e319cc53dbd45f38971894a0e77d57d1b2c9ba2482590f2ff6",
+    "tennis_q3_comparability.py": "e968bd8c08ef6899240fbb8a0645fe9ebce72f63139ea6279c346b7057629a67",
+    "tennis_q3_matching.py": "b6685e3228f49c35444fdd5cff1f55ed2384f73c3dc3a212d5347c4abcd6142c",
+    "tennis_q3_sample.py": "4f4333f6d205709a11b57f4974247d1e8e3d5e722796cda09d9e8946bb54a4d1",
+    "tennis_reporting.py": "343c6d5a2e9efd53583c8757349922e54178fc6ad63b63c23af761443de4d884",
+    "tennis_repro.py": "7aa9fcf2a87768e2b9fe9682f416acd48c0e16a8f2974a14c0f1e14896931092"
+  },
+  "test_source_hashes": {
+    "tests/test_analysis_extensions.py": "c556230e10573b9fbb31ea1a42eced8344612359b6a65d6f69a236cc0866166d",
+    "tests/test_chronology_diagnostics.py": "a48b29a7177d3250300fdfcefb6cde453a507e5a9ba5f642b24471b36779338e",
+    "tests/test_comparability_reporting.py": "42abda75d6dac07081476b86bc96b107483d8b659274633a88aeb62906ff157c",
+    "tests/test_handedness.py": "54fb929779bb43f74cdfb79858947e18e7f3fea250ea870c57f65ff8b56a4323",
+    "tests/test_pipeline.py": "14659b83bad9a1d7de46feea77d7d97c285dfdd51fb18f336a64f79d39683f49",
+    "tests/test_provenance.py": "c486fac1e5082126ad585ad6e551619ebf088823e77e853018ce158a12f358cb",
+    "tests/test_q1_checks.py": "a095bebf67cd72d5f019c44de90444ca88ba9a1f1c94ce07b199fed7dae4a60f",
+    "tests/test_q1_q2_checks.py": "68e2e4ce8435c38166679b62d81799559054751d2453e64336d05fe4c82692ce",
+    "tests/test_q1_q2_reporting.py": "6fe0cfd1e497e7fefc3c81d230859202261162e777ab87196cb6af04d05bcdbc",
+    "tests/test_q2_checks.py": "970b57f6bb0ee6f85a69d93674d1ce07303a9ccc7a91392f975a69a9f91f8d4e",
+    "tests/test_q3_comparability.py": "acbe2091b8faa2fbf095666cce754f8f060c54098a7a2bec984ebba8050d2511",
+    "tests/test_q3_matching.py": "d354dd0588bea8e5236c51172842715e27dc21345c3390be55c0d053d0c63736",
+    "tests/test_recovery_blockers.py": "5d7c079366db3507949eb68370670b8ebb79314a259334b401341b3181308475",
+    "tests/test_reporting.py": "4a75d30155019f369de27195dd6e85c86549e660208f323848c61364b4007c26",
+    "tests/test_reporting_polish.py": "27b45c742d87020be1e8a520cc47129349f3b438af4d278e9a670983809b382c"
+  },
+  "current_notebook_sha256": "5f195a87c922f2ba8937a9856fa2c34a6bd1b83cad51fdf6ae8eae1828779317",
+  "notes": [
+    "No primary output, original input, Q3 validation evidence or historical execution record was rewritten.",
+    "Only the four existing Q1 specifications were reconstructed; original coefficient, standard-error, interval and sample-ID comparisons passed.",
+    "No Q2 models were fitted. No alternate thresholds, matching rules or datasets were introduced.",
+    "No notebook code was modified, so no notebook code execution was needed; a real temporary notebook copy was structurally validated and regenerated twice.",
+    "The 1504 full-suite warnings are existing NumPy timedelta deprecations; the real supplemental run recorded no warnings.",
+    "Synthetic fixtures are software tests, not research findings. No commit or push was made."
+  ]
+}

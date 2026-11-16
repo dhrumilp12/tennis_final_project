@@ -1,0 +1,129 @@
+outcome,sample,dimension,group,loss_type,denominator_events,denominator_players,usable_next1_events,usable_next1_players,complete_next3_events,complete_next3_players,outcome_available_events,selected_before_covariates_events,end_of_recorded_data_unobserved_followup_events,end_of_recorded_data_unobserved_followup_players,unresolved_record_blocks_followup_events,unresolved_record_blocks_followup_players,excluded_or_ambiguous_followup_events,excluded_or_ambiguous_followup_players,nonoverlap_selection_events,nonoverlap_selection_players,missing_model_covariates_events,missing_model_covariates_players,retained_events,retained_players,model_events,model_players,model_retention_share
+next3_win_rate,all_windows,overall,all,other_ranked_loss,16485,339,14550,338,12661,335,12661,12661,56,41,0,0,3768,293,0,0,51,41,12610,335,12610,335,0.764937822262663
+next3_win_rate,all_windows,overall,all,ranking_upset,7536,326,6695,321,5885,317,5885,5885,21,19,0,0,1630,268,0,0,24,20,5861,316,5861,316,0.7777335456475584
+next3_win_rate,all_windows,age_group,23_to_29,other_ranked_loss,10372,301,9125,300,7949,298,7949,7949,35,24,0,0,2388,255,0,0,33,27,7916,298,7916,298,0.763208638642499
+next3_win_rate,all_windows,age_group,23_to_29,ranking_upset,4794,285,4225,279,3715,276,3715,3715,13,12,0,0,1066,232,0,0,12,10,3703,275,3703,275,0.7724238631622862
+next3_win_rate,all_windows,age_group,30_plus,other_ranked_loss,3323,133,2994,131,2613,128,2613,2613,12,10,0,0,698,111,0,0,7,6,2606,128,2606,128,0.7842311164610292
+next3_win_rate,all_windows,age_group,30_plus,ranking_upset,1519,127,1400,126,1234,125,1234,1234,5,4,0,0,280,90,0,0,7,5,1227,125,1227,125,0.8077682685977617
+next3_win_rate,all_windows,age_group,under_23,other_ranked_loss,2790,128,2431,127,2099,124,2099,2099,9,7,0,0,682,117,0,0,11,11,2088,124,2088,124,0.7483870967741936
+next3_win_rate,all_windows,age_group,under_23,ranking_upset,1223,122,1070,120,936,118,936,936,3,3,0,0,284,93,0,0,5,5,931,118,931,118,0.7612428454619787
+next3_win_rate,all_windows,experience_group,100_to_299,other_ranked_loss,7128,250,6286,248,5465,247,5465,5465,23,17,0,0,1640,214,0,0,22,19,5443,247,5443,247,0.7636083052749719
+next3_win_rate,all_windows,experience_group,100_to_299,ranking_upset,3268,237,2889,231,2540,228,2540,2540,9,9,0,0,719,194,0,0,12,11,2528,228,2528,228,0.773561811505508
+next3_win_rate,all_windows,experience_group,300_plus,other_ranked_loss,6853,158,6010,157,5225,157,5225,5225,17,15,0,0,1611,145,0,0,24,19,5201,157,5201,157,0.7589376915219612
+next3_win_rate,all_windows,experience_group,300_plus,ranking_upset,3275,156,2919,155,2556,153,2556,2556,8,6,0,0,711,131,0,0,11,8,2545,152,2545,152,0.7770992366412214
+next3_win_rate,all_windows,experience_group,under_100,other_ranked_loss,2504,232,2254,230,1971,225,1971,1971,16,10,0,0,517,171,0,0,5,5,1966,225,1966,225,0.7851437699680511
+next3_win_rate,all_windows,experience_group,under_100,ranking_upset,993,205,887,198,789,191,789,789,4,4,0,0,200,115,0,0,1,1,788,191,788,191,0.7935548841893253
+next3_win_rate,all_windows,age_experience,23_to_29 / 100_to_299,other_ranked_loss,5278,223,4678,222,4066,221,4066,4066,16,12,0,0,1196,187,0,0,12,10,4054,221,4054,221,0.7680939749905267
+next3_win_rate,all_windows,age_experience,23_to_29 / 100_to_299,ranking_upset,2399,206,2122,201,1871,198,1871,1871,7,7,0,0,521,165,0,0,5,4,1866,198,1866,198,0.7778240933722385
+next3_win_rate,all_windows,age_experience,23_to_29 / 300_plus,other_ranked_loss,4008,133,3461,131,3004,130,3004,3004,8,7,0,0,996,123,0,0,18,14,2986,130,2986,130,0.7450099800399201
+next3_win_rate,all_windows,age_experience,23_to_29 / 300_plus,ranking_upset,1939,133,1689,131,1469,128,1469,1469,3,2,0,0,467,108,0,0,6,5,1463,127,1463,127,0.7545126353790613
+next3_win_rate,all_windows,age_experience,23_to_29 / under_100,other_ranked_loss,1086,129,986,129,879,127,879,879,11,6,0,0,196,78,0,0,3,3,876,127,876,127,0.8066298342541437
+next3_win_rate,all_windows,age_experience,23_to_29 / under_100,ranking_upset,456,107,414,103,375,101,375,375,3,3,0,0,78,44,0,0,1,1,374,101,374,101,0.8201754385964912
+next3_win_rate,all_windows,age_experience,30_plus / 100_to_299,other_ranked_loss,488,40,447,40,395,40,395,395,3,2,0,0,90,26,0,0,1,1,394,40,394,40,0.8073770491803278
+next3_win_rate,all_windows,age_experience,30_plus / 100_to_299,ranking_upset,191,37,176,36,154,36,154,154,0,0,0,0,37,21,0,0,2,2,152,36,152,36,0.7958115183246073
+next3_win_rate,all_windows,age_experience,30_plus / 300_plus,other_ranked_loss,2810,104,2527,102,2203,100,2203,2203,9,8,0,0,598,92,0,0,6,5,2197,100,2197,100,0.7818505338078292
+next3_win_rate,all_windows,age_experience,30_plus / 300_plus,ranking_upset,1319,98,1216,98,1074,98,1074,1074,5,4,0,0,240,72,0,0,5,3,1069,98,1069,98,0.8104624715693708
+next3_win_rate,all_windows,age_experience,30_plus / under_100,other_ranked_loss,25,6,20,6,15,5,15,15,0,0,0,0,10,3,0,0,0,0,15,5,15,5,0.6
+next3_win_rate,all_windows,age_experience,30_plus / under_100,ranking_upset,9,5,8,5,6,4,6,6,0,0,0,0,3,3,0,0,0,0,6,4,6,4,0.6666666666666666
+next3_win_rate,all_windows,age_experience,under_23 / 100_to_299,other_ranked_loss,1362,87,1161,86,1004,86,1004,1004,4,3,0,0,354,73,0,0,9,9,995,86,995,86,0.7305433186490455
+next3_win_rate,all_windows,age_experience,under_23 / 100_to_299,ranking_upset,678,81,591,78,515,78,515,515,2,2,0,0,161,57,0,0,5,5,510,78,510,78,0.7522123893805309
+next3_win_rate,all_windows,age_experience,under_23 / 300_plus,other_ranked_loss,35,6,22,6,18,6,18,18,0,0,0,0,17,6,0,0,0,0,18,6,18,6,0.5142857142857142
+next3_win_rate,all_windows,age_experience,under_23 / 300_plus,ranking_upset,17,7,14,7,13,7,13,13,0,0,0,0,4,3,0,0,0,0,13,7,13,7,0.7647058823529411
+next3_win_rate,all_windows,age_experience,under_23 / under_100,other_ranked_loss,1393,118,1248,116,1077,112,1077,1077,5,4,0,0,311,97,0,0,2,2,1075,112,1075,112,0.7717157214644652
+next3_win_rate,all_windows,age_experience,under_23 / under_100,ranking_upset,528,110,465,107,408,102,408,408,1,1,0,0,119,72,0,0,0,0,408,102,408,102,0.7727272727272727
+next3_win_rate,nonoverlapping,overall,all,other_ranked_loss,16485,339,14550,338,12661,335,12661,7213,56,41,0,0,3768,293,5448,311,27,27,7186,333,7186,333,0.4359114346375493
+next3_win_rate,nonoverlapping,overall,all,ranking_upset,7536,326,6695,321,5885,317,5885,2510,21,19,0,0,1630,268,3375,296,12,11,2498,290,2498,290,0.3314755838641189
+next3_win_rate,nonoverlapping,age_group,23_to_29,other_ranked_loss,10372,301,9125,300,7949,298,7949,4555,35,24,0,0,2388,255,3394,274,17,17,4538,297,4538,297,0.43752410335518704
+next3_win_rate,nonoverlapping,age_group,23_to_29,ranking_upset,4794,285,4225,279,3715,276,3715,1567,13,12,0,0,1066,232,2148,264,5,4,1562,248,1562,248,0.32582394659991654
+next3_win_rate,nonoverlapping,age_group,30_plus,other_ranked_loss,3323,133,2994,131,2613,128,2613,1416,12,10,0,0,698,111,1197,120,3,3,1413,127,1413,127,0.4252181763466747
+next3_win_rate,nonoverlapping,age_group,30_plus,ranking_upset,1519,127,1400,126,1234,125,1234,525,5,4,0,0,280,90,709,106,4,4,521,115,521,115,0.34298880842659646
+next3_win_rate,nonoverlapping,age_group,under_23,other_ranked_loss,2790,128,2431,127,2099,124,2099,1242,9,7,0,0,682,117,857,116,7,7,1235,121,1235,121,0.44265232974910396
+next3_win_rate,nonoverlapping,age_group,under_23,ranking_upset,1223,122,1070,120,936,118,936,418,3,3,0,0,284,93,518,105,3,3,415,103,415,103,0.339329517579722
+next3_win_rate,nonoverlapping,experience_group,100_to_299,other_ranked_loss,7128,250,6286,248,5465,247,5465,3087,23,17,0,0,1640,214,2378,240,12,12,3075,245,3075,245,0.4313973063973064
+next3_win_rate,nonoverlapping,experience_group,100_to_299,ranking_upset,3268,237,2889,231,2540,228,2540,1057,9,9,0,0,719,194,1483,214,6,6,1051,216,1051,216,0.3216034271725826
+next3_win_rate,nonoverlapping,experience_group,300_plus,other_ranked_loss,6853,158,6010,157,5225,157,5225,3097,17,15,0,0,1611,145,2128,148,11,11,3086,156,3086,156,0.4503137312126076
+next3_win_rate,nonoverlapping,experience_group,300_plus,ranking_upset,3275,156,2919,155,2556,153,2556,1129,8,6,0,0,711,131,1427,144,6,5,1123,142,1123,142,0.3429007633587786
+next3_win_rate,nonoverlapping,experience_group,under_100,other_ranked_loss,2504,232,2254,230,1971,225,1971,1029,16,10,0,0,517,171,942,195,4,4,1025,222,1025,222,0.40934504792332266
+next3_win_rate,nonoverlapping,experience_group,under_100,ranking_upset,993,205,887,198,789,191,789,324,4,4,0,0,200,115,465,165,0,0,324,158,324,158,0.32628398791540786
+next3_win_rate,nonoverlapping,age_experience,23_to_29 / 100_to_299,other_ranked_loss,5278,223,4678,222,4066,221,4066,2250,16,12,0,0,1196,187,1816,208,6,6,2244,221,2244,221,0.425161045850701
+next3_win_rate,nonoverlapping,age_experience,23_to_29 / 100_to_299,ranking_upset,2399,206,2122,201,1871,198,1871,750,7,7,0,0,521,165,1121,188,1,1,749,182,749,182,0.3122134222592747
+next3_win_rate,nonoverlapping,age_experience,23_to_29 / 300_plus,other_ranked_loss,4008,133,3461,131,3004,130,3004,1867,8,7,0,0,996,123,1137,124,8,8,1859,129,1859,129,0.4638223552894212
+next3_win_rate,nonoverlapping,age_experience,23_to_29 / 300_plus,ranking_upset,1939,133,1689,131,1469,128,1469,670,3,2,0,0,467,108,799,119,4,3,666,118,666,118,0.34347601856627125
+next3_win_rate,nonoverlapping,age_experience,23_to_29 / under_100,other_ranked_loss,1086,129,986,129,879,127,879,438,11,6,0,0,196,78,441,106,3,3,435,125,435,125,0.4005524861878453
+next3_win_rate,nonoverlapping,age_experience,23_to_29 / under_100,ranking_upset,456,107,414,103,375,101,375,147,3,3,0,0,78,44,228,87,0,0,147,78,147,78,0.3223684210526316
+next3_win_rate,nonoverlapping,age_experience,30_plus / 100_to_299,other_ranked_loss,488,40,447,40,395,40,395,192,3,2,0,0,90,26,203,35,0,0,192,39,192,39,0.39344262295081966
+next3_win_rate,nonoverlapping,age_experience,30_plus / 100_to_299,ranking_upset,191,37,176,36,154,36,154,68,0,0,0,0,37,21,86,27,2,2,66,29,66,29,0.34554973821989526
+next3_win_rate,nonoverlapping,age_experience,30_plus / 300_plus,other_ranked_loss,2810,104,2527,102,2203,100,2203,1215,9,8,0,0,598,92,988,95,3,3,1212,99,1212,99,0.4313167259786477
+next3_win_rate,nonoverlapping,age_experience,30_plus / 300_plus,ranking_upset,1319,98,1216,98,1074,98,1074,453,5,4,0,0,240,72,621,89,2,2,451,91,451,91,0.3419257012888552
+next3_win_rate,nonoverlapping,age_experience,30_plus / under_100,other_ranked_loss,25,6,20,6,15,5,15,9,0,0,0,0,10,3,6,3,0,0,9,5,9,5,0.36
+next3_win_rate,nonoverlapping,age_experience,30_plus / under_100,ranking_upset,9,5,8,5,6,4,6,4,0,0,0,0,3,3,2,1,0,0,4,4,4,4,0.4444444444444444
+next3_win_rate,nonoverlapping,age_experience,under_23 / 100_to_299,other_ranked_loss,1362,87,1161,86,1004,86,1004,645,4,3,0,0,354,73,359,79,6,6,639,83,639,83,0.46916299559471364
+next3_win_rate,nonoverlapping,age_experience,under_23 / 100_to_299,ranking_upset,678,81,591,78,515,78,515,239,2,2,0,0,161,57,276,69,3,3,236,65,236,65,0.3480825958702065
+next3_win_rate,nonoverlapping,age_experience,under_23 / 300_plus,other_ranked_loss,35,6,22,6,18,6,18,15,0,0,0,0,17,6,3,2,0,0,15,6,15,6,0.42857142857142855
+next3_win_rate,nonoverlapping,age_experience,under_23 / 300_plus,ranking_upset,17,7,14,7,13,7,13,6,0,0,0,0,4,3,7,5,0,0,6,4,6,4,0.35294117647058826
+next3_win_rate,nonoverlapping,age_experience,under_23 / under_100,other_ranked_loss,1393,118,1248,116,1077,112,1077,582,5,4,0,0,311,97,495,102,1,1,581,109,581,109,0.41708542713567837
+next3_win_rate,nonoverlapping,age_experience,under_23 / under_100,ranking_upset,528,110,465,107,408,102,408,173,1,1,0,0,119,72,235,86,0,0,173,84,173,84,0.32765151515151514
+next1_win,all_windows,overall,all,other_ranked_loss,16485,339,14550,338,12661,335,14550,14550,22,22,0,0,1913,268,0,0,26,24,14524,338,14524,338,0.881043372763118
+next1_win,all_windows,overall,all,ranking_upset,7536,326,6695,321,5885,317,6695,6695,13,13,0,0,828,230,0,0,13,12,6682,321,6682,321,0.8866772823779193
+next1_win,all_windows,age_group,23_to_29,other_ranked_loss,10372,301,9125,300,7949,298,9125,9125,13,13,0,0,1234,234,0,0,13,13,9112,300,9112,300,0.8785190898573081
+next1_win,all_windows,age_group,23_to_29,ranking_upset,4794,285,4225,279,3715,276,4225,4225,9,9,0,0,560,197,0,0,7,7,4218,279,4218,279,0.8798498122653317
+next1_win,all_windows,age_group,30_plus,other_ranked_loss,3323,133,2994,131,2613,128,2994,2994,5,5,0,0,324,95,0,0,5,5,2989,131,2989,131,0.8994884140836593
+next1_win,all_windows,age_group,30_plus,ranking_upset,1519,127,1400,126,1234,125,1400,1400,2,2,0,0,117,59,0,0,2,2,1398,126,1398,126,0.9203423304805793
+next1_win,all_windows,age_group,under_23,other_ranked_loss,2790,128,2431,127,2099,124,2431,2431,4,4,0,0,355,100,0,0,8,8,2423,127,2423,127,0.8684587813620072
+next1_win,all_windows,age_group,under_23,ranking_upset,1223,122,1070,120,936,118,1070,1070,2,2,0,0,151,76,0,0,4,3,1066,120,1066,120,0.8716271463614064
+next1_win,all_windows,experience_group,100_to_299,other_ranked_loss,7128,250,6286,248,5465,247,6286,6286,10,10,0,0,832,194,0,0,9,9,6277,248,6277,248,0.8806116722783389
+next1_win,all_windows,experience_group,100_to_299,ranking_upset,3268,237,2889,231,2540,228,2889,2889,6,6,0,0,373,165,0,0,6,5,2883,231,2883,231,0.8821909424724602
+next1_win,all_windows,experience_group,300_plus,other_ranked_loss,6853,158,6010,157,5225,157,6010,6010,8,8,0,0,835,138,0,0,14,14,5996,157,5996,157,0.8749452794396615
+next1_win,all_windows,experience_group,300_plus,ranking_upset,3275,156,2919,155,2556,153,2919,2919,4,4,0,0,352,110,0,0,6,6,2913,155,2913,155,0.8894656488549618
+next1_win,all_windows,experience_group,under_100,other_ranked_loss,2504,232,2254,230,1971,225,2254,2254,4,4,0,0,246,139,0,0,3,3,2251,230,2251,230,0.8989616613418531
+next1_win,all_windows,experience_group,under_100,ranking_upset,993,205,887,198,789,191,887,887,3,3,0,0,103,78,0,0,1,1,886,198,886,198,0.892245720040282
+next1_win,all_windows,age_experience,23_to_29 / 100_to_299,other_ranked_loss,5278,223,4678,222,4066,221,4678,4678,6,6,0,0,594,165,0,0,2,2,4676,222,4676,222,0.8859416445623343
+next1_win,all_windows,age_experience,23_to_29 / 100_to_299,ranking_upset,2399,206,2122,201,1871,198,2122,2122,5,5,0,0,272,128,0,0,2,2,2120,201,2120,201,0.8837015423092955
+next1_win,all_windows,age_experience,23_to_29 / 300_plus,other_ranked_loss,4008,133,3461,131,3004,130,3461,3461,5,5,0,0,542,120,0,0,10,10,3451,131,3451,131,0.8610279441117764
+next1_win,all_windows,age_experience,23_to_29 / 300_plus,ranking_upset,1939,133,1689,131,1469,128,1689,1689,2,2,0,0,248,92,0,0,4,4,1685,131,1685,131,0.8690046415678184
+next1_win,all_windows,age_experience,23_to_29 / under_100,other_ranked_loss,1086,129,986,129,879,127,986,986,2,2,0,0,98,61,0,0,1,1,985,129,985,129,0.9069981583793738
+next1_win,all_windows,age_experience,23_to_29 / under_100,ranking_upset,456,107,414,103,375,101,414,414,2,2,0,0,40,29,0,0,1,1,413,103,413,103,0.9057017543859649
+next1_win,all_windows,age_experience,30_plus / 100_to_299,other_ranked_loss,488,40,447,40,395,40,447,447,2,2,0,0,39,19,0,0,1,1,446,40,446,40,0.9139344262295082
+next1_win,all_windows,age_experience,30_plus / 100_to_299,ranking_upset,191,37,176,36,154,36,176,176,0,0,0,0,15,11,0,0,0,0,176,36,176,36,0.9214659685863874
+next1_win,all_windows,age_experience,30_plus / 300_plus,other_ranked_loss,2810,104,2527,102,2203,100,2527,2527,3,3,0,0,280,80,0,0,4,4,2523,102,2523,102,0.897864768683274
+next1_win,all_windows,age_experience,30_plus / 300_plus,ranking_upset,1319,98,1216,98,1074,98,1216,1216,2,2,0,0,101,51,0,0,2,2,1214,98,1214,98,0.9203942380591357
+next1_win,all_windows,age_experience,30_plus / under_100,other_ranked_loss,25,6,20,6,15,5,20,20,0,0,0,0,5,2,0,0,0,0,20,6,20,6,0.8
+next1_win,all_windows,age_experience,30_plus / under_100,ranking_upset,9,5,8,5,6,4,8,8,0,0,0,0,1,1,0,0,0,0,8,5,8,5,0.8888888888888888
+next1_win,all_windows,age_experience,under_23 / 100_to_299,other_ranked_loss,1362,87,1161,86,1004,86,1161,1161,2,2,0,0,199,64,0,0,6,6,1155,86,1155,86,0.8480176211453745
+next1_win,all_windows,age_experience,under_23 / 100_to_299,ranking_upset,678,81,591,78,515,78,591,591,1,1,0,0,86,52,0,0,4,3,587,78,587,78,0.8657817109144543
+next1_win,all_windows,age_experience,under_23 / 300_plus,other_ranked_loss,35,6,22,6,18,6,22,22,0,0,0,0,13,6,0,0,0,0,22,6,22,6,0.6285714285714286
+next1_win,all_windows,age_experience,under_23 / 300_plus,ranking_upset,17,7,14,7,13,7,14,14,0,0,0,0,3,3,0,0,0,0,14,7,14,7,0.8235294117647058
+next1_win,all_windows,age_experience,under_23 / under_100,other_ranked_loss,1393,118,1248,116,1077,112,1248,1248,2,2,0,0,143,79,0,0,2,2,1246,116,1246,116,0.8944723618090452
+next1_win,all_windows,age_experience,under_23 / under_100,ranking_upset,528,110,465,107,408,102,465,465,1,1,0,0,62,48,0,0,0,0,465,107,465,107,0.8806818181818182
+next1_win,nonoverlapping,overall,all,other_ranked_loss,16485,339,14550,338,12661,335,14550,11935,22,22,0,0,1913,268,2615,308,25,23,11910,338,11910,338,0.7224749772520473
+next1_win,nonoverlapping,overall,all,ranking_upset,7536,326,6695,321,5885,317,6695,4360,13,13,0,0,828,230,2335,287,7,6,4353,308,4353,308,0.5776273885350318
+next1_win,nonoverlapping,age_group,23_to_29,other_ranked_loss,10372,301,9125,300,7949,298,9125,7534,13,13,0,0,1234,234,1591,264,13,13,7521,300,7521,300,0.7251253374469726
+next1_win,nonoverlapping,age_group,23_to_29,ranking_upset,4794,285,4225,279,3715,276,4225,2748,9,9,0,0,560,197,1477,253,2,2,2746,265,2746,265,0.572799332498957
+next1_win,nonoverlapping,age_group,30_plus,other_ranked_loss,3323,133,2994,131,2613,128,2994,2392,5,5,0,0,324,95,602,114,4,4,2388,131,2388,131,0.7186277460126392
+next1_win,nonoverlapping,age_group,30_plus,ranking_upset,1519,127,1400,126,1234,125,1400,902,2,2,0,0,117,59,498,104,1,1,901,123,901,123,0.5931533903884134
+next1_win,nonoverlapping,age_group,under_23,other_ranked_loss,2790,128,2431,127,2099,124,2431,2009,4,4,0,0,355,100,422,111,8,8,2001,127,2001,127,0.7172043010752688
+next1_win,nonoverlapping,age_group,under_23,ranking_upset,1223,122,1070,120,936,118,1070,710,2,2,0,0,151,76,360,100,4,3,706,115,706,115,0.5772690106295993
+next1_win,nonoverlapping,experience_group,100_to_299,other_ranked_loss,7128,250,6286,248,5465,247,6286,5155,10,10,0,0,832,194,1131,220,9,9,5146,248,5146,248,0.7219416386083053
+next1_win,nonoverlapping,experience_group,100_to_299,ranking_upset,3268,237,2889,231,2540,228,2889,1869,6,6,0,0,373,165,1020,208,5,4,1864,225,1864,225,0.5703794369645043
+next1_win,nonoverlapping,experience_group,300_plus,other_ranked_loss,6853,158,6010,157,5225,157,6010,5051,8,8,0,0,835,138,959,139,13,13,5038,157,5038,157,0.7351524879614767
+next1_win,nonoverlapping,experience_group,300_plus,ranking_upset,3275,156,2919,155,2556,153,2919,1928,4,4,0,0,352,110,991,141,2,2,1926,152,1926,152,0.5880916030534351
+next1_win,nonoverlapping,experience_group,under_100,other_ranked_loss,2504,232,2254,230,1971,225,2254,1729,4,4,0,0,246,139,525,186,3,3,1726,229,1726,229,0.689297124600639
+next1_win,nonoverlapping,experience_group,under_100,ranking_upset,993,205,887,198,789,191,887,563,3,3,0,0,103,78,324,146,0,0,563,185,563,185,0.5669687814702921
+next1_win,nonoverlapping,age_experience,23_to_29 / 100_to_299,other_ranked_loss,5278,223,4678,222,4066,221,4678,3819,6,6,0,0,594,165,859,190,2,2,3817,222,3817,222,0.7231906025009474
+next1_win,nonoverlapping,age_experience,23_to_29 / 100_to_299,ranking_upset,2399,206,2122,201,1871,198,2122,1354,5,5,0,0,272,128,768,177,1,1,1353,195,1353,195,0.5639849937473947
+next1_win,nonoverlapping,age_experience,23_to_29 / 300_plus,other_ranked_loss,4008,133,3461,131,3004,130,3461,2979,5,5,0,0,542,120,482,112,10,10,2969,131,2969,131,0.7407684630738522
+next1_win,nonoverlapping,age_experience,23_to_29 / 300_plus,ranking_upset,1939,133,1689,131,1469,128,1689,1137,2,2,0,0,248,92,552,119,1,1,1136,126,1136,126,0.5858690046415678
+next1_win,nonoverlapping,age_experience,23_to_29 / under_100,other_ranked_loss,1086,129,986,129,879,127,986,736,2,2,0,0,98,61,250,95,1,1,735,129,735,129,0.6767955801104972
+next1_win,nonoverlapping,age_experience,23_to_29 / under_100,ranking_upset,456,107,414,103,375,101,414,257,2,2,0,0,40,29,157,78,0,0,257,91,257,91,0.5635964912280702
+next1_win,nonoverlapping,age_experience,30_plus / 100_to_299,other_ranked_loss,488,40,447,40,395,40,447,326,2,2,0,0,39,19,121,33,1,1,325,40,325,40,0.6659836065573771
+next1_win,nonoverlapping,age_experience,30_plus / 100_to_299,ranking_upset,191,37,176,36,154,36,176,116,0,0,0,0,15,11,60,25,0,0,116,35,116,35,0.6073298429319371
+next1_win,nonoverlapping,age_experience,30_plus / 300_plus,other_ranked_loss,2810,104,2527,102,2203,100,2527,2052,3,3,0,0,280,80,475,88,3,3,2049,102,2049,102,0.7291814946619217
+next1_win,nonoverlapping,age_experience,30_plus / 300_plus,ranking_upset,1319,98,1216,98,1074,98,1216,781,2,2,0,0,101,51,435,86,1,1,780,96,780,96,0.5913570887035633
+next1_win,nonoverlapping,age_experience,30_plus / under_100,other_ranked_loss,25,6,20,6,15,5,20,14,0,0,0,0,5,2,6,4,0,0,14,6,14,6,0.56
+next1_win,nonoverlapping,age_experience,30_plus / under_100,ranking_upset,9,5,8,5,6,4,8,5,0,0,0,0,1,1,3,1,0,0,5,5,5,5,0.5555555555555556
+next1_win,nonoverlapping,age_experience,under_23 / 100_to_299,other_ranked_loss,1362,87,1161,86,1004,86,1161,1010,2,2,0,0,199,64,151,58,6,6,1004,86,1004,86,0.737151248164464
+next1_win,nonoverlapping,age_experience,under_23 / 100_to_299,ranking_upset,678,81,591,78,515,78,591,399,1,1,0,0,86,52,192,67,4,3,395,73,395,73,0.5825958702064897
+next1_win,nonoverlapping,age_experience,under_23 / 300_plus,other_ranked_loss,35,6,22,6,18,6,22,20,0,0,0,0,13,6,2,2,0,0,20,6,20,6,0.5714285714285714
+next1_win,nonoverlapping,age_experience,under_23 / 300_plus,ranking_upset,17,7,14,7,13,7,14,10,0,0,0,0,3,3,4,3,0,0,10,6,10,6,0.5882352941176471
+next1_win,nonoverlapping,age_experience,under_23 / under_100,other_ranked_loss,1393,118,1248,116,1077,112,1248,979,2,2,0,0,143,79,269,97,2,2,977,115,977,115,0.7013639626704954
+next1_win,nonoverlapping,age_experience,under_23 / under_100,ranking_upset,528,110,465,107,408,102,465,301,1,1,0,0,62,48,164,76,0,0,301,102,301,102,0.5700757575757576

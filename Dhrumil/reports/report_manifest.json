@@ -3,8 +3,88 @@
   "outputs_summary_sha256": "840cffd0622c9963ab9b687700e4f4f738cdf25e8f9a46907fd7e3e8ac29a7bc",
   "files": {
     "DATA_QUALITY.md": "513b630f4d3c4aa12a9b7932ecf958a97fe1b0de1e453806834d2e4c82cec2b5",
-    "FINAL_REPORT.md": "76e96702b6ccd363f8f6ae0f6757dcc1aa62b2182e81194185610c638969cb5f",
-    "RESULTS.md": "b0326effb5a2889f24aebe095533d578b239d65de73e651a25d7f89bc827723a",
-    "report_claims.json": "a2d479d517ee717a9a3d2cdf478e7051d9029e1525d08db23a824222407508b2"
+    "FINAL_REPORT.md": "2a57c8335531e285aa5364a02e6dc808d949e97e8bc0a1b41e5e83e28e295917",
+    "RESULTS.md": "6414ed0d4f8911d26079b45b24fa191b60adc9760c1b11e8ec4404eb0226e78f",
+    "report_claims.json": "ecd50481e12c81d573279d139750da099c67a7beb5162e930e777103640e740b"
+  },
+  "separate_validations": {
+    "q3_comparability": {
+      "validation_id": "q3-comparability-20261110T065912Z",
+      "source_run_id": "20261027T121134Z-20f069d1",
+      "source_run_summary_sha256": "840cffd0622c9963ab9b687700e4f4f738cdf25e8f9a46907fd7e3e8ac29a7bc",
+      "manifest": "../validation/q3_comparability/manifest.json",
+      "manifest_sha256": "034f2ed80b2102febda3a06af73272f8d152f2e63fd307ab34ed3f6f6c4ad943",
+      "artifacts": {
+        "DETAILS.md": "2fc56be4a150065908f52d5783c22bf15cbb507bf877a3200f5b2d25f03c307b",
+        "REPORT.md": "de8c5c84467535e744cb50a5b84bb8243470f9fa88c6e03d238d1f720c235d26",
+        "adjusted_sample_ids.csv.gz": "a2cffe8e5c283517ba7da0d83ad1236582c7939bd2a7b67818ba7019068e4f8f",
+        "balance.csv": "1581f2f0bd0e4af565689b5cc5f6127c4ee09ace66c08711d983a7727852d280",
+        "baseline_hashes.json": "9f1756d7fc8e8947e7ff8672f56bcca996352d51a4460c03c01911fce1b36658",
+        "compact_summary.csv": "9bd41c4da38665b0d2b9afad3f79614a9fe09874a6b760059918f357939f146a",
+        "coverage.csv": "022ae592d89cafbeb2eb78b6cdcbe77d5a2ca21ebfdc4d6f5d4ac20537eb40bf",
+        "decision.json": "596c56e63af5d3d663097737f442be1d7b1e8c9113c5eab9654923ec31e472b1",
+        "distributions.csv": "0b601392320bc042e226a7320e7ce834b36968d4bb53b5f7ac5b08ef2bac5e00",
+        "focused_tests.txt": "1ed705846a5acdb61dbb09bb56e945e4389b225191935545955a3b249b6c8b32",
+        "matched_analysis_ids.csv.gz": "e955b65fc5847ae3c89ac7739d92ba8391a4e8d38b396fa39def4f2e84fc8e54",
+        "matched_contrasts.csv": "a324b3eae83265f663a4e84ca61ee30b94c07e4a47b4bc26a100bebb18264d44",
+        "matched_model.json": "b05c94276c4c7c5163ee8856822d1d1e21582b7b5099c0af0373bcd489e63913",
+        "matched_pairs.csv.gz": "dc36b6eabe59694a63140b7478b6c55e61142e364a4aa3e57594b90338d65ddb",
+        "matching_verification.json": "8944c2d30089fb5ca7546cc3b190dd9e922d432442b684abbef941df93b93775",
+        "protocol.json": "e86a00754bd5511351dd2fc4a379fc96b85bf1ed3b3cc95a10b240070a1cb92d",
+        "rank_distributions.png": "d365670284dbb4305df144c1f2c961dde65d2365b77b361d88292ef0a0815fcd",
+        "retention.csv": "ba47c4c25776f646648c54fd606bdbfdeb10852bba93993db1ba8562b9ffdd40",
+        "strata.csv.gz": "7fc11b06479bcdcb3c4d00fd14d78c5ebfd4ff3620e2df1779fc54e865bf7ed9",
+        "summary.json": "2a56f5a7f78f710cd9bebee354bb4f5886482e0b9695eacd4a8a1a453daaff42",
+        "tests.txt": "8c78f0cd7d061834d9d27b895443eff86d1412cc186ee79d28bc5f8a741601f6",
+        "verification.json": "13fcf04b82a24b258286ec166a9d1ae276f69ee6bf72a859bdfe7f9283b3afd8",
+        "within_player_coverage.png": "ccb62f8926dfedd20b196cc221d340d23cc33be4962354e1f1a7be0f5dff4850",
+        "within_stratum_summary.csv": "79471921157455410b249bfd08544794ec51ae14036cf4c729991760512a47d9"
+      },
+      "claim_sources": [
+        "REPORT.md",
+        "summary.json"
+      ]
+    },
+    "q1_q2_checks": {
+      "validation_id": "q1-q2-checks-20261116T222522Z",
+      "source_run_id": "20261027T121134Z-20f069d1",
+      "source_run_summary_sha256": "840cffd0622c9963ab9b687700e4f4f738cdf25e8f9a46907fd7e3e8ac29a7bc",
+      "manifest": "../validation/q1_q2_checks/manifest.json",
+      "manifest_sha256": "f2a44ff681140729463fbee83cae26d36985c7344083b5a6fb6e9c72b4dedd44",
+      "artifacts": {
+        "README_FINDINGS.md": "f8f9b58ef42f2f45983e7827e704a62cb0a2123718ef142b954b272c7061aa1b",
+        "REPORT.md": "40a27648709e7a9f31e475dce1feb9f3ac3f4d5cf3f12092b7fca472282b2c95",
+        "baseline.json": "f1a87bb8a8468b915f6eaad914c7b232507f2f5eddec60b876cf96051382a241",
+        "chronology_prior_candidate_ids.csv.gz": "4564a97c8b11a7165f36305a1c4b7ba7c274b6595b8de9be7c9e4b85d3304830",
+        "chronology_q1_windows.csv.gz": "8ebdfd90ec51b1d87acc855e90164904bcea3dd6d4a389c4303d58af4a917032",
+        "chronology_q2_records.csv.gz": "c29862f3f807e0b4b7e09a6ac47ab18b8849a98c51f14c621a7d1eba17a93314",
+        "chronology_summary.csv": "5039018ff96b1c1193d0a0ae14049b477dcb141c4a6a2feb30528457acb2885d",
+        "claim_references.json": "3c72709f181e21b563b336f27685c25d38e3af8b53e10703b177efbf3a40f387",
+        "focused_tests.txt": "2473f1cd58417a2319c7fd695526d14c1e8af36d91fcc73bc90ea51f501b44ad",
+        "historical_notebook_cells.json": "830fbf4eefb06e9cfca33811e415ec108d7b81fa409e618ac901cdd51c84a36c",
+        "q1_compact.csv": "fd58db47fb3d9614de981e5153311a78c359871e438bed519fcb4c1cec9a4851",
+        "q1_distributions.csv": "f9d7c9d2afd0841997bd24de1e182889144e63a30323a244b64c337b34d85c4e",
+        "q1_model_diagnostics.csv": "fbb768ec8287a0d626d7a66e864ea85b543d8f19af088964f567610c896b176b",
+        "q1_model_ids.csv.gz": "a1a247033e68bb94da96dc333195f84da388a9f5430b48a96927eca6cd6c7f39",
+        "q1_post_upset_contrasts.csv": "c20a011d802b228ccfe418cd021ee867e3a01659fae745964d524caaeae8341b",
+        "q1_retention.csv": "c367806c093d3a5e45cea010a8db5aea43fe464f50deda661ea5bc219d6536d8",
+        "q1_retention_compact.csv": "bc12dce35febf235c94ddafd3ba52ccc1ca71cdd6cb1fabf5d056949b0116088",
+        "q1_support.csv": "6fefd96a7929b4cce2b08c4ca76cf01bf311462f786938af55970e222b743c9b",
+        "q2_compact.csv": "e37d24cd566ff3c6dfe5e2a3f5cc4d531144c7c4118091ce6d2432892ab73bd9",
+        "q2_comparisons.csv": "015cb717bcc59bc7e4ef9fd2694821f7b9abcb4d66d32d4c765dd7f6b7dbabdf",
+        "q2_prediction_ids.csv.gz": "dd22226d41ee4ce63638bbf52f6cad89246673b4270a0a888e24b363cef34c54",
+        "q2_scores.csv": "60344871d84e41ec0d4f6fb94a104454491d5822b06b99284d6f0acd799fbaee",
+        "run.txt": "645e62eb4a7d94f2bdca4e7027b6c7b0397a3dc7f9bc32d4a7787b8c5d4a48ab",
+        "settings.json": "b4f46cb38cfa7df839119641d995b394c88f3f4c257b17fe13523af2eb7c302f",
+        "summary.json": "f0bae87a1fcc9f0b16c098edb3b4ec76053f1f7cd70c6183ad216e2caff2394b",
+        "tests.txt": "9f21fe8ce3650e8712ff6868c4b90718202ad80ba9222ccdf3b6b94f78e6474b",
+        "verification.json": "9a43acc7319d6e282e78aed4d53cdf30465f28d79dc4972b7f047fd4b9874849"
+      },
+      "claim_sources": [
+        "REPORT.md",
+        "summary.json",
+        "README_FINDINGS.md"
+      ]
+    }
   }
 }

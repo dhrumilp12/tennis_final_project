@@ -1,0 +1,25 @@
+{
+  "strata": [
+    "player_id",
+    "surface",
+    "season"
+  ],
+  "rank_ratio_caliper": 1.5,
+  "absolute_log_rank_caliper": 0.4054651081081644,
+  "floating_point_boundary_tolerance": 1e-12,
+  "distribution_minimum_per_hand_in_stratum": 5,
+  "quantiles": [
+    0.05,
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    0.9,
+    0.95
+  ],
+  "sensitivity_trigger": "Either hand has <90% with a same-stratum dual-rank candidate, or <80% in strata with >=5 observations per hand.",
+  "trigger_note": "Conservative descriptive coverage thresholds, not statistical tests or universal standards.",
+  "matching_rule": "Same focal player, surface, calendar season; traverse left rows by stable match_id within sorted strata; nearest available right row by sum of absolute log focal-rank and log opponent-rank differences, each <=log(1.5); tie by right match_id; no reuse within focal player; no outcomes used.",
+  "opportunity_rule": "Reapply original minimum per opponent hand after matching; no rematching.",
+  "inference": "Existing Q3 within-player specification and shared-player dyadic sandwich; retain original IDs, support, identification, residual-df and variance safeguards."
+}

@@ -9,6 +9,8 @@ We reconstruct tennis match histories to study performance after ranking upsets,
 <!-- GENERATED_FINDINGS_START -->
 Analysis run: `20261027T121134Z-20f069d1`; **63,784 eligible study matches**.
 
+**Historical primary analysis.** The overview below reports the preserved original models; the supplemental Q1/Q2 checks follow separately.
+
 **1. Does performance after a ranking upset vary with age or experience?** We did not find clear evidence that the upset-related difference varied with age or prior recorded match experience. This does not show that all players recover identically. The overall adjusted next-three-match difference from ordinary losses was -1.37 pp (95% interval -2.24 to -0.51 pp) (18,471 loss events, 341 players).
 
 **2. Do previous meetings help predict the next match?** Meeting count alone gave no clear improvement. Previous head-to-head results lowered prediction error. Meeting count alone: Brier improvement -0.000021 (95% interval -0.000091 to +0.000039). Including previous head-to-head results: +0.000586 (95% interval +0.000095 to +0.001019) (11,340 held-out matches). Positive improvement means lower prediction error.
@@ -16,6 +18,12 @@ Analysis run: `20261027T121134Z-20f069d1`; **63,784 eligible study matches**.
 **3. Does performance differ by opponent handedness?** We found no clear evidence of an adjusted difference against left- versus right-handed opponents in either focal-hand group. Adjusted left-minus-right differences: +1.11 pp (95% interval -0.86 to +3.08 pp) for right-handed focal players; +0.99 pp (95% interval -0.63 to +2.62 pp) for left-handed focal players.
 
 Source rows: [`q1_adjusted_contrasts.csv`](outputs_final/q1_adjusted_contrasts.csv), primary average and age/experience interactions; [`q2_paired_improvements.csv`](outputs_final/q2_paired_improvements.csv), baseline Brier comparisons; [`q3_adjusted_contrasts.csv`](outputs_final/q3_adjusted_contrasts.csv), both focal hands.
+
+**Supplemental Q1/Q2 validation.**
+
+**Q1 direct post-upset associations:** next-three-match age slope -1.43 pp (95% interval -1.81 to -1.04 pp) per year; experience slope +7.73 pp (95% interval +5.95 to +9.51 pp) per log(1 + prior eligible recorded matches) unit. These conditional slopes answer a different question from modification of the upset-versus-ordinary difference. [Direct slopes and separate interactions](validation/q1_q2_checks/q1_post_upset_contrasts.csv).
+
+**Q2 dependence and repeat encounters:** ALL, Baseline → count: both methods leave the direction uncertain. ALL, Baseline → H2H results: both methods support lower prediction error. REPEAT, Baseline → count: both methods leave the direction uncertain. REPEAT, Baseline → H2H results: both methods support lower prediction error. Brier remains primary; these are prediction-error differences, not increases in winning probability or causal effects. [Paired estimates under both methods](validation/q1_q2_checks/q2_comparisons.csv) and [support, retention and limitations](validation/q1_q2_checks/REPORT.md).
 <!-- GENERATED_FINDINGS_END -->
 
 “Percentage points” (pp) means an absolute difference between probabilities: 60% versus 59% is one percentage point. Brier score measures prediction error; lower is better. Its improvement is **not** an increase in a player's chance of winning. The reported 95% intervals describe uncertainty under the stated models and dependence assumptions.
@@ -52,6 +60,20 @@ python tennis_project.py --offline --output-dir validation/full-study
 To regenerate the written findings from existing authoritative tables, without refitting:
 
 ```bash
+python tennis_reporting.py --output-dir outputs_final
+```
+
+To regenerate the separate [Q3 opponent-comparability validation](validation/q3_comparability/REPORT.md) from saved data and include it in the reports, run the commands below. This checks the adjusted Q3 sample and fits its single matched-sample sensitivity; it leaves the primary models and `outputs_final/` unchanged. The validation has its own [provenance manifest](validation/q3_comparability/manifest.json).
+
+```bash
+python tennis_q3_comparability.py
+python tennis_reporting.py --output-dir outputs_final
+```
+
+The separate [supplemental Q1/Q2 validation](validation/q1_q2_checks/REPORT.md) checks performance after upsets and uncertainty for the saved Q2 predictions. Regenerate it from saved data with the commands below. Historical primary outputs and Q3 validation remain intact; reporting adds the supplement to the reports, README and one Markdown-only notebook cell without rerunning notebook code.
+
+```bash
+python tennis_q1_q2_checks.py
 python tennis_reporting.py --output-dir outputs_final
 ```
 

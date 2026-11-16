@@ -1,0 +1,41 @@
+{
+  "source_run_id": "20261027T121134Z-20f069d1",
+  "Q1_post_upset_and_interactions": {
+    "table": "q1_post_upset_contrasts.csv",
+    "selectors": [
+      "outcome",
+      "sample",
+      "contrast"
+    ],
+    "method": "original_focal_player_cluster_t"
+  },
+  "Q1_retention": {
+    "table": "q1_retention.csv",
+    "selectors": [
+      "outcome",
+      "sample",
+      "dimension",
+      "group",
+      "loss_type"
+    ]
+  },
+  "Q2": {
+    "table": "q2_comparisons.csv",
+    "selectors": [
+      "subset",
+      "metric",
+      "first_model",
+      "second_model",
+      "method"
+    ]
+  },
+  "chronology": {
+    "table": "chronology_summary.csv",
+    "selectors": [
+      "question",
+      "sample",
+      "outcome",
+      "check"
+    ]
+  }
+}

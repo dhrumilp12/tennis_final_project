@@ -1,0 +1,29 @@
+{
+  "matched_rows_before_opportunity_minimum": 22592,
+  "min_hand_matches": 10,
+  "player_match_rows": 21266,
+  "unique_matches": 19499,
+  "players": 330,
+  "removed_rows_for_opportunity_minimum": 1326,
+  "covariance": "Original shared-player dyadic sandwich; original player and match IDs retained.",
+  "warnings": [
+    "Dyadic covariance is indefinite; nonpositive contrast variances are unavailable. Positive contrasts remain exploratory.",
+    "Exploratory dyadic intervals assume no remaining dependence between disjoint participant pairs; restrictions select a narrower sample."
+  ],
+  "within_design_rank": 34,
+  "within_design_columns": 34,
+  "within_condition_number": 927.5889093139473,
+  "absorbed_player_intercepts": 330,
+  "effective_parameters": 364,
+  "residual_degrees_of_freedom": 20902,
+  "dyadic_finite_sample_factor": 1.0173667591618027,
+  "dyadic_nodes": 792,
+  "dyadic_pairs": 12954,
+  "primary_negative_variance_terms": 0,
+  "primary_minimum_covariance_eigenvalue": -5.848946879874227e-06,
+  "contrast_inference": {
+    "R": "available",
+    "L": "available"
+  },
+  "status": "fitted"
+}
